@@ -1,4 +1,4 @@
-#Front End Requirements: Test Cases Page 1
+# Front End Requirements: Test Cases Page 1
 
 Test data:  
 ```
@@ -111,7 +111,7 @@ Actions:
 * open /login again
 * validate that ```#message``` is ''email/password combination incorrect''
 
-####Test case R2.1 If the user has logged in, redirect back to the user profile page /
+#### Test case R2.1 If the user has logged in, redirect back to the user profile page /
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -124,14 +124,14 @@ Actions:
 * open /register
 * validate that current page redirects to the user page and contains ```#welcome-header``` element
 
-####Test case R2.2- Show the user registration page if user is not logged in
+#### Test case R2.2- Show the user registration page if user is not logged in
 
 Actions:
 * open /logout (to invalid any logged-in sessions may exist)
 * open /register
 * validate that the ```h1``` element contains ```Register```
 
-####Test case R2.3 - The registration page shows a registration form requesting: email, user name, password, password2
+#### Test case R2.3 - The registration page shows a registration form requesting: email, user name, password, password2
 Actions:
 * open /register
 * check that the page contains ```#email```
