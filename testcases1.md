@@ -1,52 +1,145 @@
-#####Test case R1.1 - If the user hasn't logged in, show the login page
+#Front End Requirements: Test Cases Page 1
+
+Test data:  
+```
+test_user = User(
+    email='test_frontend@test.com',
+    name='test_frontend',
+    password=generate_password_hash('test_frontend')
+)
+```
+
+####Test case R1.1 - If the user hasn't logged in, show the login page
 Actions:  
 * open /logout (to invalidate any logged in sessions may exist)
 * open /login
-(validate that the current page contains the ```#login``` element
+* validate that the current page has a ```h1``` element containing ```Log In```
 
-#####Test case R1.2: the login page has a message that by default says 'please login'
+####Test case R1.2: the login page has a message that by default says 'please login'
 Actions: 
 * open /logout (to invalidate any logged in sessions may exist)
 * open /login
 * validate that the ```#message``` element contains the text "please login"
 
-#####Test case R1.4 -The login page provides a login form which requests two fields: email and passwords
+####Test case R1.4 -The login page provides a login form which requests two fields: email and passwords
 * open /login
-* validate that the element ```input[name = "email"]``` exists
-* validate that the element ```input[type = "password"]``` exists
+* validate that the element ```input[id = "email"]``` exists
+* validate that the element ```input[id = "password"]``` exists
 
-#####Test case R1.5 - The login form can be submitted as a POST request to the current URL (/login)
+####Test case R1.5 - The login form can be submitted as a POST request to the current URL (/login)
 * open /login
 * validate that the element ```form[method = "post"]``` exists
 
-#####Test case R1.6 - Email and password both cannot be empty
+####Test case R1.6 - Email and password both cannot be empty
 * open /login
-* assert that input[required] is validated for both email and password
+* assert that ```input[id = email]``` contains text
+* assert that ```input[id = password]``` contains text
 
-#####Test case R1.7 - Email has to follow addr-spec defined in RFC 5322
+####Test case R1.7 - Email has to follow addr-spec defined in RFC 5322
+#####R1.7.1
 * open /login
-* check that the email contains 
+* input ```1234567890123456789012345678901234567890123456789012345678901234+x@example.com``` into element ```#email```
+* input a password in element ```#password```
+* check that ```#message``` is "Incorrect email format."
 
-#####Test case R1.8 - Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
-Mockup: create a test user with 
-
--open /login
--input a password "test!" and check error message (needs minimum length 6)
--input a password "test123! and check error message (needs at least one upper case)
--input a password "TEST123!" and check error message (needs at least one lower case)
--input a password "TESt123" and check error message (needs at least one special character)
-
-#####Test case R1.9 - For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
+#####R1.7.2
 * open /login
-* enter email with formatting error into element #email
+* input ```abc.example.com``` into element ```#email```
+* input a password in element ```#password```
+* check that ```#message``` is "Incorrect email format."
+
+#####R1.7.3
+* open /login
+* input ```a"b(c)d,e:f;g<h>i[j\k]l@example.com``` into element ```#email```
+* input a password in element ```#password```
+* check that ```#message``` is "Incorrect email format."
+
+#####R1.7.4
+* open /login
+* input ```i_like_underscore@but_its_not_allow_in_this_part.example.com``` into element ```#email```
+* input a password in element ```#password```
+* check that ```#message``` is "Incorrect email format."
+
+####Test case R1.8 - Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
+Mocking: create a test user with 
+
+#####R1.8.1
+* open /login
+* input a password "test!" and check  element ```#message``` is "needs minimum length 6"
+#####R1.8.2
+* open /login
+* input a password "test123! and check element ```#message``` is (needs at least one upper case)
+#####R1.8.3
+* open /login
+* input a password "TEST123!" and check element ```#message``` is (needs at least one lower case)
+#####R1.8.4
+* open /login
+* input a password "TESt123" and check element ```#message``` is(needs at least one special character)
+
+####Test case R1.9 - For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
+Actions:
+* open /login
+* enter email with formatting error into element ```#email```
 * enter password with formatting error into element #password
 * click element ```input[type = "submit"]```
-* open /login again
 * check that ```#message``` is "email/password format is incorrect"
 
-#####Test case R1.10 - If email/password are correct, redirect to /
+####Test case R1.10 - If email/password are correct, redirect to /
+
 Mocking:
-	- Mock backend.get_user to return a test_user instance
+* Mock backend.get_user to return a test_user instance
+
 Actions:
--open /logout (to invalidate any logged in sessions may exist)
--open /login
+* open /logout (to invalid any logged-in sessions may exist)
+* open /login
+* enter test_user's email into element #email
+* enter test_user's password into element #password
+* click element input[type="submit"]
+* open /login again
+* validate that current page contains #welcome-header element
+
+####Test case R1.11-	Otherwise, redirect to /login and show message 'email/password combination incorrect'
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:
+* open /logout (to invalid any logged-in sessions may exist)
+* open /login
+* enter incorrect email eg.```wrongemail@test.com``` into element ```#email```
+* enter incorrect password eg.```wrongpassword!``` into element ```#password```
+* click element ```input[type="submit"]```
+* open /login again
+* validate that ```#message``` is ''email/password combination incorrect''
+
+####Test case R2.1 If the user has logged in, redirect back to the user profile page /
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:
+* open /logout (to invalid any logged-in sessions may exist)
+* open /login
+* enter test_user's email into element ```#email```
+* enter test_user's password into element ```#password```
+* click element ```input[type="submit"]```
+* open /register
+* validate that current page redirects to the user page and contains ```#welcome-header``` element
+
+####Test case R2.2- Show the user registration page if user is not logged in
+
+Actions:
+* open /logout (to invalid any logged-in sessions may exist)
+* open /register
+* validate that the ```h1``` element contains ```Register```
+
+####Test case R2.3 - The registration page shows a registration form requesting: email, user name, password, password2
+Actions:
+* open /register
+* check that the page contains ```#email```
+* check that the page contains  ```#name```
+* check that the page contains ```#password```
+* check that the page contains ```#password2```
+
+####Test case R2.4 - The registration form can be submitted as a POST request to the current URL (/register)
+Actions:
+* open /register
+* validate that the element ```form[method = "post"]``` exists
