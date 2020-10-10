@@ -54,10 +54,25 @@ Actions:
 * validate that you got redirected to / which contains ```#welcome-header``` element
 
 #### Test case R1.6 - Email and password both cannot be empty
+Mocking:
+* Mock backend.get_user to return a test_user instance
+#####R1.6.1
 Actions: 
 * open /login
-* assert that ```input[id = email]``` contains text
-* assert that ```input[id = password]``` contains text
+* enter test_user's email into element ```#email```
+* leave test_user's password blank and click ```input[type="submit"]```
+* validate that you receive error ```#message``` "Email and/or password cannot be empty"
+#####R1.6.2
+Actions: 
+* open /login
+* enter test_user's email into element ```#password```
+* leave test_user's email blank and click ```input[type="submit"]```
+* validate that you receive error ```#message``` "Email and/or password cannot be empty"
+#####R1.6.3
+Actions: 
+* open /login
+* leave test_user's email and password blank and click ```input[type="submit"]```
+* validate that you receive error ```#message``` "Email and/or password cannot be empty"
 
 #### Test case R1.7 - Email has to follow addr-spec defined in RFC 5322
 ##### R1.7.1
