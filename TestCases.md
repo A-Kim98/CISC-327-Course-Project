@@ -6,6 +6,7 @@ Actions:
 * check that ```#email```, ```#password``` and ```#password2``` are not empty
 * check that ```#email``` follows addr-spec defined in RFC 5322
 * check that ```#password``` meet the required complexity
+* check that ```#password2``` meet the required complexity
 
 #### Test case R2.6 - Password and password2 have to be exactly the same
 Actions:
@@ -76,6 +77,7 @@ Actions:
 * enter password with formatting error into element ```#password```
 * enter name with formatting error into element ```#name```
 * enter password2 with formatting error into element ```#password2```
+* click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect.".format(the_corresponding_attribute)
 
@@ -83,7 +85,7 @@ Actions:
 Actions:
 * open /register
 * enter test_user's email into element ```#email```
-* check ```input[id = "email"]``` exists
+* check ```input[id = "email"]``` already exists
 * check that ```#message``` is "this email has been ALREADY used"
 
 #### Test case R2.11 - If no error regarding the inputs following the rules above, create a new user, set the balance to 5000, and go back to the /login page
@@ -92,7 +94,7 @@ Actions:
 * enter "test123@google.com" into element ```#email```
 * enter "testing327" into element ```#password```
 * enter "testing327" into element ```#password2```
-* enter "tester123" into element #name
+* enter "tester327" into element #name
 * click element ```input[type="submit"]```
 * add 5000 into element ```#balance```
 * open /login
@@ -118,7 +120,6 @@ Actions:
 Actions:
 * validate that current page contains ```#logout``` element
 * check the ```#logout``` works
-* open /logout
 
 #### Test case R3.5 - This page lists all available tickets. Information including the quantity of each ticket, the owner's email, and the price, for tickets that are not expired.
 Actions:
