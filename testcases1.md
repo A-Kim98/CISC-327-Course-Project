@@ -21,6 +21,20 @@ Actions:
 * open /login
 * validate that the ```#message``` element contains the text "please login"
 
+#### Test case R1.3: If the user has logged in, redirect to the user profile page 
+Mocking:
+
+* Mock backend.get_user to return a test_user instance
+
+Actions:
+* open /logout (to invalid any logged-in sessions may exist)
+* open /login
+* enter test_user's email into element ```#email```
+* enter test_user's password into element ```#password```
+* click element ```input[type="submit"]```
+* open /login again
+* validate that current page contains ```#welcome-header``` element
+
 #### Test case R1.4 -The login page provides a login form which requests two fields: email and passwords
 Actions: 
 * open /login
@@ -28,9 +42,16 @@ Actions:
 * validate that the element ```input[id = "password"]``` exists
 
 #### Test case R1.5 - The login form can be submitted as a POST request to the current URL (/login)
-Actions: 
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:
+* open /logout (to invalid any logged-in sessions may exist)
 * open /login
-* validate that the element ```form[method = "post"]``` exists
+* enter test_user's email into element #email
+* enter test_user's password into element #password
+* click element ```input[type="submit"]```
+* validate that you got redirected to / which contains ```#welcome-header``` element
 
 #### Test case R1.6 - Email and password both cannot be empty
 Actions: 
@@ -118,8 +139,8 @@ Mocking:
 Actions:
 * open /logout (to invalid any logged-in sessions may exist)
 * open /login
-* enter test_user's email into element #email
-* enter test_user's password into element #password
+* enter test_user's email into element ```#email```
+* enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
 * open /login again
 * validate that current page contains ```#welcome-header``` element
@@ -168,4 +189,10 @@ Actions:
 #### Test case R2.4 - The registration form can be submitted as a POST request to the current URL (/register)
 Actions:
 * open /register
-* validate that the element ```form[method = "post"]``` exists
+* enter test_user's email into element ```#email```
+* enter test_user's name into element ```#name```
+* enter test_user's password into element ```#password```
+* enter test_user's password into element ```#password2```
+* click element ```input[type="submit"]```
+* open /register
+* validate that current page redirects to the login page and contains ```h1``` element with the text  ```Login```
