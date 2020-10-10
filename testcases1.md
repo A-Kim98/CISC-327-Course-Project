@@ -56,19 +56,20 @@ Actions:
 #### Test case R1.6 - Email and password both cannot be empty
 Mocking:
 * Mock backend.get_user to return a test_user instance
-#####R1.6.1
+
+##### R1.6.1
 Actions: 
 * open /login
 * enter test_user's email into element ```#email```
 * leave test_user's password blank and click ```input[type="submit"]```
 * validate that you receive error ```#message``` "Email and/or password cannot be empty"
-#####R1.6.2
+##### R1.6.2
 Actions: 
 * open /login
 * enter test_user's email into element ```#password```
 * leave test_user's email blank and click ```input[type="submit"]```
 * validate that you receive error ```#message``` "Email and/or password cannot be empty"
-#####R1.6.3
+##### R1.6.3
 Actions: 
 * open /login
 * leave test_user's email and password blank and click ```input[type="submit"]```
