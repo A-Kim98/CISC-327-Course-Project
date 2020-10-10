@@ -105,7 +105,7 @@ Actions:
 * input ```i_like_underscore@but_its_not_allow_in_this_part.example.com``` into element ```#email```
 * input a password in element ```#password```
 * click element ```input[type = "submit"]```
-* check that ```#message``` is "Incorrect email format."
+* check that ```#message``` is "email/password format is incorrect."
 
 #### Test case R1.8 - Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
 
