@@ -18,56 +18,38 @@ Actions:
 #### R2.7.1
 Actions:
 * open /register
-* input test_user's email into ```#email```
-* input test_user's password into ```#password```
 * input a user name ""
-* click element ```input[type = "submit"]```
 * check element #name_error1 is "User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character."
 
 #### R2.7.2
 Actions:
 * open /register
-* input test_user's email into ```#email```
-* input test_user's password into ```#password```
 * input a user name "1234"
-* click element ```input[type = "submit"]```
 * check element #name_error1 is "User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character."
 
 #### R2.7.3
 Actions:
 * open /register
-* input test_user's email into ```#email```
-* input test_user's password into ```#password```
 * input a user name " testuser"
-* click element ```input[type = "submit"]```
 * check element ```#name_error1``` is "User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character."
 
 #### R2.7.4
 Actions:
 * open /register
-* input test_user's email into ```#email```
-* input test_user's password into ```#password```
 * input a user name "testuser "
-* click element ```input[type = "submit"]```
 * check element ```#name_error1``` is "User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character."
 
 #### Test case R2.8 - User name has to be longer than 2 characters and less than 20 characters.
 #### R2.8.1
 Actions:
 * open /register
-* input test_user's email into ```#email```
-* input test_user's password into ```#password```
 * input a user name "a"
-* click element ```input[type = "submit"]```
 * check element ```#name_error2``` is "User name has to be longer than 2 characters and less than 20 characters."
 
 #### R2.8.2
 Actions:
 * open /register
-* input test_user's email into ```#email```
-* input test_user's password into ```#password```
 * input a user name "Polytetrafluoroethylene" into ```#name```
-* click element ```input[type = "submit"]```
 * check element ```#name_error2``` is "User name has to be longer than 2 characters and less than 20 characters."
 
 #### Test case R2.9 - For any formatting errors, redirect back to /login and show message '{} format is incorrect.'.format(the_corresponding_attribute)
