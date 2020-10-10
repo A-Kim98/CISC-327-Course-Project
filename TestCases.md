@@ -107,6 +107,7 @@ Actions:
 * enter test_user's email into element ```#email```
 * enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
+* open /login
 
 #### Test case R3.2 - This page shows a header 'Hi {}'.format(user.name)
 Actions:
@@ -119,7 +120,7 @@ Actions:
 #### Test case R3.4 - This page shows a logout link, pointing to /logout
 Actions:
 * validate that current page contains ```#logout``` element
-* check the ```#logout``` works
+* open /logout
 
 #### Test case R3.5 - This page lists all available tickets. Information including the quantity of each ticket, the owner's email, and the price, for tickets that are not expired.
 Actions:
