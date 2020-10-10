@@ -8,6 +8,7 @@ Actions:
 * check that ```#password``` meet the required complexity
 
 #### Test case R2.6 - Password and password2 have to be exactly the same
+Actions:
 * open /register
 * check that content of ```#password``` and ```#password2``` are equal
 
