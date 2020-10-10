@@ -38,8 +38,8 @@ Actions:
 #### Test case R1.4 -The login page provides a login form which requests two fields: email and passwords
 Actions: 
 * open /login
-* validate that the element ```input[id = "email"]``` exists
-* validate that the element ```input[id = "password"]``` exists
+* validate that the element ```#email``` exists
+* validate that the element ```#password``` exists
 
 #### Test case R1.5 - The login form can be submitted as a POST request to the current URL (/login)
 Mocking:
