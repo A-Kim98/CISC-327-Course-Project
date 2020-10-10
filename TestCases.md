@@ -60,7 +60,7 @@ Actions:
 * click element ```input[type = "submit"]```
 * check element ```#name_error2``` is "User name has to be longer than 2 characters and less than 20 characters."
 
-####R2.8.2
+#### R2.8.2
 Actions:
 * open /register
 * input test_user's email into ```#email```
