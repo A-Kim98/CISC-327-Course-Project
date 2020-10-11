@@ -116,28 +116,28 @@ Actions:
 * input test_user's email into ```#email```
 * input a password "test!" 
 * click element ```input[type = "submit"]```
-* check  element ```#pwmessage``` is "Password needs minimum length 6, at least one upper case, at least one lower case, and at least one special character." (needs minimum length 6)
+* check  element ```#message``` is "Password needs minimum length 6" 
 ##### R1.8.2
 Actions: 
 * open /login
 * input test_user's email into ```#email```
 * input a password "test123! 
 * click element ```input[type = "submit"]```
-* check element ```#pwmessage``` is "Password needs minimum length 6, at least one upper case, at least one lower case, and at least one special character." (needs at least one upper case)
+* check element ```#message``` is "Password needs at least one upper case"
 ##### R1.8.3
 Actions: 
 * open /login
 * input test_user's email into ```#email```
 * input a password "TEST123!"
 * click element ```input[type = "submit"]```
-* check element ```#pwmessage``` is "Password needs minimum length 6, at least one upper case, at least one lower case, and at least one special character."  (needs at least one lower case)
+* check element ```#message``` is "Password needs at least one lower case."
 ##### R1.8.4
 Actions: 
 * open /login
 * input test_user's email into ```#email```
 * input a password "TESt123" 
 * click element ```input[type = "submit"]```
-* check element ```#pwmessage``` is "Password needs minimum length 6, at least one upper case, at least one lower case, and at least one special character."  (needs at least one special character)
+* check element ```#message``` is "Password needs at least one special character." 
 
 #### Test case R1.9 - For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
 Actions:
