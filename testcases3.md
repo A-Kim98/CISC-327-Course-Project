@@ -263,6 +263,7 @@ Actions:
 * Enter the value ```Sept. 9 2021``` into element ```#expdate_sell```
 * Click element ```input[type="submit" value="Sell"]```
 * Validate that current page redirects to the user profile page and contains header element ```'Hi {}'.format(user.name)```
+* Validate that ```#message``` is not blank
 
 #### Test case R4.7 - The added new ticket information will be posted on the user profile page
 Mocking:
@@ -324,7 +325,7 @@ Actions:
 * Click element ```input[type="submit" value="Buy"]```
 * Check that ```#message``` is "Ticket name cannot begin with a space"
 
-#### Test case R5.1.2 - The name of the ticket cannot have space as first character
+#### Test case R5.1.3 - The name of the ticket cannot have space as last character
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
