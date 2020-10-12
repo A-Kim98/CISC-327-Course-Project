@@ -23,6 +23,7 @@
 |                                  | R5.3.2       | Testing to make sure the quantity field of the ticket-buying form cannot be exceeding                                                                               |
 
 Describing the test plan:
+
  Q. How did your team organize the documentations of the test cases?
  A. We have decided to name our testcases testcases1, testcases2, testcases3 and put them in the same place.
 
