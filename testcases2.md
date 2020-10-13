@@ -28,38 +28,38 @@ Actions:
 Actions:
 * open /register
 * input a user name ""
-* check element  ```#name_error1``` is "User name has to be non-empty."
+* check element  ```#name_error1.1``` is "User name has to be non-empty."
 
 #### R2.7.2
 Actions:
 * open /register
 * input a user name "1234"
-* check element ```#name_error1``` is "User name has to be alphanumeric-only"
+* check element ```#name_error1.2``` is "User name has to be alphanumeric-only"
 
 #### R2.7.3
 Actions:
 * open /register
 * input a user name " testuser"
-* check element ```#name_error1``` is "Space allowed only if it is not the first or the last character."
+* check element ```#name_error1.3``` is "Space allowed only if it is not the first or the last character."
 
 #### R2.7.4
 Actions:
 * open /register
 * input a user name "testuser "
-* check element ```#name_error1``` is "Space allowed only if it is not the first or the last character."
+* check element ```#name_error1.3``` is "Space allowed only if it is not the first or the last character."
 
 #### Test case R2.8 - User name has to be longer than 2 characters and less than 20 characters.
 #### R2.8.1
 Actions:
 * open /register
 * input a user name "a"
-* check element ```#name_error2``` is "User name has to be longer than 2 characters."
+* check element ```#name_error2.1``` is "User name has to be longer than 2 characters."
 
 #### R2.8.2
 Actions:
 * open /register
 * input a user name "Polytetrafluoroethylene" into ```#name```
-* check element ```#name_error2``` is "User name has to be less than 20 characters."
+* check element ```#name_error2.2``` is "User name has to be less than 20 characters."
 
 #### Test case R2.9 - For any formatting errors, redirect back to /login and show message '{} format is incorrect.'.format(the_corresponding_attribute)
 Actions:
