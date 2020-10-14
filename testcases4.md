@@ -1,0 +1,382 @@
+# Front End Requirements: Test Cases Page 4
+
+Test data:  
+```
+test_user = User(
+    email='test_frontend@test.com',
+    name='test_frontend',
+    password=generate_password_hash('test_frontend')
+)
+```
+```
+test_ticket = Ticket(
+    owner='test_frontend@test.com',
+    name='t1',
+    quantity=10,
+    price=100,
+    date='20200901'
+)
+```
+#### Test case R5.1 - The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
+#### Test case R5.1.1 - Check if name of the ticket is alphanumeric-only and space allowed in middle
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```t1&t2@!*")(/.,<>[]-+``` into element ```#name_update```
+* Enter the value ```1``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```20210901``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "Ticket name must be alphanumeric-only"
+
+#### Test case R5.1.2 - Check space is not allowed as first character
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ``` t1``` into element ```#name_update```
+* Enter the value ```1``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```20210901``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "Ticket name cannot begin with a space"
+
+#### Test case R5.1.3 - Check space is not allowed as last character
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```t1 ``` into element ```#name_update```
+* Enter the value ```1``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```20210901``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "Ticket name cannot end with a space"
+
+#### Test case R5.1.4 - Check if name of the ticket is alphanumeric-only and space allowed in middle  -positive case 
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```t1``` into element ```#name_update```
+* Enter the value ```1``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```Hello World 123``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Validate that the current route is /update
+
+#### Test case R5.2 - The name of the ticket is no longer than 60 characters
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:  
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi``` into element ```#name_update```
+* Enter the value ```1``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```20210901``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "Ticket name cannot be longer than 60 characters"
+
+
+#### Test case R5.3 - The quantity of the tickets has to be more than 0, and less than or equal to 100.
+### Test case R5.3.1 - The quantity of the tickets has to be more than 0
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```t1```` into element ```#name_update```
+* Enter the value ```0``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```20210901``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "At least 1 ticket must be sold"
+
+
+#### Test case R5.3.2 - The quantity of the tickets has to be less than or equal to 100
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```t1``` into element ```#name_update```
+* Enter the value ```101``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```20210901``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "At most 100 tickets can be sold"
+
+
+
+#### Test case R5.4 - Price has to be of range [10, 100]
+#### Test case R5.4.1 - Boundary of 10 validation - positive
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:  
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* enter test_user's email into element ```#email```
+* enter test_user's password into element ```#password```
+* click element ```input[type="submit"]```
+* Enter ```10``` into element ```#price_sell```
+* Enter the value ```1``` into element ```#quantity_sell```
+* Enter the value ```15``` into element ```#price_sell```
+* Enter the value ```20210901``` into element ```#expdate_sell```
+* Click element ```input[type="submit" value="Sell"]```
+* Check that ```#message``` is "The ticket has been updated"
+
+#### Test case R5.4.2 - boundary of 100 validation - positive
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:  
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* enter test_user's email into element ```#email```
+* enter test_user's password into element ```#password```
+* click element ```input[type="submit"]```
+* Enter ```100``` into element ```#price_sell```
+* Enter the value ```1``` into element ```#quantity_sell```
+* Enter the value ```15``` into element ```#price_sell```
+* Enter the value ```20210901``` into element ```#expdate_sell```
+* Click element ```input[type="submit" value="Sell"]```
+* Check that ```#message``` is "The ticket has been updated"
+
+#### Test case R5.4.3 - boundary of 10 - negative
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:  
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* enter test_user's email into element ```#email```
+* enter test_user's password into element ```#password```
+* click element ```input[type="submit"]```
+* Enter ```9``` into element ```#price_sell```
+* Enter the value ```1``` into element ```#quantity_sell```
+* Enter the value ```15``` into element ```#price_sell```
+* Enter the value ```20210901``` into element ```#expdate_sell```
+* Click element ```input[type="submit" value="Sell"]```
+* Check that #message is "Ticket price range must be between 10-100 dollars"
+
+#### Test case R5.4.4 - boundary of 100 - negative
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:  
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* enter test_user's email into element ```#email```
+* enter test_user's password into element ```#password```
+* click element ```input[type="submit"]```
+* Enter ```101``` into element ```#price_sell```
+* Enter the value ```1``` into element ```#quantity_sell```
+* Enter the value ```15``` into element ```#price_sell```
+* Enter the value ```20210901``` into element ```#expdate_sell```
+* Click element ```input[type="submit" value="Sell"]```
+* Check that #message is "Ticket price range must be between 10-100 dollars"
+
+#### Test case R5.5: - Date must be given in the format YYYYMMDD (e.g. 20200901)
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions: 
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* enter test_user's email into element ```#email```
+* enter test_user's password into element ```#password```
+* click element ```input[type="submit"]```
+* Enter ```t1``` into element ```#name_update```
+* Enter the value ```1``` into element ```#quantity_update```
+* Enter the value ```101``` into element ```#price_update```
+* Enter the value ```Sept. 9 2021``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "Expiration date is in invalid format"
+
+#### Test case R5.6: - The ticket of the given name must exist
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```this ticket does not exist``` into element ```#name_update```
+* Enter the value ```2``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```20210901``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "The ticket does not exist"
+
+
+
+#### Test case R5.7: - For any errors, redirect back to / and show an error message
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```t1``` into element ```#name_update```
+* Enter the value ```1``` into element ```#quantity_update```
+* Enter the value ```101``` into element ```#price_update```
+* Enter the value ```Sept. 9 2021``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Validate that current page redirects to the user profile page and contains header element ```'Hi {}'.format(user.name)```
+* Validate that ```#message``` is not blank
+
+
+
+
+#### Test case R6.4: - The ticket name exists in the database and the quantity is more than the quantity requested to buy
+
+#### Test case R6.4.1: - The ticket name exists in the database - negative
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter the value ```this ticket does not exist``` into element ```#name_buy```
+* Enter test_ticket's quantity into element ```#quantity_buy```
+* Enter test_ticket's price into element ```#price_buy```
+* Enter test_ticket's date into element ```#expdate_buy```
+* Click element ```input[type="submit" value="Buy"]```
+* Check that ```#message``` is "Ticket not found"
+
+#### Test case R6.4.2: - The ticket name exists in the database - positive
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter test_ticket's name into element ```#name_buy```
+* Enter test_ticket's quantity into element ```#quantity_buy```
+* Enter test_ticket's price into element ```#price_buy```
+* Enter test_ticket's date into element ```#expdate_buy```
+* Click element ```input[type="submit" value="Buy"]```
+* Check that ```#message``` is "The tickets have been bought"
+
+#### Test case R6.4.3: - The ticket quantity is more than the quantity bought - positive
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter test_ticket's name into element ```#name_buy```
+* Enter the value ```11``` into element ```#quantity_buy```
+* Enter test_ticket's price into element ```#price_buy```
+* Enter test_ticket's date into element ```#expdate_buy```
+* Click element ```input[type="submit" value="Buy"]```
+* Check that ```#message``` is "The quantity exceeds the quantity of tickets for sale"
+
+#### Test case R6.4.4: - The ticket quantity is more than the quantity bought - negative
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter test_ticket's name into element ```#name_buy```
+* Enter the value ```7``` into element ```#quantity_buy```
+* Enter test_ticket's price into element ```#price_buy```
+* Enter test_ticket's date into element ```#expdate_buy```
+* Click element ```input[type="submit" value="Buy"]```
+* Check that ```#message``` is "The Tickets have been bought"
+
+#### Test case R6.5: - The user has more balance than the ticket price * quantity + service fee (35%) + tax (5%)
+Actions: 
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+
+
+
+*open /logout (clean up)
+
+#### Test case R6.6: - 	For any errors, redirect back to / and show an error message
+Actions: 
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+
+
+
+
+
+#### Test case R7.1: - 
+Actions: 
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+
+
+
+*open /logout (clean up)
+
+#### Test case R8.1: - 
+Actions: 
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+
+
