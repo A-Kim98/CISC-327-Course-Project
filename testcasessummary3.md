@@ -7,9 +7,11 @@
 | R4.1                             | R4.1.1       | Testing to make sure the name field of the ticket-selling form cannot contain non-alphanumerical characters                                                         |
 |                                  | R4.1.2       | Testing to make sure the name field of the ticket-selling form cannot begin with a space                                                                            |
 |                                  | R4.1.3       | Testing to make sure the name field of the ticket-selling form cannot end with a space                                                                              |
+|                                  | R4.1.4       | Testing to make sure the name field of the ticket-selling form with valid inputs is processed                                                                         |
 | R4.2                             | R4.2         | Testing to make sure the name field of the ticket-selling form cannot be longer than 60 characters                                                                  |
 | R4.3                             | R4.3.1       | Testing to make sure the quantity field of the ticket-selling form cannot be 0 or below                                                                             |
 |                                  | R4.3.2       | Testing to make sure the quantity field of the ticket-selling form cannot be exceeding 100                                                                          |
+|                                  | R4.3.3       | Testing to make sure the quantity field of the ticket-selling form with valid value is processed                                                                    |
 | R4.4                             | R4.4.1       | Testing to make sure the price field of the ticket-selling form cannot be under 10                                                                                  |
 |                                  | R4.4.2       | Testing to make sure the price field of the ticket-selling form cannot be exceeding 100                                                                             |
 | R4.5                             | R4.5         | Testing to make sure the date field of the ticket-selling form has to be in YYYYMMDD format                                                                         |
@@ -18,6 +20,7 @@
 | R5.1                             | R5.1.1       | Testing to make sure the name field of the ticket-buying form cannot contain non-alphanumerical characters                                                          |
 |                                  | R5.1.2       | Testing to make sure the name field of the ticket-buying form cannot begin with a space                                                                             |
 |                                  | R5.1.3       | Testing to make sure the name field of the ticket-buying form cannot end with a space                                                                               |
+|                                  | R5.1.4       | Testing to make sure the name field of the ticket-buying form with valid inputs is processed                                                                         |
 | R5.2                             | R5.2         | Testing to make sure the name field of the ticket-buying form cannot be longer than 60 characters                                                                   |
 | R5.3                             | R5.3.1       | Testing to make sure the quantity field of the ticket-buying form cannot be 0 or below                                                                              |
 |                                  | R5.3.2       | Testing to make sure the quantity field of the ticket-buying form cannot be exceeding                                                                               |
@@ -25,10 +28,11 @@
 Describing the test plan:
 
  Q. How did your team organize the documentations of the test cases?
- A. We have decided to name our testcases testcases1, testcases2, testcases3 and put them in the same place.
+ A. We have decided to name our testcases testcases1, testcases2, etc.,. and then testcasessummary1, testcasessummary2, etc.,. and put them in the same place, where Neila was in charge of 1, Alice was in 2, I was in 3, and Cole was in 4.
 
  Q. Your understanding of how the chosen testing framework works to test the frontend, including your understandings of when and how the test cases will be running directly on GitHub?
- A. A sample of what we wanted the page to look like was made via photoshop, where we wanted to have a table in the user profile and forms for buying, selling, and updating a ticket below, where the elements for name of, say, buying form, selling form, update form would be called #name_buy, #name_sell, and #name_update respectively.
+ A. A sample of what we wanted the page to look like was made via photoshop, where we wanted to have a table in the user profile and forms for buying, selling, and updating a ticket below, where the elements for name of, say, buying form, selling form, update form would be called #name_buy, #name_sell, and #name_update respectively. Test cases will be running directly on github whenever we can validate the test case success condition through
+ a given value or result, such as a number or a specific message output.
 
  Q. How are you going to organize different test case code files? (a folder for a specification?)
- A. Undecided
+ A. We decided that, in a folder to store all test case code files, and each test case codes with same first value of test case ID will be grouped together (So all R1 will be in one folder, R2, etc.,.)
