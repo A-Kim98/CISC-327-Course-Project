@@ -288,8 +288,6 @@ Actions:
 * Click element ```input[type="submit"]```
 * Enter the value ```this ticket does not exist``` into element ```#name_buy```
 * Enter test_ticket's quantity into element ```#quantity_buy```
-* Enter test_ticket's price into element ```#price_buy```
-* Enter test_ticket's date into element ```#expdate_buy```
 * Click element ```input[type="submit" value="Buy"]```
 * Check that ```#message``` is "Ticket not found"
 
@@ -306,8 +304,6 @@ Actions:
 * Click element ```input[type="submit"]```
 * Enter test_ticket's name into element ```#name_buy```
 * Enter test_ticket's quantity into element ```#quantity_buy```
-* Enter test_ticket's price into element ```#price_buy```
-* Enter test_ticket's date into element ```#expdate_buy```
 * Click element ```input[type="submit" value="Buy"]```
 * Check that ```#message``` is "The tickets have been bought"
 
@@ -324,8 +320,6 @@ Actions:
 * Click element ```input[type="submit"]```
 * Enter test_ticket's name into element ```#name_buy```
 * Enter the value ```11``` into element ```#quantity_buy```
-* Enter test_ticket's price into element ```#price_buy```
-* Enter test_ticket's date into element ```#expdate_buy```
 * Click element ```input[type="submit" value="Buy"]```
 * Check that ```#message``` is "The quantity exceeds the quantity of tickets for sale"
 
@@ -342,41 +336,108 @@ Actions:
 * Click element ```input[type="submit"]```
 * Enter test_ticket's name into element ```#name_buy```
 * Enter the value ```7``` into element ```#quantity_buy```
-* Enter test_ticket's price into element ```#price_buy```
-* Enter test_ticket's date into element ```#expdate_buy```
 * Click element ```input[type="submit" value="Buy"]```
 * Check that ```#message``` is "The Tickets have been bought"
 
 #### Test case R6.5: - The user has more balance than the ticket price * quantity + service fee (35%) + tax (5%)
+
+#### Test case R6.5.1: - The user has more balance than the ticket price * quantity + service fee (35%) + tax (5%) in this case it is 140$ - positive
+Test data:  
+```
+test_user = User(
+    email='test_frontend@test.com',
+    name='test_frontend',
+    password=generate_password_hash('test_frontend')
+    balance=140
+)
+```
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
 Actions: 
 * open /logout (to invalidate any logged in sessions may exist)
 * open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter test_ticket's name into element ```#name_buy```
+* Enter the value ```10``` into element ```#quantity_buy```
+* Click element ```input[type="submit" value="Buy"]```
+* Check that ```#message``` is "The Tickets have been bought"
 
 
+#### Test case R6.5.2: - The user has more balance than the ticket price * quantity + service fee (35%) + tax (5%) in this case it is 140$ - negative
+Test data:  
+```
+test_user = User(
+    email='test_frontend@test.com',
+    name='test_frontend',
+    password=generate_password_hash('test_frontend')
+    balance=139
+)
+```
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
 
-*open /logout (clean up)
+Actions: 
+* open /logout (to invalidate any logged in sessions may exist)
+* open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter test_ticket's name into element ```#name_buy```
+* Enter the value ```10``` into element ```#quantity_buy```
+* Click element ```input[type="submit" value="Buy"]```
+* Check that ```#message``` is "Not enough money for ticket purchase"
+
 
 #### Test case R6.6: - 	For any errors, redirect back to / and show an error message
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
 Actions: 
-* open /logout (to invalidate any logged in sessions may exist)
-* open /login
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```t1``` into element ```#name_buy```
+* Enter the value ```1``` into element ```#quantity_buy```
+* Click element ```input[type="submit" value="Buy"]```
+* Validate that current page redirects to the user profile page and contains header element ```'Hi {}'.format(user.name)```
+* Validate that ```#message``` is not blank
 
 
 
+#### Test case R7.1: - 	Logout will invalid the current session and redirect to the login page. After logout, the user shouldn't be able to access restricted pages.
+#### Test case R7.1.1: - 	Logout will invalid the current session and redirect to the login page.
+Mocking:
+* Mock backend.get_user to return a test_user instance
 
-
-#### Test case R7.1: - 
 Actions: 
-* open /logout (to invalidate any logged in sessions may exist)
+* open /logout (ensure the user will properly log in and invalidate unwanted session)
 * open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* open /logout
+* validate that the current page has a ```h1``` element containing ```Log In```
 
+#### Test case R7.1.2: - 	After logout, the user shouldn't be able to access restricted pages.
+Mocking:
+* Mock backend.get_user to return a test_user instance
 
+Actions: 
+* open /logout (ensure the user will properly log in and invalidate unwanted session)
+* attempt to open /
+* validate that the current page has a ```h1``` element containing ```Log In```
 
-*open /logout (clean up)
 
 #### Test case R8.1: - 
 Actions: 
-* open /logout (to invalidate any logged in sessions may exist)
-* open /login
+* open /thisPageDoesNotExist
+* validate that the current page has a ```p``` element containing ```The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.```
 
 
