@@ -33,7 +33,6 @@ Actions:
 #### Test case R3.8 - The ticket-selling form can be posted to /sell
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
