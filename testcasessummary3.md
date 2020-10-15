@@ -11,24 +11,23 @@
 | R4.2                             | R4.2         | Testing to make sure the name field of the ticket-selling form cannot be longer than 60 characters                                                                  |
 | R4.3                             | R4.3.1       | Testing to make sure the quantity field of the ticket-selling form cannot be 0 or below                                                                             |
 |                                  | R4.3.2       | Testing to make sure the quantity field of the ticket-selling form cannot be exceeding 100                                                                          |
-|                                  | R4.3.3       | Testing to make sure the quantity field of the ticket-selling form with valid value is processed                                                                    |
 | R4.4                             | R4.4.1       | Testing to make sure the price field of the ticket-selling form cannot be under 10                                                                                  |
 |                                  | R4.4.2       | Testing to make sure the price field of the ticket-selling form cannot be exceeding 100                                                                             |
 | R4.5                             | R4.5         | Testing to make sure the date field of the ticket-selling form has to be in YYYYMMDD format                                                                         |
 | R4.6                             | R4.6         | Testing if any error redirects back to / (user profile) and shows an error message                                                                                  |
 | R4.7                             | R4.7         | Testing to make sure when a form to sell a ticket is submitted, it is posted on the user profile page                                                               |
-| R5.1                             | R5.1.1       | Testing to make sure the name field of the ticket-buying form cannot contain non-alphanumerical characters                                                          |
-|                                  | R5.1.2       | Testing to make sure the name field of the ticket-buying form cannot begin with a space                                                                             |
-|                                  | R5.1.3       | Testing to make sure the name field of the ticket-buying form cannot end with a space                                                                               |
-|                                  | R5.1.4       | Testing to make sure the name field of the ticket-buying form with valid inputs is processed                                                                         |
-| R5.2                             | R5.2         | Testing to make sure the name field of the ticket-buying form cannot be longer than 60 characters                                                                   |
-| R5.3                             | R5.3.1       | Testing to make sure the quantity field of the ticket-buying form cannot be 0 or below                                                                              |
-|                                  | R5.3.2       | Testing to make sure the quantity field of the ticket-buying form cannot be exceeding                                                                               |
+| R6.1                             | R6.1.1       | Testing to make sure the name field of the ticket-buying form cannot contain non-alphanumerical characters                                                          |
+|                                  | R6.1.2       | Testing to make sure the name field of the ticket-buying form cannot begin with a space                                                                             |
+|                                  | R6.1.3       | Testing to make sure the name field of the ticket-buying form cannot end with a space                                                                               |
+|                                  | R6.1.4       | Testing to make sure the name field of the ticket-buying form with valid inputs is processed                                                                         |
+| R6.2                             | R6.2         | Testing to make sure the name field of the ticket-buying form cannot be longer than 60 characters                                                                   |
+| R6.3                             | R6.3.1       | Testing to make sure the quantity field of the ticket-buying form cannot be 0 or below                                                                              |
+|                                  | R6.3.2       | Testing to make sure the quantity field of the ticket-buying form cannot be exceeding                                                                               |
 
 Describing the test plan:
 
  Q. How did your team organize the documentations of the test cases?
- A. We have decided to name our testcases testcases1, testcases2, etc.,. and then testcasessummary1, testcasessummary2, etc.,. and put them in the same place, where Neila was in charge of 1, Alice was in 2, I was in 3, and Cole was in 4.
+ A. We have decided to name our testcases testcases1, testcases2, etc.,. and then testcasessummary1, testcasessummary2, etc.,. and put them in the same place, where Neila was in charge of 1, Alice was in 2, I was in 3, and Bram was in 4.
 
  Q. Your understanding of how the chosen testing framework works to test the frontend, including your understandings of when and how the test cases will be running directly on GitHub?
  A. A sample of what we wanted the page to look like was made via photoshop, where we wanted to have a table in the user profile and forms for buying, selling, and updating a ticket below, where the elements for name of, say, buying form, selling form, update form would be called #name_buy, #name_sell, and #name_update respectively. Test cases will be running directly on github whenever we can validate the test case success condition through

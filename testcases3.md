@@ -45,7 +45,7 @@ Actions:
 * Enter the value ```15``` into element ```#price_sell```
 * Enter the value ```20210901``` into element ```#expdate_sell```
 * Click element ```input[type="submit" value="Sell"]```
-* Validate that the current route is /sell
+* Validate that current route is ```/sell```
 * Open /logout (clean up)
 
 #### Test case R3.9 - The ticket-buying form can be posted to /buy
@@ -62,7 +62,7 @@ Actions:
 * Enter ```t1``` 'name' into element ```#name_buy```
 * Enter the value ```1``` into element ```#quantity_buy```
 * Click element ```input[type="submit" value="Buy"]```
-* Validate that the current route is /buy
+* Validate that current route is ```/buy```
 * Open /logout (clean up)
 
 #### Test case R3.10 - The ticket-update form can be posted to /update
@@ -81,7 +81,7 @@ Actions:
 * Enter the value ```15``` into element ```#price_update```
 * Enter the value ```20210901``` into element ```#expdate_update```
 * Click element ```input[type="submit" value="Update"]```
-* Validate that the current route is /update
+* Validate that current route is ```/update```
 * Open /logout (clean up)
 
 #### Test case R4.1 - The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
@@ -140,7 +140,7 @@ Actions:
 * Check that ```#message``` is "Ticket name cannot end with a space"
 * Open /logout (clean up)
 
-#### Test case R4.1.4 - Check if ticket works if it doesn't begin or end with space, and is alphanumerical
+#### Test case R4.1.4 - Check if ticket works if it doesn't begin or end with space, and is alphanumerical, and all fields are correct.
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -212,24 +212,6 @@ Actions:
 * Enter the value ```20210901``` into element ```#expdate_sell```
 * Click element ```input[type="submit" value="Sell"]```
 * Check that ```#message``` is "At most 100 tickets can be sold"
-* Open /logout (clean up)
-
-#### Test case R4.3.3 - The quantity of the tickets with valid value is processed
-Mocking:
-* Mock backend.get_user to return a test_user instance
-
-Actions: 
-* Open /logout (to invalid any logged-in sessions that may exist)
-* Open /login
-* Enter test_user's email into element #email
-* Enter test_user's password into element #password
-* Click element ```input[type="submit"]```
-* Enter ```t1``` into element ```#name_sell```
-* Enter the value ```2``` into element ```#quantity_sell```
-* Enter the value ```15``` into element ```#price_sell```
-* Enter the value ```20210901``` into element ```#expdate_sell```
-* Click element ```input[type="submit" value="Sell"]```
-* Check that ```#message``` is "The ticket has been sold"
 * Open /logout (clean up)
 
 #### Test case R4.4 - Price has to be of range [10, 100]
@@ -333,9 +315,9 @@ Actions:
 ```
 * Open /logout (clean up)
 
-#### Test case R5.1 - The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
+#### Test case R6.1 - The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
 
-#### Test case R5.1.1 - The name of the ticket has to be alphanumeric-only
+#### Test case R6.1.1 - The name of the ticket has to be alphanumeric-only
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
@@ -352,7 +334,7 @@ Actions:
 * Check that ```#message``` is "Ticket name must be alphanumeric-only"
 * Open /logout (clean up)
 
-#### Test case R5.1.2 - The name of the ticket cannot have space as first character
+#### Test case R6.1.2 - The name of the ticket cannot have space as first character
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
@@ -369,7 +351,7 @@ Actions:
 * Check that ```#message``` is "Ticket name cannot begin with a space"
 * Open /logout (clean up)
 
-#### Test case R5.1.3 - The name of the ticket cannot have space as last character
+#### Test case R6.1.3 - The name of the ticket cannot have space as last character
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
@@ -386,7 +368,7 @@ Actions:
 * Check that ```#message``` is "Ticket name cannot end with a space"
 * Open /logout (clean up)
 
-#### Test case R5.1.4 - The name of the ticket with valid fields is processed.
+#### Test case R6.1.4 - The name of the ticket with valid fields is processed.
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
@@ -403,7 +385,7 @@ Actions:
 * Validate that ```#message``` is ```successful```
 * Open /logout (clean up)
 
-#### Test case R5.2 - The name of the ticket is no longer than 60 characters
+#### Test case R6.2 - The name of the ticket is no longer than 60 characters
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
@@ -420,9 +402,9 @@ Actions:
 * Check that ```#message``` is "Ticket name cannot be longer than 60 characters"
 * Open /logout (clean up)
 
-#### Test case R5.3 - The quantity of the tickets has to be more than 0, and less than or equal to 100.
+#### Test case R6.3 - The quantity of the tickets has to be more than 0, and less than or equal to 100.
 
-#### Test case R5.3.1 - The quantity of the tickets has to be more than 0
+#### Test case R6.3.1 - The quantity of the tickets has to be more than 0
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
@@ -439,7 +421,7 @@ Actions:
 * Check that ```#message``` is "At least one ticket must be purchased"
 * Open /logout (clean up)
 
-#### Test case R5.3.2 - The quantity of the tickets has to be less than or equal to 100
+#### Test case R6.3.2 - The quantity of the tickets has to be less than or equal to 100
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
