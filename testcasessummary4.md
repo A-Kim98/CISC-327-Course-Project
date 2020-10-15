@@ -7,12 +7,15 @@
 | R5.2                              | R5.2         | check that something longer than 60 characters is accepted                         |
 | R5.3                              | R5.3.1       | check that a quantity of zero is rejected                                          |
 |                                   | R5.3.2       | check that a quantity greater than 100 is rejected                                 |
-| R5.4                              | R5.4.1       | check price accepts 10                                                             |
-|                                   | R5.4.2       | check price accepts 100                                                            |
+|                                   | R5.3.3       | check that a quantity of 1 is accepted(boundary)                                   |
+|                                   | R5.3.4       | check that a quantity of 100 is accepted(boundary)                                 |
+| R5.4                              | R5.4.1       | check price accepts 10(boundary)                                                   |
+|                                   | R5.4.2       | check price accepts 100(boundary)                                                  |
 |                                   | R5.4.3       | check price rejects a price of 9                                                   |
 |                                   | R5.4.4       | check price rejects a price of 101                                                 |
 | R5.5                              | R5.5         | check that invalid input in date field is rejected                                 |
-| R5.6                              | R5.6         | ensure a non existant ticket is rejected                                           |
+| R5.6                              | R5.6.1       | ensure a non existant ticket is rejected                                           |
+|                                   | R5.6.2       | ensure an existant ticket is accepted                                              |
 | R5.7                              | R5.7         | ensure errors show an error message on user home page                              |
 | R6.4                              | R6.4.1       | ensure a ticket that does not exist is rejected                                    |
 |                                   | R6.4.2       | ensure a ticket that does exist is accepted                                        |
