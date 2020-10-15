@@ -89,7 +89,6 @@ Actions:
 #### Test case R4.1.1 - Check if name of the ticket is alphanumeric-only
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -108,7 +107,6 @@ Actions:
 #### Test case R4.1.2 - Check space is not allowed as first character
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -127,7 +125,6 @@ Actions:
 #### Test case R4.1.3 - Check space is not allowed as last character
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -146,7 +143,6 @@ Actions:
 #### Test case R4.1.4 - Check if ticket works if it doesn't begin or end with space, and is alphanumerical
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -154,7 +150,7 @@ Actions:
 * Enter test_user's email into element #email
 * Enter test_user's password into element #password
 * Click element ```input[type="submit"]```
-* Enter ```t1``` into element ```#name_sell```
+* Enter ```Hello World 123``` into element ```#name_sell```
 * Enter the value ```1``` into element ```#quantity_sell```
 * Enter the value ```15``` into element ```#price_sell```
 * Enter the value ```20210901``` into element ```#expdate_sell```
@@ -165,7 +161,6 @@ Actions:
 #### Test case R4.2 - The name of the ticket is no longer than 60 characters
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -186,7 +181,6 @@ Actions:
 #### Test case R4.3.1 - The quantity of the tickets has to be more than 0
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -205,7 +199,6 @@ Actions:
 #### Test case R4.3.2 - The quantity of the tickets has to be less than or equal to 100
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -224,7 +217,6 @@ Actions:
 #### Test case R4.3.3 - The quantity of the tickets with valid value is processed
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -245,7 +237,6 @@ Actions:
 #### Test case R4.4.1 - Price cannot be lower than 10
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -264,7 +255,6 @@ Actions:
 #### Test case R4.4.2 - Price cannot be higher than 100
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -283,7 +273,6 @@ Actions:
 #### Test case R4.5 - Date must be given in the format YYYYMMDD (e.g. 20200901)
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -302,7 +291,6 @@ Actions:
 #### Test case R4.6 - For any errors, redirect back to / and show an error message
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -322,7 +310,6 @@ Actions:
 #### Test case R4.7 - The added new ticket information will be posted on the user profile page
 Mocking:
 * Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
 
 Actions: 
 * Open /logout (to invalid any logged-in sessions that may exist)
@@ -427,7 +414,7 @@ Actions:
 * Enter test_user's email into element #email
 * Enter test_user's password into element #password
 * Click element ```input[type="submit"]```
-* Enter ```abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg``` into element ```#name_buy```
+* Enter ```abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi``` into element ```#name_buy```
 * Enter the value ```1``` into element ```#quantity_buy```
 * Click element ```input[type="submit" value="Buy"]```
 * Check that ```#message``` is "Ticket name cannot be longer than 60 characters"
