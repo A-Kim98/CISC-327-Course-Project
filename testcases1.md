@@ -133,7 +133,7 @@ Actions:
 * check element ```#message``` is "Password needs at least one lower case."
 ##### R1.8.4
 Actions: 
-* open /login
+* open /login.
 * input test_user's email into ```#email```
 * input a password "TESt123" 
 * click element ```input[type = "submit"]```

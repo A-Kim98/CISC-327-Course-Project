@@ -17,7 +17,7 @@
 |                                  | R1.8.3       | Error message should show as password needs at least 1 lower case to pass complexity requirements                                                                   |
 |                                  | R1.8.4       | Error message should show as password needs at least 1 special character to pass complexity requirements                                                            |
 | R1.9                             | R1.9         | Error message should show as there are formatting errors in the password/email.                                                                                     |
-| R1.10                            | R1.10        | Test case should pass if the page redirects to / after logging in with correct email and password                                                                   |
+| R1.10                            | R1.10        | Test case should pass if the page redirects to / after logging in with correct email and password.                                                                   |
 | R1.11                            | R1.11        | If logging in fails, should redirect to /login with message "Email/password combination incorrect."                                                                 |
 | R2.1                             | R2.1         | If user is logged in, should redirect from the register page to the / page for test case to pass                                                                    |
 | R2.2                             | R2.2         | Show the user registration page if user is not logged in                                                                                                            |
