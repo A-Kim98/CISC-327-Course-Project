@@ -1,4 +1,4 @@
-# CISC-327-Course-Project hello
+# CISC-327-Course-Project
 
 Test data:  
 ```
