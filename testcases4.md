@@ -109,7 +109,7 @@ Actions:
 
 
 #### Test case R5.3 - The quantity of the tickets has to be more than 0, and less than or equal to 100.
-### Test case R5.3.1 - The quantity of the tickets has to be more than 0
+### Test case R5.3.1 - The quantity of the tickets has to be more than 0 - negative
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -127,7 +127,7 @@ Actions:
 * Check that ```#message``` is "At least 1 ticket must be sold"
 
 
-#### Test case R5.3.2 - The quantity of the tickets has to be less than or equal to 100
+#### Test case R5.3.2 - The quantity of the tickets has to be less than or equal to 100 -negative
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -144,10 +144,42 @@ Actions:
 * Click element ```input[type="submit" value="Update"]```
 * Check that ```#message``` is "At most 100 tickets can be sold"
 
+#### Test case R5.3.3 - The quantity of the tickets has to be more than 0 -positive
+Mocking:
+* Mock backend.get_user to return a test_user instance
 
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```t1``` into element ```#name_update```
+* Enter the value ```1``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```20210901``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "The ticket has been updated"
+
+#### Test case R5.3.4 - The quantity of the tickets has to be less than or equal to 100 -positive
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```t1``` into element ```#name_update```
+* Enter the value ```100``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```20210901``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "The ticket has been updated"
 
 #### Test case R5.4 - Price has to be of range [10, 100]
-#### Test case R5.4.1 - Boundary of 10 validation - positive
+### Test case R5.4.1 - Boundary of 10 validation - positive
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -216,6 +248,8 @@ Actions:
 * Check that #message is "Ticket price range must be between 10-100 dollars"
 
 #### Test case R5.5: - Date must be given in the format YYYYMMDD (e.g. 20200901)
+
+#### Test case R5.5.1: - Date must be given in the format YYYYMMDD (e.g. 20200901)
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -232,7 +266,10 @@ Actions:
 * Click element ```input[type="submit" value="Update"]```
 * Check that ```#message``` is "Expiration date is in invalid format"
 
+
 #### Test case R5.6: - The ticket of the given name must exist
+
+#### Test case R5.6.1: - The ticket of the given name must exist - Negative
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
@@ -250,6 +287,23 @@ Actions:
 * Click element ```input[type="submit" value="Update"]```
 * Check that ```#message``` is "The ticket does not exist"
 
+#### Test case R5.6.2: - The ticket of the given name must exist - Positive
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```t1``` into element ```#name_update```
+* Enter the value ```2``` into element ```#quantity_update```
+* Enter the value ```15``` into element ```#price_update```
+* Enter the value ```20210901``` into element ```#expdate_update```
+* Click element ```input[type="submit" value="Update"]```
+* Check that ```#message``` is "The ticket has been updated"
 
 
 #### Test case R5.7: - For any errors, redirect back to / and show an error message
@@ -435,7 +489,7 @@ Actions:
 * validate that the current page has a ```h1``` element containing ```Log In```
 
 
-#### Test case R8.1: - 
+#### Test case R8.1: - For any other requests except the ones above, the system should return a 404 error
 Actions: 
 * open /thisPageDoesNotExist
 * validate that the current page has a ```p``` element containing ```The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.```
