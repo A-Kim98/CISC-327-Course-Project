@@ -173,7 +173,7 @@ Actions:
 * Enter test_user's email into element #email
 * Enter test_user's password into element #password
 * Click element ```input[type="submit"]```
-* Enter ```abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg``` into element ```#name_sell```
+* Enter ```abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi``` into element ```#name_sell```
 * Enter the value ```1``` into element ```#quantity_sell```
 * Enter the value ```15``` into element ```#price_sell```
 * Enter the value ```20210901``` into element ```#expdate_sell```
