@@ -28,7 +28,7 @@ Actions:
 #### R2.7.1
 Actions:
 * open /register
-* input a user name ""
+* input a user name "" into ```#name```
 * check that  ```#message``` is "User name has to be non-empty."
 
 #### R2.7.2
