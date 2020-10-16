@@ -300,4 +300,4 @@ Actions:
 * enter test_user's email into element ```#email```
 * enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
-* Validate that the form element contains the  ```#name```,  ```#quantity```,  ```#price``` and ```#expiration_date``` elements. 
+* Validate that the form element contains the  ```#name```,  ```#ticket_quantity```,  ```#ticket_price``` and ```#ticket_expiration_date``` elements. 
