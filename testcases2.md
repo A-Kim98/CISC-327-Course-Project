@@ -11,6 +11,7 @@ test_user = User(
 
 #### Test case R2.5 - Email, password, password2 all have to satisfy the same required as defined in R1
 Actions:
+* Open /logout (to invalid any logged-in sessions may exist)
 * open /register
 * check that ```#email```, ```#password``` and ```#password2``` are not empty
 * check that ```#email``` follows addr-spec defined in RFC 5322
