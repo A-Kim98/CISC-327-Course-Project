@@ -228,7 +228,7 @@ Actions:
 * click element ```input[type="submit"]```
 * add 5000 into element ```#balance```
 * open /login
-
+* validate that 5000 value added to balance successfully. 
 #### Test case R3.1 - If the user is not logged in, redirect to login page
 Mocking:
 * Mock backend.get_user to return a test_user instance
