@@ -53,7 +53,7 @@ Actions:
 #### R2.8.1
 Actions:
 * open /register
-* input a user name "a"
+* input a user name "a" into ```#name```
 * check that  ```#message``` is "User name has to be longer than 2 characters."
 
 #### R2.8.2
