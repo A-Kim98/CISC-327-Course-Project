@@ -14,7 +14,83 @@ Actions:
 * Open /logout (to invalid any logged-in sessions may exist)
 * open /register
 * check that ```#email```, ```#password``` and ```#password2``` are not empty
-* check that ```#email``` follows addr-spec defined in RFC 5322
+#### R2.5.1
+Actions:
+* Open /logout (to invalid any logged-in sessions may exist)
+* open /register
+* enter ```1234567890123456789012345678901234567890123456789012345678901234+x@example.com``` into element ```#email```
+* input a password in element ```#password```
+* click element ```input[type = "submit"]```
+* check that ```#message``` is "email/password format is incorrect."
+
+#### R2.5.2.1
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:
+* open /logout (to invalidate any logged-in sessions that may exist)
+* open /login
+* enter the value "" into element ```#password```
+* click element ```input[type="submit"]```
+* validate that user receive error ```#message``` "Email and/or password cannot be empty"
+
+#### R2.5.2.2
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:
+* open /logout (to invalidate any logged-in sessions that may exist)
+* open /login
+* enter the value "" into element ```#password```
+* click element ```input[type="submit"]```
+* validate that user receive error ```#message``` "Email and/or password cannot be empty"
+
+#### R2.5.2.3
+Actions:
+* open /logout (to invalidate any logged-in sessions that may exist)
+* open /login
+* enter test_user's email into element ```#password```
+* enter the "" into element ```#email``` and click ```input[type="submit"]```
+* validate that you receive error ```#message``` "Email and/or password cannot be empty"
+
+#### R2.5.2.4
+Actions: 
+* open /login
+* enter the "" into element ```#email``` and  ```#password```
+* click ```input[type="submit"]```
+* validate that you receive error ```#message``` "Email and/or password cannot be empty"
+
+#### R2.5.3.1
+Actions: 
+* open /login
+* input test_user's email into ```#email```
+* input a password "test!"  into ```#password```
+* click element ```input[type = "submit"]```
+* check  element ```#message``` is "Password needs minimum length 6" 
+
+#### R2.5.3.2
+Actions:
+* open /login
+* input test_user's email into ```#email```
+* input a password "test123!  into ```#password```
+* click element ```input[type = "submit"]```
+* check element ```#message``` is "Password needs at least one upper case"
+
+#### R2.5.3.3
+Actions:
+* open /login
+* input test_user's email into ```#email```
+* input a password "TEST123!"  into ```#password```
+* click element ```input[type = "submit"]```
+* check element ```#message``` is "Password needs at least one lower case."
+
+#### R2.5.3.4
+Actions:
+* open /login.
+* input test_user's email into ```#email```
+* input a password "tESt123"  into ```#password```
+* click element ```input[type = "submit"]```
+* check element ```#message``` is "Password needs at least one special character." 
 * check that ```#password``` meets the required complexity
 * check that ```#password2``` meets the required complexity
 
