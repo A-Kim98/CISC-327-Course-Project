@@ -239,7 +239,7 @@ Actions:
 * enter test_user's email into element ```#email```
 * enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
-
+* open /login
 
 #### Test case R3.2 - This page shows a header 'Hi {}'.format(user.name)
 Actions:
