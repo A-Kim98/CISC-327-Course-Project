@@ -10,10 +10,7 @@ test_user = User(
 ```
 
 #### Test case R2.5 - Email, password, password2 all have to satisfy the same required as defined in R1
-Actions:
-* Open /logout (to invalid any logged-in sessions may exist)
-* open /register
-* check that ```#email```, ```#password``` and ```#password2``` are not empty
+
 #### R2.5.1
 Actions:
 * Open /logout (to invalid any logged-in sessions may exist)
@@ -110,19 +107,19 @@ Actions:
 #### R2.7.2
 Actions:
 * open /register
-* input a user name "1234"
+* input a user name "1234" into ```#name```
 * check that ```#message``` is "User name has to be alphanumeric-only"
 
 #### R2.7.3
 Actions:
 * open /register
-* input a user name " testuser"
+* input a user name " testuser" into ```#name```
 * check that ```#message``` is "Space allowed only if it is not the first or the last character."
 
 #### R2.7.4
 Actions:
 * open /register
-* input a user name "testuser "
+* input a user name "testuser " into ```#name```
 * check that  ```#message``` is "Space allowed only if it is not the first or the last character."
 
 #### Test case R2.8 - User name has to be longer than 2 characters and less than 20 characters.
@@ -138,19 +135,6 @@ Actions:
 * input a user name "Polytetrafluoroethylene" into ```#name```
 * check that  ```#message``` is "User name has to be less than 20 characters."
 
-#### Test case R2.9 - For any formatting errors, redirect back to /login and show message '{} format is incorrect.'.format(the_corresponding_attribute)
-Mocking:
-* Mock backend.get_user to return a test_user instance
-
-Actions:
-* open /register
-* enter email with formatting error into element ```#email```
-* enter password with formatting error into element ```#password```
-* enter name with formatting error into element ```#name```
-* enter password2 with formatting error into element ```#password2```
-* click element ```input[type = "submit"]```
-* open /login
-* check that ```#message``` is "{} format is incorrect."
 #### Test case R2.9 - For any formatting errors, redirect back to /login and show message '{} format is incorrect.'.format(the_corresponding_attribute)
 
 #### R2.9.1
@@ -205,6 +189,7 @@ Actions:
 * click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect."
+
 #### Test case R2.10 - If the email already exists, show message 'this email has been ALREADY used'
 Mocking:
 * Mock backend.get_user to return a test_user instance
@@ -229,6 +214,7 @@ Actions:
 * add 5000 into element ```#balance```
 * open /login
 * validate that 5000 value added to balance successfully. 
+
 #### Test case R3.1 - If the user is not logged in, redirect to login page
 Mocking:
 * Mock backend.get_user to return a test_user instance
@@ -277,7 +263,8 @@ Actions:
 * enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
 * validate that current page shows ```#logout``` element
-* validate that current page shows ```#logout``` element and also points to ```#logout``` element 
+* validate that current page shows ```#logout``` element and points to ```#logout``` element 
+
 #### Test case R3.5 - This page lists all available tickets. Information including the quantity of each ticket, the owner's email, and the price, for tickets that are not expired.
 Mocking:
 * Mock backend.get_user to return a test_user instance
