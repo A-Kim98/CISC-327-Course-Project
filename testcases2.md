@@ -277,7 +277,7 @@ Actions:
 * enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
 * validate that current page shows ```#logout``` element
-
+* validate that current page shows ```#logout``` element and also points to ```#logout``` element 
 #### Test case R3.5 - This page lists all available tickets. Information including the quantity of each ticket, the owner's email, and the price, for tickets that are not expired.
 Mocking:
 * Mock backend.get_user to return a test_user instance
