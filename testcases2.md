@@ -151,7 +151,60 @@ Actions:
 * click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect."
+#### Test case R2.9 - For any formatting errors, redirect back to /login and show message '{} format is incorrect.'.format(the_corresponding_attribute)
 
+#### R2.9.1
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions:
+* open /register
+* enter email with formatting error into element ```#email```
+* enter password with test_user's password into element ```#password```
+* enter name with test_user' name into element ```#name```
+* enter password2 with test_user's password into element ```#password2```
+* click element ```input[type = "submit"]```
+* open /login
+* check that ```#message``` is "{} format is incorrect."
+
+#### R2.9.2
+* Mock backend.get_user to return a test_user instance
+
+Actions:
+* open /register
+* enter email with test_user's email into element ```#email```
+* enter password with formatting error into element ```#password```
+* enter name with test_user' name into element ```#name```
+* enter password2 with test_user's password into element ```#password2```
+* click element ```input[type = "submit"]```
+* open /login
+* check that ```#message``` is "{} format is incorrect."
+
+#### R2.9.3
+* Mock backend.get_user to return a test_user instance
+
+Actions:
+* open /register
+* enter email with test_user's email into element ```#email```
+* enter password with test_user's password into element ```#password```
+* enter name with formatting error into element ```#name```
+* enter password2 with test_user's password into element ```#password2```
+* click element ```input[type = "submit"]```
+* open /login
+* check that ```#message``` is "{} format is incorrect."
+
+#### R2.9.4
+* Mock backend.get_user to return a test_user instance
+
+Actions:
+* open /register
+* enter email with test_user's email into element ```#email```
+* enter password with test_user's password into element ```#password```
+* enter name with test_user' name into element ```#name```
+* enter password2 with formatting error into element ```#password2```
+* click element ```input[type = "submit"]```
+* open /login
+* check that ```#message``` is "{} format is incorrect."
 #### Test case R2.10 - If the email already exists, show message 'this email has been ALREADY used'
 Mocking:
 * Mock backend.get_user to return a test_user instance
