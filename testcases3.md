@@ -11,7 +11,7 @@ test_user = User(
 
 test_ticket = Ticket(
   owner='test_frontend@test.com',
-  name='t1',
+  name='t 1',
   quantity=10,
   price=100,
   date='20210901'
