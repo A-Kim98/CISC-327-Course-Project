@@ -8,7 +8,6 @@ test_user = User(
     password=generate_password_hash('test_frontend')
 )
 ```
-
 #### Test case R2.5 - Email, password, password2 all have to satisfy the same required as defined in R1
 
 #### R2.5.1
@@ -16,9 +15,9 @@ Actions:
 * Open /logout (to invalid any logged-in sessions may exist)
 * open /register
 * enter ```1234567890123456789012345678901234567890123456789012345678901234+x@example.com``` into element ```#email```
-* input a password in element ```#password```
+* input a test_user's password in element ```#password```
 * click element ```input[type = "submit"]```
-* check that ```#message``` is "email/password format is incorrect."
+* check that ```#message``` is "Email/password format is incorrect."
 
 #### R2.5.2.1
 Mocking:
@@ -29,7 +28,7 @@ Actions:
 * open /login
 * enter the value "" into element ```#password```
 * click element ```input[type="submit"]```
-* validate that user receive error ```#message``` "Email and/or password cannot be empty"
+* validate that user receive error ```#message``` "Password cannot be empty"
 
 #### R2.5.2.2
 Mocking:
@@ -38,17 +37,17 @@ Mocking:
 Actions:
 * open /logout (to invalidate any logged-in sessions that may exist)
 * open /login
-* enter the value "" into element ```#password```
+* enter the value "" into element ```#password2```
 * click element ```input[type="submit"]```
-* validate that user receive error ```#message``` "Email and/or password cannot be empty"
+* validate that user receive error ```#message``` "Password cannot be empty"
 
 #### R2.5.2.3
 Actions:
 * open /logout (to invalidate any logged-in sessions that may exist)
 * open /login
-* enter test_user's email into element ```#password```
+* enter test_user's password into element ```#password```
 * enter the "" into element ```#email``` and click ```input[type="submit"]```
-* validate that you receive error ```#message``` "Email and/or password cannot be empty"
+* validate that you receive error ```#message``` "Email cannot be empty"
 
 #### R2.5.2.4
 Actions: 
