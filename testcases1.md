@@ -66,6 +66,7 @@ Actions:
 * enter the value "" into element ```#password```
 * click element ```input[type="submit"]```
 * validate that you receive error ```#message``` "Email and/or password cannot be empty"
+
 ##### R1.6.2
 Actions: 
 * open /login
@@ -90,7 +91,7 @@ Actions:
 ##### R1.7.2
 Actions: 
 * open /login
-* input ```abc.example.com``` into element ```#email```
+* input ```abc@superlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octets.com``` into element ```#email```
 * input a password in element ```#password```
 * click element ```input[type = "submit"]```
 * check that ```#message``` is "email/password format is incorrect."
@@ -98,12 +99,20 @@ Actions:
 ##### R1.7.3
 Actions: 
 * open /login
-* input ```a"b(c)d,e:f;g<h>i[j\k]l@example.com``` into element ```#email```
+* input ```abc.example.com``` into element ```#email```
 * input a password in element ```#password```
 * click element ```input[type = "submit"]```
 * check that ```#message``` is "email/password format is incorrect."
 
 ##### R1.7.4
+Actions: 
+* open /login
+* input ```a"b(c)d,e:f;g<h>i[j\k]l@example.com``` into element ```#email```
+* input a password in element ```#password```
+* click element ```input[type = "submit"]```
+* check that ```#message``` is "email/password format is incorrect."
+
+##### R1.7.5
 Actions: 
 * open /login
 * input ```i_like_underscore@but_its_not_allow_in_this_part.example.com``` into element ```#email```
@@ -112,6 +121,17 @@ Actions:
 * check that ```#message``` is "email/password format is incorrect."
 
 #### Test case R1.8 - Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
+
+##### R1.8.0 - Positive case
+Actions: 
+* open /login
+* input test_user's email into ```#email```
+* input a password "Test123!"  into ```#password```
+* click element ```input[type = "submit"]```
+* validate element ```#message``` is not equal to "Password needs minimum length 6" 
+* validate element ```#message``` is not equal to "Password needs at least one upper case"
+* validate element ```#message``` is not equal to "Password needs at least one lower case."
+* validate element ```#message``` is not equal to "Password needs at least one special character." 
 
 ##### R1.8.1
 Actions: 
@@ -124,7 +144,7 @@ Actions:
 Actions: 
 * open /login
 * input test_user's email into ```#email```
-* input a password "test123! 
+* input a password "test123!"
 * click element ```input[type = "submit"]```
 * check element ```#message``` is "Password needs at least one upper case"
 ##### R1.8.3
