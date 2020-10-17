@@ -18,7 +18,7 @@ test_ticket = Ticket(
     date='20200901'
 )
 ```
-#### Test case R5.0 - Checking for positive case for the fields of ticket's updating form
+#### Test case R5.0.1 - Checking for positive case for the fields of ticket's updating form
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
@@ -132,7 +132,7 @@ Actions:
 * Check that ```#message``` is "Ticket name cannot end with a space"
 * Open /logout (clean up)
 
-#### Test case R5.2 - The name of the ticket is no longer than 60 characters
+#### Test case R5.2.1 - The name of the ticket is no longer than 60 characters
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -190,7 +190,7 @@ Actions:
 
 #### Test case R5.4 - Price has to be of range [10, 100]
 
-#### Test case R5.4.3 - boundary of 10 - negative
+#### Test case R5.4.1 - boundary of 10 - negative
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -208,7 +208,7 @@ Actions:
 * Check that #message is "Ticket price must be 10 dollars or above"
 * Open /logout (clean up)
 
-#### Test case R5.4.4 - boundary of 100 - negative
+#### Test case R5.4.2 - boundary of 100 - negative
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -226,9 +226,8 @@ Actions:
 * Check that #message is "Ticket price must be lower than 100 dollars"
 * Open /logout (clean up)
 
-#### Test case R5.5: - Date must be given in the format YYYYMMDD (e.g. 20200901)
-
 #### Test case R5.5.1: - Date must be given in the format YYYYMMDD (e.g. 20200901)
+
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -246,7 +245,6 @@ Actions:
 * Check that ```#message``` is "Expiration date is in invalid format"
 * Open /logout (clean up)
 
-#### Test case R5.6: - The ticket of the given name must exist
 
 #### Test case R5.6.1: - The ticket of the given name must exist - Negative
 Mocking:
@@ -267,7 +265,7 @@ Actions:
 * Check that ```#message``` is "The ticket does not exist"
 * Open /logout (clean up)
 
-#### Test case R5.7: - For any errors, redirect back to / and show an error message
+#### Test case R5.7.1: - For any errors, redirect back to / and show an error message
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -307,7 +305,7 @@ Actions:
 * Check that ```#message``` is "Ticket not found"
 * Open /logout (clean up)
 
-#### Test case R6.4.3: - The ticket quantity is more than the quantity bought - negative
+#### Test case R6.4.2: - The ticket quantity is more than the quantity bought - negative
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
@@ -324,10 +322,7 @@ Actions:
 * Check that ```#message``` is "The quantity exceeds the quantity of tickets for sale"
 * Open /logout (clean up)
 
-#### Test case R6.5: - The user has more balance than the ticket price * quantity + service fee (35%) + tax (5%)
-
-
-#### Test case R6.5.2: - The user has more balance than the ticket price * quantity + service fee (35%) + tax (5%) (in this case it is 1400$ assuming tax before service fee)- negative
+#### Test case R6.5.1: - The user has more balance than the ticket price * quantity + service fee (35%) + tax (5%) (in this case it is 1400$ assuming tax before service fee)- negative
 Test data:  
 ```
 test_user_neg = User(
@@ -353,7 +348,7 @@ Actions:
 * Check that ```#message``` is "Not enough money for ticket purchase"
 * Open /logout (clean up)
 
-#### Test case R6.6: - 	For any errors, redirect back to / and show an error message
+#### Test case R6.6.1: - 	For any errors, redirect back to / and show an error message
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
