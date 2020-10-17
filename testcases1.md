@@ -63,7 +63,8 @@ Actions:
 * open /logout (to invalidate any logged-in sessions that may exist)
 * open /login
 * enter test_user's email into element ```#email```
-* leave test_user's password blank and click ```input[type="submit"]```
+* enter the value "" into element ```#password```
+* click element ```input[type="submit"]```
 * validate that you receive error ```#message``` "Email and/or password cannot be empty"
 ##### R1.6.2
 Actions: 
