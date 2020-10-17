@@ -6,6 +6,7 @@ test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
+balance = 1400
 )
 ```
 
