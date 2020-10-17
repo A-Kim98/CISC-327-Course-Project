@@ -18,6 +18,7 @@ Actions:
 * input a test_user's password in element ```#password```
 * click element ```input[type = "submit"]```
 * check that ```#message``` is "Email/password format is incorrect."
+* Open /logout (clean up)
 
 #### R2.5.2.1
 Mocking:
@@ -29,6 +30,7 @@ Actions:
 * enter the value "" into element ```#password```
 * click element ```input[type="submit"]```
 * validate that user receive error ```#message``` "Password cannot be empty"
+* Open /logout (clean up)
 
 #### R2.5.2.2
 Mocking:
@@ -40,6 +42,7 @@ Actions:
 * enter the value "" into element ```#password2```
 * click element ```input[type="submit"]```
 * validate that user receive error ```#message``` "Password cannot be empty"
+* Open /logout (clean up)
 
 #### R2.5.2.3
 Actions:
@@ -48,6 +51,7 @@ Actions:
 * enter test_user's password into element ```#password```
 * enter the "" into element ```#email``` and click ```input[type="submit"]```
 * validate that you receive error ```#message``` "Email cannot be empty"
+* Open /logout (clean up)
 
 #### R2.5.2.4
 Actions: 
@@ -55,6 +59,7 @@ Actions:
 * enter the "" into element ```#email``` and  ```#password```
 * click ```input[type="submit"]```
 * validate that you receive error ```#message``` "Email and/or password cannot be empty"
+* Open /logout (clean up)
 
 #### R2.5.3.1
 Actions: 
@@ -63,6 +68,7 @@ Actions:
 * input a password "test!"  into ```#password```
 * click element ```input[type = "submit"]```
 * check  element ```#message``` is "Password needs minimum length 6" 
+* Open /logout (clean up)
 
 #### R2.5.3.2
 Actions:
@@ -71,6 +77,7 @@ Actions:
 * input a password "test123!  into ```#password```
 * click element ```input[type = "submit"]```
 * check element ```#message``` is "Password needs at least one upper case"
+* Open /logout (clean up)
 
 #### R2.5.3.3
 Actions:
@@ -79,6 +86,7 @@ Actions:
 * input a password "TEST123!"  into ```#password```
 * click element ```input[type = "submit"]```
 * check element ```#message``` is "Password needs at least one lower case."
+* Open /logout (clean up)
 
 #### R2.5.3.4
 Actions:
@@ -89,6 +97,7 @@ Actions:
 * check element ```#message``` is "Password needs at least one special character." 
 * check that ```#password``` meets the required complexity
 * check that ```#password2``` meets the required complexity
+* Open /logout (clean up)
 
 #### Test case R2.6 - Password and password2 have to be exactly the same
 Actions:
@@ -102,6 +111,7 @@ Actions:
 * open /register
 * input a user name "" into ```#name```
 * check that  ```#message``` is "User name has to be non-empty."
+
 
 #### R2.7.2
 Actions:
@@ -149,6 +159,7 @@ Actions:
 * click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect."
+* Open /logout (clean up)
 
 #### R2.9.2
 * Mock backend.get_user to return a test_user instance
@@ -162,6 +173,7 @@ Actions:
 * click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect."
+* Open /logout (clean up)
 
 #### R2.9.3
 * Mock backend.get_user to return a test_user instance
@@ -175,6 +187,7 @@ Actions:
 * click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect."
+* Open /logout (clean up)
 
 #### R2.9.4
 * Mock backend.get_user to return a test_user instance
@@ -188,6 +201,7 @@ Actions:
 * click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect."
+* Open /logout (clean up)
 
 #### Test case R2.9 - For any formatting errors, redirect back to /login and show message '{} format is incorrect.'.format(the_corresponding_attribute)
 
@@ -203,6 +217,7 @@ Actions:
 * click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect."
+* Open /logout (clean up)
 
 #### R2.9.2
 * Mock backend.get_user to return a test_user instance
@@ -215,6 +230,7 @@ Actions:
 * click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect."
+* Open /logout (clean up)
 
 #### R2.9.3
 * Mock backend.get_user to return a test_user instance
@@ -227,6 +243,7 @@ Actions:
 * click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect."
+* Open /logout (clean up)
 
 #### R2.9.4
 * Mock backend.get_user to return a test_user instance
@@ -239,6 +256,8 @@ Actions:
 * click element ```input[type = "submit"]```
 * open /login
 * check that ```#message``` is "{} format is incorrect."
+* Open /logout (clean up)
+
 #### Test case R2.10 - If the email already exists, show message 'this email has been ALREADY used'
 Mocking:
 * Mock backend.get_user to return a test_user instance
@@ -248,6 +267,7 @@ Actions:
 * enter test_user's email into element ```#email```
 * check ```input[id = "email"]``` already exists
 * check that ```#message``` is "this email has been ALREADY used"
+
 
 #### Test case R2.11 - If no error regarding the inputs following the rules above, create a new user, set the balance to 5000, and go back to the /login page
 Mocking:
@@ -263,6 +283,7 @@ Actions:
 * add 5000 into element ```#balance```
 * open /login
 * validate that 5000 value added to balance successfully. 
+* Open /logout (clean up)
 
 #### Test case R3.1 - If the user is not logged in, redirect to login page
 Mocking:
@@ -276,6 +297,7 @@ Actions:
 * click element ```input[type="submit"]```
 * open /login
 * validate that current page shows (some element on the login page)
+* Open /logout (clean up)
 
 #### Test case R3.2 - This page shows a header 'Hi {}'.format(user.name)
 Actions:
@@ -289,6 +311,7 @@ Actions:
 * enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
 * validate that current page shows ```#hi``` header
+* Open /logout (clean up)
 
 #### Test case R3.3 - This page shows user balance.
 Mocking:
@@ -301,6 +324,7 @@ Actions:
 * enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
 * validate that current page shows ```#balance``` element
+* Open /logout (clean up)
 
 #### Test case R3.4 - This page shows a logout link, pointing to /logout
 Mocking:
@@ -314,6 +338,7 @@ Actions:
 * click element ```input[type="submit"]```
 * validate that current page shows ```#logout``` element
 * validate that current page shows ```#logout``` element and points to ```#logout``` element 
+* Open /logout (clean up)
 
 #### Test case R3.5 - This page lists all available tickets. Information including the quantity of each ticket, the owner's email, and the price, for tickets that are not expired.
 Mocking:
@@ -325,7 +350,8 @@ Actions:
 * enter test_user's email into element ```#email```
 * enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
-* validate that current page contains and lists  ```#all_tickets``` ,  ```#quantity_tickets```,  ```#email```,  ```#tickets_price``` and  ```input[type="submit"]``` elements. 
+* validate that current page contains and lists  ```#all_tickets``` ,  ```#quantity_tickets```,  ```#email```,  ```#tickets_price``` and ```input[type="submit"]``` elements. 
+* Open /logout (clean up)
 
 #### Test case R3.6 - This page contains a form that a user can submit new tickets for sell. Fields: name, quantity, price, expiration date
 Mocking:
@@ -338,3 +364,4 @@ Actions:
 * enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
 * Validate that the form element contains the  ```#name```,  ```#quantity_sell```,  ```#price_sell``` and ```#expirationdate_sell``` elements. 
+* Open /logout (clean up)
