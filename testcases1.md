@@ -60,6 +60,7 @@ Mocking:
 
 ##### R1.6.1
 Actions: 
+* open /logout (to invalidate any logged-in sessions that may exist)
 * open /login
 * enter test_user's email into element ```#email```
 * leave test_user's password blank and click ```input[type="submit"]```
