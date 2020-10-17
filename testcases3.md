@@ -6,13 +6,14 @@ test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
+    balance=140
 )
 
 test_ticket = Ticket(
   owner='test_frontend@test.com',
   name='t1',
-  quantity=10,
-  price=10,
+  quantity=1,
+  price=100,
   date='20210901'
 )
 ```
@@ -84,6 +85,32 @@ Actions:
 * Validate that current route is ```/update```
 * Open /logout (clean up)
 
+#### Test case R4.0 - Checking for positive case for the fields of ticket's selling form
+Mocking:
+* Mock backend.get_user to return a test_user instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```Hello World 123``` into element ```#name_sell```
+* Enter the value ```1``` into element ```#quantity_sell```
+* Enter the value ```15``` into element ```#price_sell```
+* Enter the value ```20210901``` into element ```#expdate_sell```
+* Click element ```input[type="submit" value="Sell"]```
+* Validate that the ```#message``` does not equal to "Ticket name must be alphanumeric-only"
+* Validate that the ```#message``` does not equal to "Ticket name cannot begin with a space"
+* Validate that the ```#message``` does not equal to "Ticket name cannot end with a space"
+* Validate that the ```#message``` does not equal to "Ticket name cannot be longer than 60 characters"
+* Validate that the ```#message``` does not equal to "At least 1 ticket must be sold"
+* Validate that the ```#message``` does not equal to "At most 100 tickets can be sold"
+* Validate that the ```#message``` does not equal to "Price of the ticket cannot be below 10"
+* Validate that the ```#message``` does not equal to "Price of the ticket cannot be above 100"
+* Validate that the ```#message``` does not equal to "Expiration date is in invalid format"
+* Open /logout (clean up)
+
 #### Test case R4.1 - The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
 
 #### Test case R4.1.1 - Check if name of the ticket is alphanumeric-only
@@ -138,24 +165,6 @@ Actions:
 * Enter the value ```20210901``` into element ```#expdate_sell```
 * Click element ```input[type="submit" value="Sell"]```
 * Check that ```#message``` is "Ticket name cannot end with a space"
-* Open /logout (clean up)
-
-#### Test case R4.1.4 - Check if ticket works if it doesn't begin or end with space, and is alphanumerical, and all fields are correct.
-Mocking:
-* Mock backend.get_user to return a test_user instance
-
-Actions: 
-* Open /logout (to invalid any logged-in sessions that may exist)
-* Open /login
-* Enter test_user's email into element #email
-* Enter test_user's password into element #password
-* Click element ```input[type="submit"]```
-* Enter ```Hello World 123``` into element ```#name_sell```
-* Enter the value ```1``` into element ```#quantity_sell```
-* Enter the value ```15``` into element ```#price_sell```
-* Enter the value ```20210901``` into element ```#expdate_sell```
-* Click element ```input[type="submit" value="Sell"]```
-* Validate that the ```#message``` ```successful```
 * Open /logout (clean up)
 
 #### Test case R4.2 - The name of the ticket is no longer than 60 characters
@@ -249,7 +258,7 @@ Actions:
 * Enter the value ```101``` into element ```#price_sell```
 * Enter the value ```20210901``` into element ```#expdate_sell```
 * Click element ```input[type="submit" value="Sell"]```
-* Check that ```#message``` is "Price of the ticket cannot be below 10"
+* Check that ```#message``` is "Price of the ticket cannot be above 100"
 * Open /logout (clean up)
 
 #### Test case R4.5 - Date must be given in the format YYYYMMDD (e.g. 20200901)
@@ -286,7 +295,7 @@ Actions:
 * Enter the value ```Sept. 9 2021``` into element ```#expdate_sell```
 * Click element ```input[type="submit" value="Sell"]```
 * Validate that current page redirects to the user profile page and contains header element ```'Hi {}'.format(user.name)```
-* Validate that ```#message``` is not blank
+* Validate that ```#message``` is not "successful"
 * Open /logout (clean up)
 
 #### Test case R4.7 - The added new ticket information will be posted on the user profile page
@@ -313,6 +322,32 @@ Actions:
   <th>20210901</th>
 </tr>
 ```
+* Open /logout (clean up)
+
+#### Test case R6.0 - Checking for positive case for the fields of ticket's buying form
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter test_ticket's name into element ```#name_buy```
+* Enter the value ```1``` into element ```#quantity_buy```
+* Click element ```input[type="submit" value="Buy"]```
+* Validate that the ```#message``` does not equal to "Ticket name must be alphanumeric-only"
+* Validate that the ```#message``` does not equal to "Ticket name cannot begin with a space"
+* Validate that the ```#message``` does not equal to "Ticket name cannot end with a space"
+* Validate that the ```#message``` does not equal to "Ticket name cannot be longer than 60 characters"
+* Validate that the ```#message``` does not equal to "At least one ticket must be purchased"
+* Validate that the ```#message``` does not equal to "At most 100 tickets can be purchased"
+* Validate that the ```#message``` does not equal to "Ticket not found"
+* Validate that the ```#message``` does not equal to "The tickets have been bought"
+* Validate that the ```#message``` does not equal to "The quantity exceeds the quantity of tickets for sale"
+* Validate that the ```#message``` does not equal to "Not enough money for ticket purchase"
 * Open /logout (clean up)
 
 #### Test case R6.1 - The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
@@ -366,23 +401,6 @@ Actions:
 * Enter the value ```1``` into element ```#quantity_buy```
 * Click element ```input[type="submit" value="Buy"]```
 * Check that ```#message``` is "Ticket name cannot end with a space"
-* Open /logout (clean up)
-
-#### Test case R6.1.4 - The name of the ticket with valid fields is processed.
-Mocking:
-* Mock backend.get_user to return a test_user instance
-* Mock backend.get_tickets to return a test_tickets instance
-
-Actions: 
-* Open /logout (to invalid any logged-in sessions that may exist)
-* Open /login
-* Enter test_user's email into element #email
-* Enter test_user's password into element #password
-* Click element ```input[type="submit"]```
-* Enter test_ticket's name into element ```#name_buy```
-* Enter the value test_ticket's quantity into element ```#quantity_buy```
-* Click element ```input[type="submit" value="Buy"]```
-* Validate that ```#message``` is ```successful```
 * Open /logout (clean up)
 
 #### Test case R6.2 - The name of the ticket is no longer than 60 characters
