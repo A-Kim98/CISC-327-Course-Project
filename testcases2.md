@@ -275,6 +275,7 @@ Actions:
 * enter test_user's password into element ```#password```
 * click element ```input[type="submit"]```
 * open /login
+* validate that current page shows (some element on the login page)
 
 #### Test case R3.2 - This page shows a header 'Hi {}'.format(user.name)
 Actions:
