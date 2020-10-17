@@ -46,7 +46,7 @@ Actions:
 * Validate that the ```#message``` does not equal to "The ticket does not exist"
 * Open /logout (clean up)
 
-#### Test case R5.0 - Checking for positive case for the fields of ticket's updating form - upper boundaries
+#### Test case R5.0.1 - Checking for positive case for the fields of ticket's updating form - upper boundaries
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
