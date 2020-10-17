@@ -6,8 +6,7 @@ test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
-    balance = 0
-balance = 1400
+    balance = 1400
 )
 ```
 #### Test case R2.5 - Email, password, password2 all have to satisfy the same required as defined in R1
@@ -282,7 +281,7 @@ Actions:
 * enter "testing327" into element ```#password2```
 * enter "tester327" into element #name
 * click element ```input[type="submit"]```
-* add 5000 into element ```#balance```
+* set ```#balance``` to 5000
 * open /login
 * validate that 5000 value added to balance successfully. 
 * Open /logout (clean up)
