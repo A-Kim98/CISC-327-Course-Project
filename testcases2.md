@@ -6,7 +6,7 @@ test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
-balance = 0
+    balance = 0
 )
 ```
 #### Test case R2.5 - Email, password, password2 all have to satisfy the same required as defined in R1
