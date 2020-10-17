@@ -146,7 +146,7 @@ Actions:
 Actions:
 * open /login
 * enter email with formatting error into element ```#email```
-* enter password with formatting error into element #password
+* enter password with formatting error into element  ```#password```
 * click element ```input[type = "submit"]```
 * check that ```#message``` is "email/password format is incorrect"
 
