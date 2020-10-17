@@ -6,7 +6,7 @@ test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
-    balance=140
+    balance=1400
 )
 
 test_ticket = Ticket(
