@@ -117,7 +117,7 @@ Actions:
 Actions: 
 * open /login
 * input test_user's email into ```#email```
-* input a password "test!" 
+* input a password "test!"  into ```#password```
 * click element ```input[type = "submit"]```
 * check  element ```#message``` is "Password needs minimum length 6" 
 ##### R1.8.2
