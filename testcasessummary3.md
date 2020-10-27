@@ -4,7 +4,8 @@
 | R3.8                             | R3.8         | Testing if ticket-selling form's sell button redirects to the /sell route                                                                                           |
 | R3.9                             | R3.9         | Testing if ticket-buying form's buy button redirects to the /buy route                                                                                              |
 | R3.10                            | R3.10        | Testing if ticket-update form's update button redirects to the /update button                                                                                       |
-| R4.0                             | R4.0         | Asserting ticket-selling form with valid inputs is processed without failure                                                                                        |
+| R4.0                             | R4.0.1       | Asserting ticket-selling form with valid lower boundary inputs is processed without failure                                                                         |
+|                                  | R4.0.2       | Asserting ticket-selling form with valid upper boundary inputs is processed without failure                                                                         |
 | R4.1                             | R4.1.1       | Testing to make sure the name field of the ticket-selling form cannot contain non-alphanumerical characters                                                         |
 |                                  | R4.1.2       | Testing to make sure the name field of the ticket-selling form cannot begin with a space                                                                            |
 |                                  | R4.1.3       | Testing to make sure the name field of the ticket-selling form cannot end with a space                                                                              |
@@ -16,7 +17,8 @@
 | R4.5                             | R4.5         | Testing to make sure the date field of the ticket-selling form has to be in YYYYMMDD format                                                                         |
 | R4.6                             | R4.6         | Testing if any error redirects back to / (user profile) and shows an error message                                                                                  |
 | R4.7                             | R4.7         | Testing to make sure when a form to sell a ticket is submitted, it is posted on the user profile page                                                               |
-| R6.0                             | R6.0         | Asserting ticket-buying form with valid inputs is processed without failure                                                                                         |
+| R6.0                             | R6.0.1       | Asserting ticket-buying form with valid lower boundary inputs is processed without failure                                                                         |
+|                                  | R6.0.2       | Asserting ticket-buying form with valid upper boundary inputs is processed without failure                                                                         |
 | R6.1                             | R6.1.1       | Testing to make sure the name field of the ticket-buying form cannot contain non-alphanumerical characters                                                          |
 |                                  | R6.1.2       | Testing to make sure the name field of the ticket-buying form cannot begin with a space                                                                             |
 |                                  | R6.1.3       | Testing to make sure the name field of the ticket-buying form cannot end with a space                                                                               |

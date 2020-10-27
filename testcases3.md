@@ -6,13 +6,13 @@ test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
-    balance=140
+    balance=1400
 )
 
 test_ticket = Ticket(
   owner='test_frontend@test.com',
-  name='t1',
-  quantity=1,
+  name='t 1',
+  quantity=10,
   price=100,
   date='20210901'
 )
@@ -86,6 +86,8 @@ Actions:
 * Open /logout (clean up)
 
 #### Test case R4.0 - Checking for positive case for the fields of ticket's selling form
+
+#### Test case R4.0.1 - Checking for positive case for the fields of ticket's selling form with lower boundaries
 Mocking:
 * Mock backend.get_user to return a test_user instance
 
@@ -97,7 +99,7 @@ Actions:
 * Click element ```input[type="submit"]```
 * Enter ```Hello World 123``` into element ```#name_sell```
 * Enter the value ```1``` into element ```#quantity_sell```
-* Enter the value ```15``` into element ```#price_sell```
+* Enter the value ```10``` into element ```#price_sell```
 * Enter the value ```20210901``` into element ```#expdate_sell```
 * Click element ```input[type="submit" value="Sell"]```
 * Validate that the ```#message``` does not equal to "Ticket name must be alphanumeric-only"
@@ -109,6 +111,33 @@ Actions:
 * Validate that the ```#message``` does not equal to "Price of the ticket cannot be below 10"
 * Validate that the ```#message``` does not equal to "Price of the ticket cannot be above 100"
 * Validate that the ```#message``` does not equal to "Expiration date is in invalid format"
+* Open /logout (clean up)
+
+#### Test case R4.0.2 - Checking for positive case for the fields of ticket's selling form with upper boundaries
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter ```Hello World 123``` into element ```#name_sell```
+* Enter the value ```100``` into element ```#quantity_sell```
+* Enter the value ```100``` into element ```#price_sell```
+* Enter the value ```20210901``` into element ```#expdate_sell```
+* Click element ```input[type="submit" value="Sell"]```
+* Validate that the ```#message``` does not equal to "Ticket name must be alphanumeric-only"
+* Validate that the ```#message``` does not equal to "Ticket name cannot begin with a space"
+* Validate that the ```#message``` does not equal to "Ticket name cannot end with a space"
+* Validate that the ```#message``` does not equal to "Ticket name cannot be longer than 60 characters"
+* Validate that the ```#message``` does not equal to "At least one ticket must be purchased"
+* Validate that the ```#message``` does not equal to "At most 100 tickets can be purchased"
+* Validate that the ```#message``` does not equal to "Ticket not found"
+* Validate that the ```#message``` does equal  "The tickets have been bought"
+* Validate that the ```#message``` does not equal to "The quantity exceeds the quantity of tickets for sale"
+* Validate that the ```#message``` does not equal to "Not enough money for ticket purchase"
 * Open /logout (clean up)
 
 #### Test case R4.1 - The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
@@ -325,6 +354,8 @@ Actions:
 * Open /logout (clean up)
 
 #### Test case R6.0 - Checking for positive case for the fields of ticket's buying form
+
+#### Test case R6.0.1 - Checking for positive case for the fields of ticket's buying form
 Mocking:
 * Mock backend.get_user to return a test_user instance
 * Mock backend.get_tickets to return a test_tickets instance
@@ -345,7 +376,31 @@ Actions:
 * Validate that the ```#message``` does not equal to "At least one ticket must be purchased"
 * Validate that the ```#message``` does not equal to "At most 100 tickets can be purchased"
 * Validate that the ```#message``` does not equal to "Ticket not found"
-* Validate that the ```#message``` does not equal to "The tickets have been bought"
+* Validate that the ```#message``` does not equal to "The quantity exceeds the quantity of tickets for sale"
+* Validate that the ```#message``` does not equal to "Not enough money for ticket purchase"
+* Open /logout (clean up)
+
+#### Test case R6.0.2 - Checking for positive case for the fields of ticket's buying form for quantity is more than the quantity requested to buy upper boundary
+Mocking:
+* Mock backend.get_user to return a test_user instance
+* Mock backend.get_tickets to return a test_tickets instance
+
+Actions: 
+* Open /logout (to invalid any logged-in sessions that may exist)
+* Open /login
+* Enter test_user's email into element #email
+* Enter test_user's password into element #password
+* Click element ```input[type="submit"]```
+* Enter test_ticket's name into element ```#name_buy```
+* Enter the value ```10``` into element ```#quantity_buy```
+* Click element ```input[type="submit" value="Buy"]```
+* Validate that the ```#message``` does not equal to "Ticket name must be alphanumeric-only"
+* Validate that the ```#message``` does not equal to "Ticket name cannot begin with a space"
+* Validate that the ```#message``` does not equal to "Ticket name cannot end with a space"
+* Validate that the ```#message``` does not equal to "Ticket name cannot be longer than 60 characters"
+* Validate that the ```#message``` does not equal to "At least one ticket must be purchased"
+* Validate that the ```#message``` does not equal to "At most 100 tickets can be purchased"
+* Validate that the ```#message``` does not equal to "Ticket not found"
 * Validate that the ```#message``` does not equal to "The quantity exceeds the quantity of tickets for sale"
 * Validate that the ```#message``` does not equal to "Not enough money for ticket purchase"
 * Open /logout (clean up)
