@@ -33,7 +33,8 @@ This design document will cover the following scenarios:
 - (R8) When user tries to access an invalid page
 
 ### 1.3. Overall Project Structure
-![Project Structure](/assets/images/philly-magic-gardens.jpg "Project Structure")
+Here is the overall control flow of the project:
+![Project Structure](/assets/images/controlflows.png "Project Structure")
 
 
 ## 2. Techniques and Tools
