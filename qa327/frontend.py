@@ -61,7 +61,7 @@ def register_post():
     elif len(name) < 1:
         error_message = "User name has to be non-empty."
     
-    elif !len(name).isalnum():
+    elif not len(name).isalnum():
         error_message = "User name has to be alphanumeric-only."
     
     elif name[0] == "" or name[-1] == "":
@@ -122,7 +122,7 @@ def login_post():
             return render_template('login.html', message="Password needs at least one special character.")
     
     # For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
-    if !re.search(regex, email):
+    if not re.search(regex, email):
         return render_template('login.html', message="email/password combination incorrect")
     
     
