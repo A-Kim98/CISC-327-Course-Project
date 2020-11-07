@@ -32,7 +32,7 @@ def register_post():
     
     # Email, password, password2 all have to satisfy the same required as defined in R1
     # Email and password both cannot be empty
-    if len(email) < 6 && len(password) < 6:
+    if len(email) < 6 and len(password) < 6:
         error_message = "Email and/or password cannot be empty"
         
     # Email has to follow addr-spec defined in RFC 5322
