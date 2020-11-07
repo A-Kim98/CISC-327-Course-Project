@@ -2,14 +2,17 @@
 Fall Quarter 2020
 
 **CISC 327 Course Project Team:**
+
 Ahn, Jihoo
 Cole, Bram
 Kim, Alice
 
 **Customer:**
+
 Steven Ding
 
 **Table of Contents:**
+
 1. Introduction
 2. Techniques and Tools
 3. Project Tasks
