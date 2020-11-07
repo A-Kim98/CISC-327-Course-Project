@@ -36,7 +36,7 @@ def register_post():
         error_message = "Email and/or password cannot be empty"
         
     # Email has to follow addr-spec defined in RFC 5322
-    elif ! re.search(regex, email):
+    elif not re.search(regex, email):
         error_message = "Email/password format is incorrect.
     
     # Password has to meet the required complexity:
