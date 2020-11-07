@@ -37,7 +37,7 @@ def register_post():
         
     # Email has to follow addr-spec defined in RFC 5322
     elif not re.search(regex, email):
-        error_message = "Email/password format is incorrect.
+        error_message = "Email/password format is incorrect."
     
     # Password has to meet the required complexity:
     # minimum length 6
@@ -123,7 +123,7 @@ def login_post():
     
     # For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
     if !re.search(regex, email):
-        return render_template('login.html', message='email/password combination incorrect')
+        return render_template('login.html', message="email/password combination incorrect")
     
     
     # If email/password are correct, redirect to /
