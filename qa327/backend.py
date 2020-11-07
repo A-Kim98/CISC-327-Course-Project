@@ -48,6 +48,6 @@ def register_user(email, name, password, password2):
     db.session.commit()
     return None
 
-
+# Fixed so that it will return a temporary result until backend is complete - R3.5
 def get_all_tickets():
-    return []
+    return [{"price": 4, "name":"Ticket 1", "quantity":2, "email":"ticket1@email.com"}, {"price": 3, "name":"Ticket 2", "quantity":21, "email":"ticket2@email.com"}]
