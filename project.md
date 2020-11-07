@@ -1,14 +1,12 @@
 # CISC 327 Course Project Design Document
 Fall Quarter 2020
 
-**CISC 327 Course Project Team:**
+**CISC 327 Course Project Team:**<br>
+Ahn, Jihoo<br>
+Cole, Bram<br>
+Kim, Alice<br>
 
-Ahn, Jihoo
-Cole, Bram
-Kim, Alice
-
-**Customer:**
-
+**Customer:**<br>
 Steven Ding
 
 **Table of Contents:**
