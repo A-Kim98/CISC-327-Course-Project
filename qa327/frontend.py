@@ -123,7 +123,7 @@ def login_post():
     
     # For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
     if not re.search(regex, email):
-        return render_template('login.html', message="email/password combination incorrect")
+        return render_template('login.html', message="email/password combination incorrect.")
     
     
     # If email/password are correct, redirect to /
