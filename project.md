@@ -57,7 +57,7 @@ the frontend represents the view in the the model view controller design pattern
 The solution for backend, which controls the business logics such as actions that involve transactions and data models' interactions, are written in `backend.py`. In the backend,  SQL language will be used to allow the program to interact with SQLite, server-less database 
 
 ![Project Structure](/assets/images/integrationtesting_architecture.png "Project Structure")
-
+the backend represents the controller in the model view controller design pattern
 ### 2.5 Integration
 By using SQLite, the program will run the front end during the day, backend during the night, and produce new data files the next day. Any conflicts at transaction will be left for customer services to resolve.
 
