@@ -15,6 +15,7 @@ Steven Ding
 2. Techniques and Tools
 3. Project Tasks
 4. Budget Management
+5. Architecture
 
 ## 1. Project Information
 ### 1.1. Purpose
@@ -52,12 +53,12 @@ With the customer, communication happens through either the customer's github pa
 ### 2.3 FrontEnd
 We will be using Python language and Flask library in order to create the frontend. The codes for frontend will be in `frontend.py`.
 Refer back to *1.3* - Overall Project Structure for a diagram of, and an explanation of what frontend of the proejct should do.
-
+the frontend represents the view in the the model view controller design pattern
 ### 2.4 BackEnd
 The solution for backend, which controls the business logics such as actions that involve transactions and data models' interactions, are written in `backend.py`. In the backend,  models will be called to interact with SQLite, a server-less database, to modify data.
 
 ![Project Structure](/assets/images/integrationtesting_architecture.png "Project Structure")
-
+the backend represents the controller in the model view controller design pattern
 ### 2.5 Integration
 By using SQLite, the program will run the front end during the day, backend during the night, and produce new data files the next day. Any conflicts at transaction will be left for customer services to resolve.
 
