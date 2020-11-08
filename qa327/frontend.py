@@ -106,7 +106,7 @@ def login_post():
     
     # Email and password both cannot be empty
     if email == "" or password == "" :
-        return render_template('login.html', message= "Email and/or password cannot be empty")
+        return render_template('login.html', message= "Email and/or password cannot be empty.")
         
     # Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
     if len(password) < 6:
