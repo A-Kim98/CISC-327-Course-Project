@@ -54,7 +54,7 @@ We will be using Python language and Flask library in order to create the fronte
 Refer back to *1.3* - Overall Project Structure for a diagram of, and an explanation of what frontend of the proejct should do.
 
 ### 2.4 BackEnd
-The solution for backend, which controls the business logics such as actions that involve transactions and data models' interactions, are written in `backend.py`. In the backend,  SQL language will be used to allow the program to interact with SQLite, server-less database 
+The solution for backend, which controls the business logics such as actions that involve transactions and data models' interactions, are written in `backend.py`. In the backend,  models will be called to interact with SQLite, a server-less database, to modify data.
 
 ![Project Structure](/assets/images/integrationtesting_architecture.png "Project Structure")
 
@@ -90,3 +90,25 @@ The reason is due to security reasons. If login, logout, or register pages' inpu
 ## 4. Budget Management
 ### 4.1 Test Cases
 The team will use the above priority to filter out low-priority tasks and tests if budgets are running short or is calculated to be short when the budget is given.
+
+## 5. Architecture
+The init file defines global vars and config values. Main runs the flask app.
+
+The frontend has routes that handle http requests. Each route has a method associated with either POST or GET. 
+register_get() gets the template for the register page
+register_post() ensures inputs entered into form are correct. Once correct they are registered with the database using a function from the controller.
+login_get() gets the template for the login page
+login_post() checks if a user exists with the form information using a session object. 
+Sesssion is an object that contains sharing information between browser and the server. The user object is stored in session to tell if the client has logged in.
+logout pops the logged_in attribute from session and redirects.
+page_not_found() gives the template for a 404 error
+authenticate will wrap around any function that accepts a user object and will check to if logged in. If not redirects to login.
+returns a profile template and gets ticket info from controller this is where authentication is done
+
+in the backend:
+get_user queries the database for the user has email param
+login_user checks for user authentifcation and has email and password params
+register_user() registers the user to the database and accepts all params in the register page forms. It creates a user object.
+
+Model:
+a class called user exists with id email password and names  as attributes
