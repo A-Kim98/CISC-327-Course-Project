@@ -115,7 +115,7 @@ def login_post():
     # at least one upper case, at least one lower case, and at least one special character
     if len(password) > 6:
         if len(re.findall(r'[A-Z]',password)) < 1:
-            return render_template('login.html', message="Password needs at least one upper case")
+            return render_template('login.html', message="Password needs at least one upper case.")
         elif len(re.findall(r'[a-z]',password)) < 1:
             return render_template('login.html', message="Password needs at least one lower case.")
         elif len(re.findall(r'\b\S+\b',password)) < 1:
