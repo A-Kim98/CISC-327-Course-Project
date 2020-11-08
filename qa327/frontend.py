@@ -145,7 +145,7 @@ def login_post():
         
     # Otherwise, redict to /login and show message 'email/password combination incorrect'
     else:
-        return render_template('login.html', message='email/password combination incorrect')
+        return render_template('login.html', message="email/password combination incorrect.")
 
 
 @app.route('/logout')
