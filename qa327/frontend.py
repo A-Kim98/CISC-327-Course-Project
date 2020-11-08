@@ -110,7 +110,7 @@ def login_post():
         
     # Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
     if len(password) < 6:
-        return render_template('login.html', message="Password needs minimum length 6")
+        return render_template('login.html', message="Password needs minimum length 6.")
     
     # at least one upper case, at least one lower case, and at least one special character
     if len(password) > 6:
