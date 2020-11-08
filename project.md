@@ -52,7 +52,7 @@ With the customer, communication happens through either the customer's github pa
 ### 2.3 FrontEnd
 We will be using Python language and Flask library in order to create the frontend. The codes for frontend will be in `frontend.py`.
 Refer back to *1.3* - Overall Project Structure for a diagram of, and an explanation of what frontend of the proejct should do.
-
+the frontend represents the view in the the model view controller design pattern
 ### 2.4 BackEnd
 The solution for backend, which controls the business logics such as actions that involve transactions and data models' interactions, are written in `backend.py`. In the backend,  SQL language will be used to allow the program to interact with SQLite, server-less database 
 
