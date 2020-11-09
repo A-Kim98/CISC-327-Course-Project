@@ -152,6 +152,11 @@ def logout():
     return redirect('/')
 
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
+
 def authenticate(inner_function):
     """
     :param inner_function: any python function that accepts a user object
