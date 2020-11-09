@@ -16,7 +16,7 @@ def register_get():
     # templates are stored in the templates folder
     return render_template('register.html', message='')
 
-
+# The registration form can be submitted as a POST request to the current URL (/register)
 @app.route('/register', methods=['POST'])
 def register_post():
     email = request.form.get('email')
@@ -27,8 +27,6 @@ def register_post():
     
     # email and password validation:
     regex = '^[a-z0-9]+[\._]?[a-z0-9]\w+{2,3}$'
-    
-    # The registration form can be submitted as a POST request to the current URL (/register)
     
     # Email, password, password2 all have to satisfy the same required as defined in R1
     # Email and password both cannot be empty
@@ -94,6 +92,7 @@ def login_get():
     return render_template('login.html', message='Please login')
 
 
+# The login form can be submitted as a POST request to the current URL (/login)
 @app.route('/login', methods=['POST'])
 def login_post():
     email = request.form.get('email')
@@ -101,9 +100,7 @@ def login_post():
     user = bn.login_user(email, password)
     
     regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-    
-    # The login form can be submitted as a POST request to the current URL (/login)
-    
+   
     # Email and password both cannot be empty
     if email == "" or password == "" :
         return render_template('login.html', message= "Email and/or password cannot be empty.")
