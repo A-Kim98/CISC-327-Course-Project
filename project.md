@@ -109,7 +109,7 @@ returns a profile template and gets ticket info from controller this is where au
 in the backend:
 get_user queries the database for the user has email param
 login_user checks for user authentifcation and has email and password params
-register_user() registers the user to the database and accepts all params in the register page forms. It creates a user object.
+register_user() registers the user to the database and accepts all params in the register page forms. It creates a user object with a balance of 5000
 
 Model:
 a class called user exists with id email password and names  as attributes
