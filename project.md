@@ -87,7 +87,38 @@ The priority will follow the following list:
 
 The reason is due to security reasons. If login, logout, or register pages' inputs are fumbled with, it can easily be led to a security issue, of allowing an intruder to check for security flaws in the login, logout, or register pages such as leaving user information vulnerable. This may cause security flaws such as an intruder logging in acting like a ticket owner, then updating the ticket to make the number undesirable for the original owner. Therefore, these pages were proritized. Then, sell, update, and buy were prioritized next as these require 
 
+### 3.3 Test Case Organization
+The website is relativily small and as it grows organization and the techniques used will change to scale with the amount of user's. Currently we will not test architecture as the architecture isn't particularly complicated yet. Each file with code in it that needs testing will have a corresponding file for unit tests. Other tests will have their own file(eg integration testing will have a file for all integration tests)
 
+### 3.4 Tools Techniques and Standard's
+**Tools:**
+Selenium- for frontend testing. It will allow us to automate browsing and form entry.
+Pytest- Our chosen testing framework
+Github CI- will be used for regression testing
+
+**Techniques:**
+Unit tests will be written. Integration testing will currently be done by integrating the model, view and controller. Lower level integration testing can be preformed if deemed necessary. System testing will also be preformed. Acceptance testing will be done through beta testing. The client may also be satisfied with just using the program or may want a certain percentage of user satisfaction.
+
+Robustness Testing- throw bad inputs and see what happens. Intentionally cause certain parts of the system to fail and see what happens(eg. server failure, database corruption) (this latter method may be deemed excessive if we haven't scaled much)
+Documentation and Coding Style/Consistency- inspection and a linter(flake8) we will use Pytest framework to document results
+security testing- do some penetration testing and then fix security wholes. We only need a small amount of deterrence for a small website. If the website grows more pen testing will be done done. 
+Usability Testing- in the beta track how many tries it takes for the user to do some action
+Compatibility Testing- test different resolutions and different machines. Virtual machines may be a good option to determine compatibility.
+
+If we scale enough performance testing may be needed.
+
+**Standards**
+We will let the tester decide in which way they would like to test but they should adhere to some guidlines:
+-the tester must attempt to maximize coverage.
+-There are only 2000 github action minutes per month so the method to determine whether a test method is acceptable is described below
+1. Calculate the number of test cases for the given methodology
+2. Record the average time for 10 tests
+3. if time*#ofTestCases > 1 minute you must rewrite the test
+
+At some point if the website needs scaling then it would be acceptable to write code that automatically writes tests
+
+Tester must describe--> inputs, actions/events, expected output, how we know the test is successful, expected coverage
+These results must be documented somewhere
 ## 4. Budget Management
 ### 4.1 Test Cases
 The team will use the above priority to filter out low-priority tasks and tests if budgets are running short or is calculated to be short when the budget is given.
