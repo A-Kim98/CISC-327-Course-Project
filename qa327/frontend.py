@@ -22,16 +22,16 @@ Validate email complexity and possible email format errors
 # Email has to follow addr-spec defined in RFC 5322
 '''
 @app.route('/register', methods=['POST'])
-def validate_email(mail, pwd1, pwd2):
+def validate_email(email, password, password2):
     email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-    if len(mail) <= 1 and (len(pwd1) <= 1 or len(pwd2) <= 1):
+    if len(email) <= 1 and (len(password) <= 1 or len(password2) <= 1):
         error_message = "Email and/or password cannot be empty."
 
-    elif len(mail) > 2 and (len(pwd1) > 1 or len(pwd2) > 1):
-        if not re.search(email_regex, mail):
+    elif len(email) > 2 and (len(password) > 1 or len(password2) > 1):
+        if not re.search(email_regex, email):
             error_message = "Email/password format is incorrect."
         
-        elif len(mail) > 25:
+        elif len(email) > 25:
             error_message = "Email/password format is incorrect."
     else:
         error_message = ""
@@ -42,21 +42,21 @@ Validate password complexity and possible password/password2 format error
 # Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
 '''
 @app.route('/register', methods=['POST'])
-def validate_password(pwd1, pwd2):
+def validate_password(password, password2):
     password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$'
     password_check = re.compile(password_regex)
     
-    if len(pwd1) < 6 or len(pwd2) < 6:
+    if len(pwd1) < 6 or len(password2) < 6:
         error_message = "Password needs minimum length 6"
     
-    elif len(pwd1) > 6 and len(pwd2) > 6:
-        if (not re.search(password_check, pwd1)) and  pwd1 == pwd2:
+    elif len(password) > 6 and len(password2) > 6:
+        if (not re.search(password_check, password)) and  password == password2:
             error_message = "Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character."
-        elif pwd1 != pwd2:
+        elif password != password2:
             error_message = "Password and password2 have to be exactly the same."
-        elif not re.match(r'^\w+$', pwd1):
+        elif not re.match(r'^\w+$', password):
             error_message = "Email/password format is incorrect."
-        elif not re.match(r'^\w+$', pwd2):
+        elif not re.match(r'^\w+$', password2):
             error_message = "Email/password format is incorrect."
     else:
         error_message = ""
@@ -68,18 +68,18 @@ Validate username complexity and possible username format error
 # User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character.
 '''
 @app.route('/register', methods=['POST'])
-def validate_username(user):
-    if len(user) <= 1:
+def validate_username(name):
+    if len(name) <= 1:
         error_message = "User name has to be non-empty."
         
-    elif len(user) > 1:
+    elif len(name) > 1:
         if user.isdigit():
             error_message = "User name has to be alphanumeric-only."
-        elif user[0] == " " or user[-1] == " ":
+        elif name[0] == " " or name[-1] == " ":
             error_message = "Space allowed only if it is not the first or the last character."
-        elif user(user) <= 2 or len(user) >= 20:
+        elif len(name) <= 2 or len(name) >= 20:
             error_message = "User name has to be longer than 2 characters and less than 20 characters."
-        elif re.match(r'^\w+$', user):
+        elif re.match(r'^\w+$', name):
             error_message = "Name format is incorrect."
     else:
         error_message = ""
