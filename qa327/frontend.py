@@ -10,7 +10,6 @@ http requests from the client (browser) through templating.
 The html templates are stored in the 'templates' folder. 
 """
 
-
 @app.route('/register', methods=['GET'])
 def register_get():
     # templates are stored in the templates folder
@@ -26,48 +25,58 @@ def register_post():
     error_message = None
     
     # email and password validation:
-    regex = r'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
-    
+    password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$'
+    email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+    password_check = re.compile(password_regex)
+
+    '''
+    Validate email complexity and possible email format errors
     # Email, password, password2 all have to satisfy the same required as defined in R1
     # Email and password both cannot be empty
-    if len(email) < 6 and len(password) < 6:
-        error_message = "Email and/or password cannot be empty"
-        
     # Email has to follow addr-spec defined in RFC 5322
-    elif not re.search(regex, email):
-        error_message = "Email/password format is incorrect."
+    '''
+    if len(email) <= 1 and (len(password) <= 1 or len(password2) <= 1):
+        error_message = "Email and/or password cannot be empty."
+        
+    elif len(email) > 2 and (len(password) > 1 or len(password2) > 1):
+        if not re.search(email_regex, email):
+            error_message = "Email/password format is incorrect."
+        elif len(email) > 25:
+            error_message = "Email/password format is incorrect."
     
-    # Password has to meet the required complexity:
-    # minimum length 6
-    elif len(password) < 6:
+        '''
+        Validate password complexity and possible password/password2 format error
+        # Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
+        '''
+    elif len(password) < 6 or len(password2) < 6:
         error_message = "Password needs minimum length 6"
     
-    # at least one upper case, at least one lower case, and at least one special character
-    elif len(password) > 6:
-        if len(re.findall(r'[A-Z]',password)) < 1:
-            error_message = "Password needs at least one upper case."
-        elif len(re.findall(r'[a-z]',password)) < 1:
-            error_message = "Password needs at least one lower case."
-        elif len(re.findall(r'\b\S+\b',password)) < 1:
-            error_message = "Password needs at least one special character."
-            
-    # Password and password2 have to be exactly the same
-    elif password != password2:
-        error_message = "The passwords do not match"
-    
-    # User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character.
-    elif len(name) < 1:
-        error_message = "User name has to be non-empty."
-    
-    elif not len(name).isalnum():
-        error_message = "User name has to be alphanumeric-only."
-    
-    elif name[0] == "" or name[-1] == "":
-        error_message = "Space allowed only if it is not the first or the last character."
+    elif len(password) > 6 and len(password2) > 6:
+        if (not re.search(password_check, password)) and  password == password2:
+            error_message = "Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character."
+        elif password != password2:
+            error_message = "Password and password2 have to be exactly the same."
+        elif not re.match(r'^\w+$', password):
+            error_message = "Email/password format is incorrect."
+        elif not re.match(r'^\w+$', password2):
+            error_message = "Email/password format is incorrect."
         
-    # User name has to be longer than 2 characters and less than 20 characters.
-    elif len(name) <= 2 or len(name) >= 20:
-        error_message = "User name has to be longer than 2 characters and less than 20 characters."
+        '''
+        Validate username complexity and possible username format error
+        # User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character.
+        '''
+    elif len(name) <= 1:
+        error_message = "User name has to be non-empty."
+        
+    elif len(name) > 1:
+        if name.isdigit():
+            error_message = "User name has to be alphanumeric-only."
+        elif name[0] == " " or name[-1] == " ":
+            error_message = "Space allowed only if it is not the first or the last character."
+        elif len(name) <= 2 or len(name) >= 20:
+            error_message = "User name has to be longer than 2 characters and less than 20 characters."
+        elif re.match(r'^\w+$', name):
+            error_message = "Name format is incorrect."
     
     # If the email already exists, show message 'this email has been ALREADY used'
     else:
@@ -102,7 +111,7 @@ def login_post():
     regex = r'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
    
     # Email and password both cannot be empty
-    if email == "" or password == "" :
+    if email == " " or password == " " :
         return render_template('login.html', message= "Email and/or password cannot be empty.")
         
     # Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
@@ -120,7 +129,7 @@ def login_post():
     
     # For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
     if not re.search(regex, email):
-        return render_template('login.html', message="email/password combination incorrect.")
+        return render_template('login.html', message="email/password format is incorrect.")
     
     
     # If email/password are correct, redirect to /
