@@ -357,7 +357,7 @@ class FrontEndHomePageTest(BaseCase):
         self.open(base_url + '/logout')
 
 
-"""R2.5 - Email, password, password2 all have to satisfy the same required as defined in R1"""
+    """R2.5 - Email, password, password2 all have to satisfy the same required as defined in R1"""
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_register_empty_email(self, *_):
@@ -627,10 +627,9 @@ class FrontEndHomePageTest(BaseCase):
         #open logout page
         self.open(base_url + '/logout')
 
-"""
-R2.7 - User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character.
-"""
-
+    """
+    R2.7 - User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character.
+    """
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_username_failed_case1(self, *_):
@@ -648,8 +647,6 @@ R2.7 - User name has to be non-empty, alphanumeric-only, and space allowed only 
         self.assert_text("User name has to be non-empty.", "#message")
         #open logout page
         self.open(base_url + '/logout')
-
-
 
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
@@ -669,7 +666,6 @@ R2.7 - User name has to be non-empty, alphanumeric-only, and space allowed only 
         #open logout page
         self.open(base_url + '/logout')
 
-
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_username_failed_case3(self, *_):
@@ -687,7 +683,6 @@ R2.7 - User name has to be non-empty, alphanumeric-only, and space allowed only 
         self.assert_text("Space allowed only if it is not the first or the last character.", "#message")
         #open logout page
         self.open(base_url + '/logout')
-
 
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
@@ -707,11 +702,9 @@ R2.7 - User name has to be non-empty, alphanumeric-only, and space allowed only 
         #open logout page
         self.open(base_url + '/logout')
 
-
-
-"""
-R2.9 - For any formatting errors, redirect back to /login and show message '{} format is incorrect.'.format(the_corresponding_attribute)
-"""
+    """
+    R2.9 - For any formatting errors, redirect back to /login and show message '{} format is incorrect.'.format(the_corresponding_attribute)
+    """
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_register_format_error_case1(self, *_):
