@@ -46,7 +46,7 @@ def validate_password(password, password2):
     password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$'
     password_check = re.compile(password_regex)
     
-    if len(pwd1) < 6 or len(password2) < 6:
+    if len(password) < 6 or len(password2) < 6:
         error_message = "Password needs minimum length 6"
     
     elif len(password) > 6 and len(password2) > 6:
@@ -73,7 +73,7 @@ def validate_username(name):
         error_message = "User name has to be non-empty."
         
     elif len(name) > 1:
-        if user.isdigit():
+        if name.isdigit():
             error_message = "User name has to be alphanumeric-only."
         elif name[0] == " " or name[-1] == " ":
             error_message = "Space allowed only if it is not the first or the last character."
