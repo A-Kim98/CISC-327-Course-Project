@@ -2,8 +2,8 @@ import pytest
 from seleniumbase import BaseCase
 from qa327_test.conftest import base_url
 from unittest.mock import patch
-from qa327.models import User
-from werkzeug.security import generate_password_hash
+from qa327.models import db, User
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Mock a sample user
 test_user = User(
@@ -18,7 +18,7 @@ test_tickets = [
 ]
 
 
-class FrontEndHomePageTest(BaseCase):
+class TestR7R8(BaseCase):
 
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
