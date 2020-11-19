@@ -2,18 +2,17 @@ import pytest
 from seleniumbase import BaseCase
 from qa327_test.conftest import base_url
 from unittest.mock import patch
-from qa327.models import db, User
-from werkzeug.security import generate_password_hash, check_password_hash
+from qa327.models import User
+from werkzeug.security import generate_password_hash
 
-# Moch a sample user
+# Mock a sample user
 test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend'),
-    balance=5000
 )
 
-# Moch some sample tickets
+# Mock some sample tickets
 test_tickets = [
     {'name': 't1', 'price': '100'}
 ]
@@ -21,6 +20,7 @@ test_tickets = [
 
 class FrontEndHomePageTest(BaseCase):
 
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     def test_logout_invalidates_session_redirects(self, *_):
         # open logout page to invalidate any logged in sessions may exist
@@ -40,6 +40,7 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_element("#login-header")
         self.assert_text("Log In", "#login-header")
 
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     def test_logout_noAccess_restricted(self, *_):
         # open logout page to invalidate any logged in sessions may exist
@@ -50,6 +51,7 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_element("#login-header")
         self.assert_text("Log In", "#login-header")
 
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     def test_404_error(self, *_):
         # open logout page to invalidate any logged in sessions may exist
