@@ -36,13 +36,13 @@ class FrontEndHomePageTest(BaseCase):
 
     # R1.2: the login page has a message that by default says 'please login'
     def test_login_message(self, *_):
-    # Open the logout page to invalidate any logged-in session
-    self.open(base_url + '/logout')
-    # open the login page
-    self.open(base_url + '/login')
-    # make sure it shows the proper page and message
-    self.assert_element("#message")
-    self.assert_text("Please login", "#message")
+        # Open the logout page to invalidate any logged-in session
+        self.open(base_url + '/logout')
+        # open the login page
+        self.open(base_url + '/login')
+        # make sure it shows the proper page and message
+        self.assert_element("#message")
+        self.assert_text("Please login", "#message")
 
     # R1.3: If the user has logged in, redirect to the user profile page
     # R1.5 - The login form can be submitted as a POST request to the current URL (/login)
