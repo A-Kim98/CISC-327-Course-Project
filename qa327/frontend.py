@@ -24,7 +24,6 @@ Validate email complexity and possible email format errors
 @app.route('/register', methods=['POST'])
 def validate_email(mail, pwd1, pwd2):
     email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-    print(email, pwd, pwd2)
     if len(mail) <= 1 and (len(pwd1) <= 1 or len(pwd2) <= 1):
         error_message = "Email and/or password cannot be empty."
 
@@ -78,7 +77,7 @@ def validate_username(user):
             error_message = "User name has to be alphanumeric-only."
         elif user[0] == " " or user[-1] == " ":
             error_message = "Space allowed only if it is not the first or the last character."
-        elif user(name) <= 2 or len(user) >= 20:
+        elif user(user) <= 2 or len(user) >= 20:
             error_message = "User name has to be longer than 2 characters and less than 20 characters."
         elif re.match(r'^\w+$', user):
             error_message = "Name format is incorrect."
