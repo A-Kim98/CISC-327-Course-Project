@@ -55,7 +55,9 @@ class TestR7R8(BaseCase):
     @patch('qa327.backend.get_user', return_value=test_user)
     def test_404_error(self, *_):
         # open logout page to invalidate any logged in sessions may exist
-        self.driver.get(base_url + '/dne')
+        self.open(base_url + '/logout')
+        # open something that doesnt exist
+        self.open(base_url + '/thisPageDoesNotExist')
         # assert we get a 404 error page
         self.assert_element("#404-header")
         self.assert_text("404 Page Not Found", "#404-header")
