@@ -19,6 +19,7 @@ test_user = User(
             )
 
 class FrontEndHomePageTest(BaseCase):
+    '''
     @patch('qa327.backend.register_user', return_value=test_user)
     # R2.2- Show the user registration page if user is not logged in
     def test_register(self, *_):
@@ -61,7 +62,7 @@ class FrontEndHomePageTest(BaseCase):
         #open logout page
         self.open(base_url + '/logout')
     
-
+ 
     #R2.5 - Email, password, password2 all have to satisfy the same required as defined in R1
     @patch('qa327.backend.register_user', return_value=test_user)
     def test_register_empty_email_case1(self, *_):
@@ -81,7 +82,8 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Email and/or password cannot be empty.", "#message")
         #open logout page
         self.open(base_url + '/logout')
-        
+    
+
     @patch('qa327.backend.register_user', return_value=test_user)
     def test_register_empty_password_case2(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -119,8 +121,8 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Email and/or password cannot be empty.", "#message")
         #open logout page
         self.open(base_url + '/logout')
-        
-    '''
+ 
+
     @patch('qa327.backend.register_user', return_value=test_user)
     def test_register_email_format_case1(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -219,8 +221,8 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Email/password format is incorrect.", "#message")
         #open logout page
         self.open(base_url + '/logout')
-        
-        
+    
+    
     @patch('qa327.backend.register_user', return_value=test_user)
     # Password has to meet the required complexity: minimum length 6
     def test_register_password_failed_case1(self, *_):
@@ -310,7 +312,8 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Password and password2 have to be exactly the same.", "#message")
         #open logout page
         self.open(base_url + '/logout')
-        
+
+
     #R2.7 - User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character
     @patch('qa327.backend.register_user', return_value=test_user)
     def test_register_username_failed_case1(self, *_):
@@ -381,8 +384,8 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Space allowed only if it is not the first or the last character", "#message")
         #open logout page
         self.open(base_url + '/logout')
-        
-  
+    '''
+
     #R2.9 - For any formatting errors, redirect back to /login and show message '{} format is incorrect.'.format(the_corresponding_attribute)
     #password error
     @patch('qa327.backend.register_user', return_value=test_user)
@@ -457,10 +460,12 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("This email has been ALREADY used", "#message")
         #open logout page
         self.open(base_url + '/logout')
-    '''
+
     '''
     R2
     '''
+    
+    
     '''
     # R1.1 - If the user hasn't logged in, show the login page
     def test_login(self, *_):
