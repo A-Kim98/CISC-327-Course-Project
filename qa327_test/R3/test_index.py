@@ -320,7 +320,7 @@ class FrontEndHomePageTest(BaseCase):
     # Test Case R3.9
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
-    def test_selling_validate(self, *_):
+    def test_buying_validate(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
         are redirected to the login page
@@ -356,7 +356,7 @@ class FrontEndHomePageTest(BaseCase):
     # Test Case R3.10
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
-    def test_selling_validate(self, *_):
+    def test_updating_validate(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
         are redirected to the login page

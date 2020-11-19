@@ -1,5 +1,0 @@
-| Test # 	| Detail                                                           	| Failure                                          	| Fix                                             	                |
-|--------	|------------------------------------------------------------------	|--------------------------------------------------	|-------------------------------------------------------------------|
-| R3.6   	| Index page contains a form a user can submit new tickets to sell 	| Elements from different forms had the same names 	| Added "_sell" to end of duplicate element names 	                |
-| R3.7   	| Index page contains a form a user can submit tickets to buy      	| Elements from different forms had the same names 	| Added "_buy" to end of duplicate element names  	                |
-|         	|                                                                  	|                                                	| Added "_update" to end of duplicate element names of update form 	|
