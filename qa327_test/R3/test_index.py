@@ -30,7 +30,7 @@ test_tickets = [
 ]
 
 
-class FrontEndHomePageTest(BaseCase):
+class IndexPageTest(BaseCase):
 
     #Test Case R3.1
     @patch('qa327.backend.get_user', return_value=test_user)
