@@ -464,31 +464,28 @@ class FrontEndHomePageTest(BaseCase):
         self.open(base_url + '/logout')
 
 
-    '''
-    R2
-    '''
-    
-    
-    '''
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                        R1 - Login
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     # R1.1 - If the user hasn't logged in, show the login page
     def test_login(self, *_):
-    # open the logout page to invalidate any logged-in session
-    self.open(base_url + '/logout')
-    #open the login page
-    self.open(base_url + '/login')
-    #make sure it shows the proper page
-    self.assert_element("#welcome-header")
+        # open the logout page to invalidate any logged-in session
+        self.open(base_url + '/logout')
+        #open the login page
+        self.open(base_url + '/login')
+        #make sure it shows the proper page
+        self.assert_element("#welcome-header")
     
     
     # R1.2: the login page has a message that by default says 'please login'
     def test_login_message(self, *_):
-    # Open the logout page to invalidate any logged-in session
-    self.open(base_url + '/logout')
-    # open the login page
-    self.open(base_url + '/login')
-    # make sure it shows the proper page and message
-    self.assert_element("#message")
-    self.assert_text("Please login", "#message")
+        # Open the logout page to invalidate any logged-in session
+        self.open(base_url + '/logout')
+        # open the login page
+        self.open(base_url + '/login')
+        # make sure it shows the proper page and message
+        self.assert_element("#message")
+        self.assert_text("Please login", "#message")
     
     
     # R1.3: If the user has logged in, redirect to the user profile page
@@ -496,268 +493,222 @@ class FrontEndHomePageTest(BaseCase):
     # R1.10 - If email/password are correct, redirect to /
     # R2.1 If the user has logged in, redirect back to the user profile page /
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_success(self, *_):
-    #open logout page to invalidate any logged in sessions may exist
-    self.open(base_url + '/logout')
-    # open login page
-    self.open(base_url + '/login')
-    # fill email and password
-    self.type("#email", "test_frontend@test.com")
-    self.type("#password", "test_frontend")
-    # click enter button
-    self.click('input[type="submit"]')
-    # open home page
-    self.open(base_url)
-    # test if the page loads correctly
-    self.assert_element("#welcome-header")
-    self.assert_text("Welcome back!", "#welcome-header")
-    
-    
-    
+        #open logout page to invalidate any logged in sessions may exist
+        self.open(base_url + '/logout')
+        # open login page
+        self.open(base_url + '/login')
+        # fill email and password
+        self.type("#email", "tester@gmail.com")
+        self.type("#password", "Tester327!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # open home page
+        self.open(base_url)
+
     # R1.4 -The login page provides a login form which requests two fields: email and passwords
     def test_login_form(self, *_):
-    self.open(base_url + '/login')
-    self.assert_element("#email", "test0")
-    self.assert_element("#password", "test0")
-    self.assert_element('input[type="submit"]')
-    
+        self.open(base_url + '/login')
+        self.type("#email", "")
+        self.type("#password", "")
+        self.click('input[type="submit"]')
+
     # R1.6.1 - Email and password both cannot be empty [Email]
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
-    def test_empty_email(self, *_):
-    #open logout page to invalidate any logged in sessions may exist
-    self.open(base_url + '/logout')
-    # open login page
-    self.open(base_url + '/login')
-    # fill email and password
-    self.type("#email", "")
-    self.type("#password", "test_frontend")
-    # click enter button
-    self.click('input[type="submit"]')
-    # open home page
-    self.open(base_url)
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Email and/or password cannot be empty.", "#message")
+    def test_login_empty_email(self, *_):
+        #open logout page to invalidate any logged in sessions may exist
+        self.open(base_url + '/logout')
+        # open login page
+        self.open(base_url + '/login')
+        # fill email and password
+        self.type("#email", " ")
+        self.type("#password", "Test123!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Email and/or password cannot be empty.", "#message")
     
     # R1.6.2 - Email and password both cannot be empty [Password]
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
-    def test_empty_password(self, *_):
-    #open logout page to invalidate any logged in sessions may exist
-    self.open(base_url + '/logout')
-    # open login page
-    self.open(base_url + '/login')
-    # fill email and password
-    self.type("#email", "test_frontend@test.com")
-    self.type("#password", "")
-    # click enter button
-    self.click('input[type="submit"]')
-    # open home page
-    self.open(base_url)
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Email and/or password cannot be empty.", "#message")
-    
-    
+    def test_login_empty_password(self, *_):
+        #open logout page to invalidate any logged in sessions may exist
+        self.open(base_url + '/logout')
+        # open login page
+        self.open(base_url + '/login')
+        # fill email and password
+        self.type("#email", "tester@gmail.com")
+        self.type("#password", " ")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Email and/or password cannot be empty.", "#message")
+        
     # R1.6.3 - Email and password both cannot be empty [Email and Password]
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
-    def test_emtpy_email_password(self, *_):
-    #open logout page to invalidate any logged in sessions may exist
-    self.open(base_url + '/logout')
-    # open login page
-    self.open(base_url + '/login')
-    # fill email and password
-    self.type("#email", "")
-    self.type("#password", "")
-    # click enter button
-    self.click('input[type="submit"]')
-    # open home page
-    self.open(base_url)
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Email and/or password cannot be empty.", "#message")
-    
-    
+    def test_login_emtpy_email_password(self, *_):
+        #open logout page to invalidate any logged in sessions may exist
+        self.open(base_url + '/logout')
+        # open login page
+        self.open(base_url + '/login')
+        # fill email and password
+        self.type("#email", " ")
+        self.type("#password", " ")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Email and/or password cannot be empty.", "#message")
+
     # R1.7.1 - Email has to follow addr-spec defined in RFC 5322
-    def test_email_format_case1(self, *_):
-    #open logout page to invalidate any logged in sessions may exist
-    self.open(base_url + '/logout')
-    # open login page
-    self.open(base_url + '/login')
-    # fill email and password
-    self.type("#email", "1234567890123456789012345678901234567890123456789012345678901234+x@example.com")
-    self.type("#password", "test_frontend")
-    # click enter button
-    self.click('input[type="submit"]')
-    # open home page
-    self.open(base_url)
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Email/password format is incorrect.", "#message")
+    def test_login_email_format_case1(self, *_):
+        #open logout page to invalidate any logged in sessions may exist
+        self.open(base_url + '/logout')
+        # open login page
+        self.open(base_url + '/login')
+        # fill email and password
+        self.type("#email", "1234567890123456789012345678901234567890123456789012345678901234+x@example.com")
+        self.type("#password", "Test123!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Email/password format is incorrect.", "#message")
     
     # R1.7.2 - Email has to follow addr-spec defined in RFC 5322
-    def test_email_format_case2(self, *_):
-    #open logout page to invalidate any logged in sessions may exist
-    self.open(base_url + '/logout')
-    # open login page
-    self.open(base_url + '/login')
-    # fill email and password
-    self.type("#email", "abc@superlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octets.com")
-    self.type("#password", "test_frontend")
-    # click enter button
-    self.click('input[type="submit"]')
-    # open home page
-    self.open(base_url)
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Email/password format is incorrect.", "#message")
-    
+    def test_login_email_format_case2(self, *_):
+        #open logout page to invalidate any logged in sessions may exist
+        self.open(base_url + '/logout')
+        # open login page
+        self.open(base_url + '/login')
+        # fill email and password
+        self.type("#email", "abc@superlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octetssuperlongdomainnamethatisover255octets.com")
+        self.type("#password", "Test123!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Email/password format is incorrect.", "#message")
+        
     # R1.7.3 - Email has to follow addr-spec defined in RFC 5322
-    def test_email_format_case3(self, *_):
-    #open logout page to invalidate any logged in sessions may exist
-    self.open(base_url + '/logout')
-    # open login page
-    self.open(base_url + '/login')
-    # fill email and password
-    self.type("#email", "abc.example.com")
-    self.type("#password", "test_frontend")
-    # click enter button
-    self.click('input[type="submit"]')
-    # open home page
-    self.open(base_url)
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Email/password format is incorrect.", "#message")
+    def test_login_email_format_case3(self, *_):
+        #open logout page to invalidate any logged in sessions may exist
+        self.open(base_url + '/logout')
+        # open login page
+        self.open(base_url + '/login')
+        # fill email and password
+        self.type("#email", "abc.example.com")
+        self.type("#password", "Test123!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Email/password format is incorrect.", "#message")
     
     # R1.7.4 - Email has to follow addr-spec defined in RFC 5322
-    def test_email_format_case4(self, *_):
-    #open logout page to invalidate any logged in sessions may exist
-    self.open(base_url + '/logout')
-    # open login page
-    self.open(base_url + '/login')
-    # fill email and password
-    self.type("#email", "a'b(c)d,e:f;g<h>\\i[j]l@example.com")
-    self.type("#password", "test_frontend")
-    # click enter button
-    self.click('input[type="submit"]')
-    # open home page
-    self.open(base_url)
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Email/password format is incorrect.", "#message")
+    def test_login_email_format_case4(self, *_):
+        #open logout page to invalidate any logged in sessions may exist
+        self.open(base_url + '/logout')
+        # open login page
+        self.open(base_url + '/login')
+        # fill email and password
+        self.type("#email", "a'b(c)d,e:f;g<h>\\i[j]l@example.com")
+        self.type("#password", "Test123!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Email/password format is incorrect.", "#message")
     
     # R1.7.5 - Email has to follow addr-spec defined in RFC 5322
-    def test_email_format_case5(self, *_):
-    #open logout page to invalidate any logged in sessions may exist
-    self.open(base_url + '/logout')
-    # open login page
-    self.open(base_url + '/login')
-    # fill email and password
-    self.type("#email", "i_like_underscore@but_its_not_allow_in_this_part.example.com")
-    self.type("#password", "test_frontend")
-    # click enter button
-    self.click('input[type="submit"]')
-    # open home page
-    self.open(base_url)
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Email/password format is incorrect.", "#message")
-    
-    @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
-    # R1.8.1 - Password has to meet the required complexity: minimum length 6
+    def test_login_email_format_case5(self, *_):
+        #open logout page to invalidate any logged in sessions may exist
+        self.open(base_url + '/logout')
+        # open login page
+        self.open(base_url + '/login')
+        # fill email and password
+        self.type("#email", "i_like_underscore@but_its_not_allow_in_this_part.example.com")
+        self.type("#password", "Test123!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Email/password format is incorrect.", "#message")
+   
+    # minimum length 6
     def test_login_password_failed_case1(self, *_):
-    # open login page
-    self.open(base_url + '/login')
-    # fill wrong email and password
-    self.type("#email", "test_frontend@test.com")
-    self.type("#password", "test!")
-    # click enter button
-    self.click('input[type="submit"]')
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Password needs minimum length 6.", "#message")
-    
-    
-    @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
-    # R1.8.2 - Password has to meet the required complexity: minimum length 6
+        # open login page
+        self.open(base_url + '/login')
+        # fill wrong email and password
+        self.type("#email", "tester@test.com")
+        self.type("#password", "test!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.", "#message")
+
+    # minimum length 6
     def test_login_password_failed_case2(self, *_):
-    # open login page
-    self.open(base_url + '/login')
-    # fill wrong email and password
-    self.type("#email", "test_frontend@test.com")
-    self.type("#password", "test123!")
-    # click enter button
-    self.click('input[type="submit"]')
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Password needs at least one upper case.", "#message")
-    
-    @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
-    # R1.8.3 - Password has to meet the required complexity: minimum length 6
+        # open login page
+        self.open(base_url + '/login')
+        # fill wrong email and password
+        self.type("#email", "tester@test.com")
+        self.type("#password", "test123!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.", "#message")
+
+    # at least one lower case
     def test_login_password_failed_case3(self, *_):
-    # open login page
-    self.open(base_url + '/login')
-    # fill wrong email and password
-    self.type("#email", "test_frontend@test.com")
-    self.type("#password", "TEST123!")
-    # click enter button
-    self.click('input[type="submit"]')
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Password needs at least one lower case.", "#message")
-    
-    @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
-    # R1.8.4 - Password has to meet the required complexity: minimum length 6
+        # open login page
+        self.open(base_url + '/login')
+        # fill wrong email and password
+        self.type("#email", "tester@test.com")
+        self.type("#password", "TEST123!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.", "#message")
+    # at least one special character.
     def test_login_password_failed_case4(self, *_):
-    # open login page
-    self.open(base_url + '/login')
-    # fill wrong email and password
-    self.type("#email", "test_frontend@test.com")
-    self.type("#password", "TESt123")
-    # click enter button
-    self.click('input[type="submit"]')
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Password needs at least one special character.", "#message")
+        # open login page
+        self.open(base_url + '/login')
+        # fill wrong email and password
+        self.type("#email", "tester@test.com")
+        self.type("#password", "TESt123")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.", "#message")
     
-    
-    @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     # R1.9 - For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
     def test_login_format_error(self, *_):
-    """ Login and verify if the tickets are correctly listed."""
-    # open login page
-    self.open(base_url + '/login')
-    # fill wrong email and password
-    self.type("#email", "wrong_format")
-    self.type("#password", "wrong_format")
-    # click enter button
-    self.click('input[type="submit"]')
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Email/password format is incorrect", "#message")
-    
-    
-    @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+        # open login page
+        self.open(base_url + '/login')
+        # fill wrong email and password
+        self.type("#email", "!@)#$(@#$(!@#)$)@#($)!)@(#$#(")
+        self.type("#password", "Test123!")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Email/password format is incorrect", "#message")
+        
     # R1.9 - For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
     def test_login_format_error(self, *_):
-    """ Login and verify if the tickets are correctly listed."""
-    # open login page
-    self.open(base_url + '/login')
-    # fill wrong email and password
-    self.type("#email", "wrongemail@test.com")
-    self.type("#password", "wrongPassword!1")
-    # click enter button
-    self.click('input[type="submit"]')
-    # make sure it shows proper error message
-    self.assert_element("#message")
-    self.assert_text("Email/password combination incorrect.", "#message")
-    '''
+        # open login page
+        self.open(base_url + '/login')
+        # fill wrong email and password
+        self.type("#email", "tester@gmail.com")
+        self.type("#password", "!@)#$(@#$(!@#)$)@#($)!)@(#$#(")
+        # click enter button
+        self.click('input[type="submit"]')
+        # make sure it shows proper error message
+        self.assert_element("#message")
+        self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.", "#message")
