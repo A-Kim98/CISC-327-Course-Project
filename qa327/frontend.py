@@ -27,7 +27,7 @@ def register_post():
     error_message = None
 
     # email and password validation:
-    regex = r'^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$'
+    regex = r'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
 
     # Email, password, password2 all have to satisfy the same required as defined in R1
     # Email and password both cannot be empty
@@ -102,7 +102,7 @@ def login_post():
     password = request.form.get('password')
     user = bn.login_user(email, password)
 
-    regex = r'^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$'
+    regex = r'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
 
     # Email and password both cannot be empty
     if email == "" or password == "":
