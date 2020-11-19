@@ -11,8 +11,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
     This file defines all unit tests for the frontend homepage (R1 and R2).
 '''
 
-
-
 # Moch a sample user
 test_user = User(
                  email='tester@gmail.com',
@@ -55,12 +53,15 @@ class FrontEndHomePageTest(BaseCase):
         self.type("#name", "tester")
         # click enter button
         self.click('input[type="submit"]')
+        #open the login page
+        self.open(base_url + '/login')
         # test if the page loads correctly
         self.assert_element("#welcome-header")
         self.assert_text("Hi there!", "#welcome-header")
         #open logout page
         self.open(base_url + '/logout')
-    '''
+    
+
     #R2.5 - Email, password, password2 all have to satisfy the same required as defined in R1
     @patch('qa327.backend.register_user', return_value=test_user)
     def test_register_empty_email_case1(self, *_):
@@ -70,14 +71,12 @@ class FrontEndHomePageTest(BaseCase):
         self.open(base_url + '/register')
         # fill email and password
         self.type("#email", " ")
-        self.type("#password", "test_frontend")
-        self.type("#password2", "test_frontend")
-        self.type("#name", "test_frontend")
+        self.type("#password", "Tester327!")
+        self.type("#password2", "Tester327!")
+        self.type("#name", "tester")
         # click enter button
         self.click('input[type="submit"]')
         # make sure it shows proper error message
-        self.assert_element("#welcome-header")
-        self.assert_text("Hi there!", "#welcome-header")
         self.assert_element("#message")
         self.assert_text("Email and/or password cannot be empty.", "#message")
         #open logout page
@@ -90,10 +89,10 @@ class FrontEndHomePageTest(BaseCase):
         #open the register page
         self.open(base_url + '/register')
         # fill email and password
-        self.type("#email", "test_frontend@test.com")
+        self.type("#email", "tester@gmail.com")
         self.type("#password", " ")
         self.type("#password2", " ")
-        self.type("#name", "test_frontend")
+        self.type("#name", "tester")
         # click enter button
         self.click('input[type="submit"]')
         # make sure it shows proper error message
@@ -112,7 +111,7 @@ class FrontEndHomePageTest(BaseCase):
         self.type("#email", " ")
         self.type("#password", " ")
         self.type("#password2", " ")
-        self.type("#name", "test_frontend")
+        self.type("#name", "tester")
         # click enter button
         self.click('input[type="submit"]')
         # make sure it shows proper error message
@@ -121,7 +120,7 @@ class FrontEndHomePageTest(BaseCase):
         #open logout page
         self.open(base_url + '/logout')
         
-    
+    '''
     @patch('qa327.backend.register_user', return_value=test_user)
     def test_register_email_format_case1(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -458,6 +457,9 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("This email has been ALREADY used", "#message")
         #open logout page
         self.open(base_url + '/logout')
+    '''
+    '''
+    R2
     '''
     '''
     # R1.1 - If the user hasn't logged in, show the login page
