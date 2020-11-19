@@ -1,7 +1,7 @@
 from flask import render_template, request, session, redirect
 from qa327 import app
 import qa327.backend as bn
-import re #regular expressions
+import re  # regular expressions
 
 """
 This file defines the front-end part of the service.
@@ -16,6 +16,7 @@ def register_get():
     # templates are stored in the templates folder
     return render_template('register.html', message='')
 
+
 # The registration form can be submitted as a POST request to the current URL (/register)
 @app.route('/register', methods=['POST'])
 def register_post():
@@ -24,51 +25,52 @@ def register_post():
     password = request.form.get('password')
     password2 = request.form.get('password2')
     error_message = None
-    
+
     # email and password validation:
-    regex = '^[a-z0-9]+[\._]?[a-z0-9]\w+{2,3}$'
-    
+    regex = r'^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$'
+
     # Email, password, password2 all have to satisfy the same required as defined in R1
     # Email and password both cannot be empty
     if len(email) < 6 and len(password) < 6:
         error_message = "Email and/or password cannot be empty"
-        
+
     # Email has to follow addr-spec defined in RFC 5322
     elif not re.search(regex, email):
         error_message = "Email/password format is incorrect."
-    
+
     # Password has to meet the required complexity:
     # minimum length 6
     elif len(password) < 6:
         error_message = "Password needs minimum length 6"
-    
+
     # at least one upper case, at least one lower case, and at least one special character
     elif len(password) > 6:
-        if len(re.findall(r'[A-Z]',password)) < 1:
+        if len(re.findall(r'[A-Z]', password)) < 1:
             error_message = "Password needs at least one upper case."
-        elif len(re.findall(r'[a-z]',password)) < 1:
+        elif len(re.findall(r'[a-z]', password)) < 1:
             error_message = "Password needs at least one lower case."
-        elif len(re.findall(r'\b\S+\b',password)) < 1:
+        elif len(re.findall(r'\b\S+\b', password)) < 1:
             error_message = "Password needs at least one special character."
-            
+
     # Password and password2 have to be exactly the same
     elif password != password2:
         error_message = "The passwords do not match"
-    
-    # User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character.
+
+    # User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last
+    # character.
     elif len(name) < 1:
         error_message = "User name has to be non-empty."
-    
-    elif not len(name).isalnum():
+
+    elif not str(len(name)).isalnum():
         error_message = "User name has to be alphanumeric-only."
-    
+
     elif name[0] == "" or name[-1] == "":
         error_message = "Space allowed only if it is not the first or the last character."
-        
+
     # User name has to be longer than 2 characters and less than 20 characters.
     elif len(name) <= 2 or len(name) >= 20:
         error_message = "User name has to be longer than 2 characters and less than 20 characters."
-    
+
     # If the email already exists, show message 'this email has been ALREADY used'
     else:
         user = bn.get_user(email)
@@ -76,13 +78,14 @@ def register_post():
             error_message = "this email has been ALREADY used"
         elif not bn.register_user(email, name, password, password2):
             error_message = "Failed to store user info."
-            
+
     # if there is any error messages when registering new user
     # at the backend, go back to the register page.
     if error_message:
         return render_template('register.html', message=error_message)
-        
-    #If no error regarding the inputs following the rules above, create a new user, set the balance to 5000, and go back to the /login page
+
+    # If no error regarding the inputs following the rules above, create a new user, set the balance to 5000,
+    # and go back to the /login page
     else:
         return redirect('/login')
 
@@ -98,31 +101,31 @@ def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
     user = bn.login_user(email, password)
-    
-    regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-   
+
+    regex = r'^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$'
+
     # Email and password both cannot be empty
-    if email == "" or password == "" :
-        return render_template('login.html', message= "Email and/or password cannot be empty.")
-        
-    # Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
+    if email == "" or password == "":
+        return render_template('login.html', message="Email and/or password cannot be empty.")
+
+    # Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower
+    # case, and at least one special character
     if len(password) < 6:
         return render_template('login.html', message="Password needs minimum length 6.")
-    
+
     # at least one upper case, at least one lower case, and at least one special character
     if len(password) > 6:
-        if len(re.findall(r'[A-Z]',password)) < 1:
+        if len(re.findall(r'[A-Z]', password)) < 1:
             return render_template('login.html', message="Password needs at least one upper case.")
-        elif len(re.findall(r'[a-z]',password)) < 1:
+        elif len(re.findall(r'[a-z]', password)) < 1:
             return render_template('login.html', message="Password needs at least one lower case.")
-        elif len(re.findall(r'\b\S+\b',password)) < 1:
+        elif len(re.findall(r'\b\S+\b', password)) < 1:
             return render_template('login.html', message="Password needs at least one special character.")
-    
+
     # For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
     if not re.search(regex, email):
         return render_template('login.html', message="email/password combination incorrect.")
-    
-    
+
     # If email/password are correct, redirect to /
     if user:
         session['logged_in'] = user.email
@@ -139,7 +142,7 @@ def login_post():
         # success! go back to the home page
         # code 303 is to force a 'GET' request
         return redirect('/', code=303)
-        
+
     # Otherwise, redict to /login and show message 'email/password combination incorrect'
     else:
         return render_template('login.html', message="email/password combination incorrect.")
