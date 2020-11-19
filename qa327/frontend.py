@@ -21,45 +21,46 @@ Validate email complexity and possible email format errors
 # Email and password both cannot be empty
 # Email has to follow addr-spec defined in RFC 5322
 '''
-@app.route('/register', methods=['POST'])
-def validate_email(email, password, password2):
+def validate_email(email, error_message):
     email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-    if len(email) <= 1 and (len(password) <= 1 or len(password2) <= 1):
+    if len(email) <= 1:
         error_message = "Email and/or password cannot be empty."
 
-    elif len(email) > 2 and (len(password) > 1 or len(password2) > 1):
+    else :
         if not re.search(email_regex, email):
             error_message = "Email/password format is incorrect."
         
-        elif len(email) > 25:
+        elif len(email) > 30:
             error_message = "Email/password format is incorrect."
-    else:
-        error_message = ""
+            
+        else:
+            error_message = ""
     return error_message
 
 '''
 Validate password complexity and possible password/password2 format error
 # Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
 '''
-@app.route('/register', methods=['POST'])
-def validate_password(password, password2):
+def validate_password(password, password2, error_message):
     password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$'
     password_check = re.compile(password_regex)
-    
-    if len(password) < 6 or len(password2) < 6:
+    if len(password) <= 1 or len(password2) <= 1:
+        error_message = "Email and/or password cannot be empty."
+        
+    elif (len(password) < 6 or len(password2) < 6) or (len(password) < 6 and len(password2) < 6):
         error_message = "Password needs minimum length 6"
     
-    elif len(password) > 6 and len(password2) > 6:
+    else:
         if (not re.search(password_check, password)) and  password == password2:
             error_message = "Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character."
         elif password != password2:
             error_message = "Password and password2 have to be exactly the same."
-        elif not re.match(r'^\w+$', password):
-            error_message = "Email/password format is incorrect."
-        elif not re.match(r'^\w+$', password2):
-            error_message = "Email/password format is incorrect."
-    else:
-        error_message = ""
+        elif re.match(r'^\w+$', password):
+            error_message = "Email/password format is incorrect. HERE!"
+        elif re.match(r'^\w+$', password2):
+            error_message = "Email/password format is incorrect. HELLO!"
+        else:
+          error_message = ""
     return error_message
 
 
@@ -67,22 +68,21 @@ def validate_password(password, password2):
 Validate username complexity and possible username format error
 # User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character.
 '''
-@app.route('/register', methods=['POST'])
-def validate_username(name):
+def validate_username(name, error_message):
     if len(name) <= 1:
         error_message = "User name has to be non-empty."
         
-    elif len(name) > 1:
+    else:
         if name.isdigit():
             error_message = "User name has to be alphanumeric-only."
         elif name[0] == " " or name[-1] == " ":
             error_message = "Space allowed only if it is not the first or the last character."
         elif len(name) <= 2 or len(name) >= 20:
             error_message = "User name has to be longer than 2 characters and less than 20 characters."
-        elif re.match(r'^\w+$', name):
+        elif (not re.match(r'^\w+$', name)):
             error_message = "Name format is incorrect."
-    else:
-        error_message = ""
+        else:
+            error_message = ""
     return error_message
     
 # The registration form can be submitted as a POST request to the current URL (/register)
@@ -93,18 +93,21 @@ def register_post():
     password = request.form.get('password')
     password2 = request.form.get('password2')
     error_message = None
+    
 
     # validate email
-    check_email = validate_email(email, password, password2)
+    check_email = validate_email(email, error_message)
     user = bn.get_user(email)
-
+    
     # validate password and password2
-    check_pwd = validate_password(password, password2)
+    check_pwd = validate_password(password, password2, error_message)
     
     # validate username
-    check_name = validate_username(name)
+    check_name = validate_username(name, error_message)
     
     # validate user informations
+    # if there is any error messages when registering new user
+    # at the backend, go back to the register page.
     if check_pwd == "" and check_name == "":
         if check_email != "":
             return render_template('register.html', message=check_email)
@@ -114,6 +117,11 @@ def register_post():
     if check_email == "" and check_pwd == "":
         if check_name != "":
             return render_template('register.html', message=check_name)
+    
+    if check_pwd == "" or check_name == "":
+        if check_email != "":
+            return render_template('register.html', message=check_email)
+    
    
     # If the email already exists, show message 'this email has been ALREADY used'
     if user:
