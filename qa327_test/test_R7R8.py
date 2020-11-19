@@ -57,5 +57,5 @@ class TestR7R8(BaseCase):
         # open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/thisPageDoesNotExist')
         # assert we get a 404 error page
-        self.assert_element("#404-pError")
-        self.assert_text("The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.", "#404-pError")
+        self.assert_element("#404-header")
+        self.assert_text("404 Page Not Found", "#404-header")
