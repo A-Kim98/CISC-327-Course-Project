@@ -24,9 +24,6 @@ test_tickets = [
 ]
 
 class FrontEndHomePageTest(BaseCase):
-"""
-R1
-"""
     # R1.1 - If the user hasn't logged in, show the login page
     def test_login(self, *_):
         # open the logout page to invalidate any logged-in session
@@ -316,10 +313,6 @@ R1
         self.assert_element("#message")
         self.assert_text("Email/password combination incorrect.", "#message")
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-                        R2
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     # R2.2- Show the user registration page if user is not logged in
