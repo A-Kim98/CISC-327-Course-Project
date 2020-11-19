@@ -24,9 +24,9 @@ test_tickets = [
 ]
 
 class FrontEndHomePageTest(BaseCase):
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-                        R1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""
+R1
+"""
     # R1.1 - If the user hasn't logged in, show the login page
     def test_login(self, *_):
         # open the logout page to invalidate any logged-in session
