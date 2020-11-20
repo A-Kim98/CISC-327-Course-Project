@@ -710,6 +710,7 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_element("#message")
         self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.", "#message")
         
+    
     # at least one special character.
     @pytest.mark.timeout(60)
     def test_login_password_failed_case4(self, *_):
