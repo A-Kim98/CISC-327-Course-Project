@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Profile{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<!--For R3.2 and 3.3, user balance is temporary until backend iis done-->
+<h2 id="welcome-header">Hi {{ user.name }} !</h2>
+<h2 id="welcome-header">Current User Balance: $ 4.22</h2>
+
+
+<h2 >Here are all available tickets</h2>
+
+<!--Added the title, changed to table, and added to display quantity and email of tickets-->
+<div id="tickets">
+    <table style="width:100%">
+        <tr>
+            <td>Name</td>
+            <td>Quantity</td>
+            <td>Email</td>
+            <td>Price</td>
+        </tr>   
+{% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.name }}</td>
+            <td>{{ ticket.quantity }}</td>
+            <td>{{ ticket.email }}</td>
+            <td>{{ ticket.price }}</td>
+        </tr>        
+{% endfor %}
+</table>
+</div>
+
+<h4 id='message'>{{message}}</h4>
+
+<!--Added sell form for selling tickets for R3-->
+<br>
+<h1>Sell</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="name_sell">Name</label>
+        <input class="form-control" name="name" id="name_sell" required>
+        <label for="quantity_sell">Quantity</label>
+        <input class="form-control" name="quantity" id="quantity_sell" required>
+        <label for="price_sell">Price</label>
+        <input class="form-control" name="price" id="price_sell" required>
+        <label for="expdate_sell">Expiration Date</label>
+        <input class="form-control" name="expdate" id="expdate_sell" required>
+        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit" value="Sell">
+    </div>
+</form>
+
+<!--Added buy form for buying tickets for R3-->
+<br>
+<h1>Buy</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="name_buy">Name</label>
+        <input class="form-control" name="name" id="name_buy" required>
+        <label for="quantity_sell">Quantity</label>
+        <input class="form-control" name="quantity" id="quantity_buy" required>
+        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit" value="Buy">
+    </div>
+</form>
+
+<!--Added update form for updating tickets for R3-->
+<br>
+<h1>update</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="name_update">Name</label>
+        <input class="form-control" name="name" id="name_update" required>
+        <label for="quantity_update">Quantity</label>
+        <input class="form-control" name="quantity" id="quantity_update" required>
+        <label for="price_update">Price</label>
+        <input class="form-control" name="price" id="price_update" required>
+        <label for="expdate_update">Expiration Date</label>
+        <input class="form-control" name="expdate" id="expdate_update" required>
+        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit" value="Update">
+    </div>
+</form>
+
+<a href='/logout'>logout</a>
+<br>
+{% endblock %}
