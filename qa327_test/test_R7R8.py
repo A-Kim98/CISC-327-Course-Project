@@ -14,7 +14,7 @@ test_user = User(
 
 # Mock some sample tickets
 test_tickets = [
-    {'name': 't1', 'price': '100'}
+    {'name': 't1', 'price': '100', 'email' : 'testemail@gmail.com', 'quantity': '1'}
 ]
 
 
