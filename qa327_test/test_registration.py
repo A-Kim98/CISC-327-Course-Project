@@ -22,6 +22,7 @@ class FrontEndHomePageTest(BaseCase):
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                         R2 - Register
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user)
     # R2.2- Show the user registration page if user is not logged in
