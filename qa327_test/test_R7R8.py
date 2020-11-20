@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
-    password=generate_password_hash('test_frontend'),
+    password=generate_password_hash('Test_frontend123!')
 )
 
 # Mock some sample tickets
