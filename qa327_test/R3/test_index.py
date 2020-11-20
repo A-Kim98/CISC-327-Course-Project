@@ -63,7 +63,6 @@ class IndexPageTest(BaseCase):
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_success(self, *_):
         """
-        are redirected to the login page
         """
         # open logout page to invalid any logged-in sessions that may exist, then open login page
         self.open(base_url + '/logout')
