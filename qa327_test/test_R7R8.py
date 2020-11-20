@@ -59,6 +59,5 @@ class TestR7R8(BaseCase):
         # open something that doesnt exist
         self.open(base_url + '/thisPageDoesNotExist')
         # assert we get a 404 error page
-        self.wait(10)
-        self.assert_element("#404-header")
-        self.assert_text("404 Page Not Found", "#404-header")
+        self.assert_element("#error_header")
+        self.assert_text("404 Page Not Found", "#error_header")
