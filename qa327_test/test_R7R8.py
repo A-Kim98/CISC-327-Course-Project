@@ -7,10 +7,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # Mock a sample user
 test_user = User(
-    email='test_frontend@test.com',
-    name='test_frontend',
-    password=generate_password_hash('Test_frontend123!')
-)
+                 email='tester@gmail.com',
+                 name='tester',
+                 password=generate_password_hash('Tester327!')
+            )
 
 # Mock some sample tickets
 test_tickets = [
