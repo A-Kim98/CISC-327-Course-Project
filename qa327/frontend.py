@@ -24,6 +24,8 @@ Validate email complexity and possible email format errors
 # If the email already exists, show message 'this email has been ALREADY used'
 
 '''
+
+
 def validate_email(email, error_message, user):
     email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
     if len(email) <= 1:
