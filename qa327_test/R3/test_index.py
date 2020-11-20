@@ -19,6 +19,11 @@ Annotate @patch before unit tests can mock backend methods (for that testing fun
 
 # Moch a sample user
 test_user = User(
+                 email='tester@gmail.com',
+                 name='tester',
+                 password=generate_password_hash('Tester327!')
+            )
+test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password=generate_password_hash('Test_frontend123!')
