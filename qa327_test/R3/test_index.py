@@ -33,6 +33,7 @@ test_tickets = [
 class IndexPageTest(BaseCase):
 
     #Test Case R3.1
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_user_redirect(self, *_):
@@ -54,6 +55,7 @@ class IndexPageTest(BaseCase):
         self.open(base_url + '/logout')
 
     # Test Case R3.2
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_success(self, *_):
@@ -91,6 +93,7 @@ class IndexPageTest(BaseCase):
         self.open(base_url + '/logout')
 
     # Test Case R3.3
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_show_balance(self, *_):
@@ -128,6 +131,7 @@ class IndexPageTest(BaseCase):
         self.open(base_url + '/logout')
 
     # Test Case R3.4
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_confirm_logout(self, *_):
@@ -164,6 +168,7 @@ class IndexPageTest(BaseCase):
         self.open(base_url + '/logout')
 
     # Test Case R3.5
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_ticket_table(self, *_):
@@ -204,6 +209,7 @@ class IndexPageTest(BaseCase):
         self.open(base_url + '/logout')
 
     # Test Case R3.6
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_selling_form(self, *_):
@@ -244,6 +250,7 @@ class IndexPageTest(BaseCase):
         self.open(base_url + '/logout')
 
     # Test Case R3.7
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_buying_form(self, *_):
@@ -282,6 +289,7 @@ class IndexPageTest(BaseCase):
         self.open(base_url + '/logout')
 
     # Test Case R3.8
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_selling_validate(self, *_):
@@ -318,6 +326,7 @@ class IndexPageTest(BaseCase):
         self.open(base_url + '/logout')
 
     # Test Case R3.9
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_buying_validate(self, *_):
@@ -354,6 +363,7 @@ class IndexPageTest(BaseCase):
         self.open(base_url + '/logout')
 
     # Test Case R3.10
+    @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_updating_validate(self, *_):
