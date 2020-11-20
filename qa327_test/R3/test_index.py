@@ -63,7 +63,6 @@ class IndexPageTest(BaseCase):
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_success(self, *_):
         """
-        This is a sample front end unit test to vertify users that are not logged in
         are redirected to the login page
         """
         # open logout page to invalid any logged-in sessions that may exist, then open login page
