@@ -38,7 +38,18 @@ This design document will cover the following scenarios:
 Here is the overall control flow of the project:
 ![Project Structure](/assets/images/controlflows.png "Project Structure")
 
-The actor, or the user, would be able to access login and register page at start, and then user homepage once they are logged in. To access user homepage with buying, selling, and accounting functions, they must be logged in - if only registered, the website will ask for log in once again. In the user homepage of the logged in actor, they will be given options to buy, sell, or update the ticket, as well as information on the actor's profile and account balance. 
+0. The actor is sent to the login page, /login
+1. If the actor does not have an account, they will click on "Register"
+    Otherwise, skip to step 5
+2. In /register, the actor is able to type in information necessary to Register.
+3. The actor presses "Register" button to complete registration. 
+    They are able press "Login" to return to login page if they mistakenly came to this page when they have an account.
+4. Whether registration is successful or unsuccessful, the actor is sent back to /login. If unsuccessful, error message will display, indicating the failure.
+5. The actor is able to login now in /login by entering their email and password and pressing "Log In". 
+6. The actor is now in the page / now, which contains their profile and other functions that enable them to buy, sell, and update tickets. On the page, there are other informations including the user's username, available balance, and tickets available for purchase.
+7. By pressing on buy, sell, and update buttons after typing the desired ticket information in the respective forms, they are able to buy, sell, and update tickets.
+8. Pressing logout will redirect the actor to the route /logout, removing all personal and ticket information from the actor, taking away permission to access / page from them, and sending the actor back to /login page again.
+
 Functions to deposit money into the website and take money from the website were not requested by the customer.
 
 

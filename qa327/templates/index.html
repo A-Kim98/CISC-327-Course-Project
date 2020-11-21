@@ -8,7 +8,7 @@
 
 <!--For R3.2 and 3.3, user balance is temporary until backend iis done-->
 <h2 id="welcome-header">Hi {{ user.name }} !</h2>
-<h2 id="welcome-header">Current User Balance: $ 4.22</h2>
+<h2 id="user-balance">Current User Balance: $ 4.22</h2>
 
 
 <h2 >Here are all available tickets</h2>
@@ -38,7 +38,7 @@
 <!--Added sell form for selling tickets for R3-->
 <br>
 <h1>Sell</h1>
-<form method="post">
+<form method="post" id="sell" action="/sell">
     <div class="form-group">
         <label for="name_sell">Name</label>
         <input class="form-control" name="name" id="name_sell" required>
@@ -55,7 +55,7 @@
 <!--Added buy form for buying tickets for R3-->
 <br>
 <h1>Buy</h1>
-<form method="post">
+<form method="post" id="buy"  action="/buy">
     <div class="form-group">
         <label for="name_buy">Name</label>
         <input class="form-control" name="name" id="name_buy" required>
@@ -68,7 +68,7 @@
 <!--Added update form for updating tickets for R3-->
 <br>
 <h1>update</h1>
-<form method="post">
+<form method="post" id="update" action="/update">
     <div class="form-group">
         <label for="name_update">Name</label>
         <input class="form-control" name="name" id="name_update" required>
