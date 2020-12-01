@@ -329,7 +329,7 @@ def validate_ticket_date(ticket_date, error_message):
     return error_message
     
 
-@app.route('/')
+@app.route('/sell')
 @authenticate
 def sell_ticket(user):
     ticket_name = request.form.get('name_sell')
@@ -359,7 +359,7 @@ def sell_ticket(user):
         tickets = bn.sell_ticket(user, ticket_name, ticket_quantity, ticket_price, ticket_date)
         return render_template('/', user=user, tickets=tickets)
       
-@app.route('/')
+@app.route('/update')
 @authenticate
 def update_ticket(user):
     ticket_name = request.form.get('name_update')
@@ -390,7 +390,7 @@ def update_ticket(user):
         return redirect('/', update_message=error_message)
         
         
-@app.route('/')
+@app.route('/buy')
 @authenticate
 def buy_ticket(user):
     ticket_name = request.form.get('name_buy')
