@@ -54,7 +54,7 @@ def get_ticket(name):
     :return: ticket with user name
     """
     
-    ticket = TicketInfo.query.filter_by(name = name).first()
+    ticket = TicketInfo.query.filter_by(name = name).first().ticket
     return ticket
 
 
