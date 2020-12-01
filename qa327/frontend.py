@@ -319,7 +319,7 @@ def validate_ticket_price(ticket_price, error_message):
     
 # Validate ticket date
 def validate_ticket_date(ticket_date, error_message):
-    expired = datatime.strptime(ticket_date, "%Y%M%D")
+    expired = datetime.strptime(ticket_date, "%Y%M%D")
     present = datetime.now()
 
     if ticket_date != datetime.strptime(ticket_date, "%Y%m%d").strftime('%Y%m%d'):
@@ -356,7 +356,7 @@ def sell_ticket(user):
         
     # The added new ticket information will be posted on the user profile page
     else:
-        bn.sell_ticket(user, ticket_name, ticket_quantity, ticket_price, ticket_date)
+        tickets = bn.sell_ticket(user, ticket_name, ticket_quantity, ticket_price, ticket_date)
         return render_template('/', user=user, tickets=tickets)
       
 @app.route('/')
