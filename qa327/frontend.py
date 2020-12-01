@@ -26,7 +26,6 @@ Validate email complexity and possible email format errors
 
 '''
 def validate_email(email, error_message, user):
-    email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
     if len(email) <= 1:
         error_message = "Email and/or password cannot be empty."
 
@@ -51,6 +50,7 @@ Validate password complexity and possible password/password2 format error
 def validate_password(password, password2, error_message):
     password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$'
     password_check = re.compile(password_regex)
+    
     if len(password) <= 1 or len(password2) <= 1:
         error_message = "Email and/or password cannot be empty."
         
@@ -74,11 +74,12 @@ Validate user's email (login)
 '''
 def validate_login_email(email, error_message, user):
     email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+    email_check = re.compile(email_regex)
+    
     if len(email) <= 1:
         error_message = "Email and/or password cannot be empty."
-
     else :
-        if not re.search(email_regex, email):
+        if not re.search(email_check, email):
             error_message = "Email/password format is incorrect."
         
         elif len(email) > 30:
