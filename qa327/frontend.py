@@ -3,6 +3,7 @@ from qa327 import app
 import qa327.backend as bn
 import re #regular expressions
 import string
+from datetime import datetime
 
 """
 This file defines the front-end part of the service.
@@ -24,8 +25,6 @@ Validate email complexity and possible email format errors
 # If the email already exists, show message 'this email has been ALREADY used'
 
 '''
-
-
 def validate_email(email, error_message, user):
     email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
     if len(email) <= 1:
@@ -92,6 +91,7 @@ def validate_login_email(email, error_message, user):
         else:
             error_message = ""
     return error_message
+    
 '''
 Validate user's password (login)
 '''
@@ -281,3 +281,141 @@ def profile(user):
     # front-end portals
     tickets = bn.get_all_tickets()
     return render_template('index.html', user=user, tickets=tickets)
+
+ 
+'''
+Validate the following:
+1. Check if name of the ticket is alphanumeric-only and space is not allwed as the first or last character
+2. Check if the name of the ticket is not longer than 60 chars.
+3. Check if the name of the ticket contains at least 6 chars
+'''
+def validate_ticket_name(ticket_name, error_message):
+    #count the number of alphabets in the ticket name
+    count = 0
+    if (ticket_name[0] == " " or ticket_name[-1] == " " or ticket_name.isdigit()):
+        error_message = "The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character."
+        
+    if len(ticket_name) > 60:
+        error_message = "The name of the ticket is no longer than 60 characters"
+    
+    for i in ticket_name:
+        if (i.isalpha()) == True:
+            count +=1
+    if count < 6:
+        error_message = "The name of the tickets has to contain at least 6 characters"
+    return error_message
+
+# Validaet ticket quantity
+def validate_ticket_quantity(ticket_quantity, error_message):
+    if (ticket_quantity <= 0 or ticket_quantity > 100):
+        error_message = "The quantity of the tickets has to be more than 0, and less than or equal to 100."
+    return error_message
+
+# Validate ticket price
+def validate_ticket_price(ticket_price, error_message):
+    if (ticket_price < 10 or ticket_price > 100):
+        error_message = "Price has to be of range [10, 100]"
+    return error_message
+    
+# Validate ticket date
+def validate_ticket_date(ticket_date, error_message):
+    expired = datatime.strptime(ticket_date, "%Y%M%D")
+    present = datetime.now()
+
+    if ticket_date != datetime.strptime(ticket_date, "%Y%m%d").strftime('%Y%m%d'):
+            error_message = "Date must be given in the format YYYYMMDD (e.g. 20200901)"
+    if (expired.date() < present.date()):
+        error_message = "The new tickets must not be expired"
+    return error_message
+    
+
+@app.route('/')
+@authenticate
+def sell_ticket(user):
+    ticket_name = request.form.get('name_sell')
+    ticket_quantity = request.form.get('quantity_sell')
+    ticket_price = request.form.get('price_sell')
+    ticket_date = request.form.get('expdate_sell')
+    error_message = ""
+    
+    # validate ticket name
+    check_ticket_name = validate_ticket_name(ticket_name, error_message)
+    
+    # validate ticket quantity
+    check_ticket_quantity = validate_ticket_quantity(ticket_quantity, error_message)
+    
+    # validate ticket price
+    check_ticket_price = validate_ticket_price(ticket_price, error_message)
+    
+    #validate ticket date
+    check_ticket_date = validate_ticket_date(ticket_date, error_message)
+
+    # For any errors, redirect back to / and show an error message
+    if error_message != "":
+        return render_template('/', sell_message=error_message)
+        
+    # The added new ticket information will be posted on the user profile page
+    else:
+        bn.sell_ticket(user, ticket_name, ticket_quantity, ticket_price, ticket_date)
+        return render_template('/', user=user, tickets=tickets)
+      
+@app.route('/')
+@authenticate
+def update_ticket(user):
+    ticket_name = request.form.get('name_update')
+    ticket_quantity = request.form.get('quantity_update')
+    ticket_price = request.form.get('price_update')
+    ticket_date = request.form.get('expdate_update')
+    ticket = bn.get_ticket(ticket_name)
+    error_message = ""
+    
+    # validate ticket name
+    check_ticket_name = validate_ticket_name(ticket_name, error_message)
+    
+    # validate ticket quantity
+    check_ticket_quantity = validate_ticket_quantity(ticket_quantity, error_message)
+    
+    # validate ticket price
+    check_ticket_price = validate_ticket_price(ticket_price, error_message)
+    
+    #validate ticket date
+    check_ticket_date = validate_ticket_date(ticket_date, error_message)
+
+    # vadliate ticket existence
+    if ticket is None:
+        error_message = "The ticket of the given name must exist"
+
+    # for any errors, redirect back to / and show an error message
+    if error_message != "":
+        return redirect('/', update_message=error_message)
+        
+        
+@app.route('/')
+@authenticate
+def buy_ticket(user):
+    ticket_name = request.form.get('name_buy')
+    ticket_quantity = request.form.get('quantity_buy')
+    ticket = bn.get_ticket(ticket_name)
+    error_message = ""
+    
+    # validate ticket name
+    check_ticket_name = validate_ticket_name(ticket_name, error_message)
+    
+    # validate ticket quantity
+    check_ticket_quantity = validate_ticket_quantity(ticket_quantity, error_message)
+    
+    # validate the ticket quantity in the database
+    if ticket.quantity > ticket_quantity:
+        error_message = "The ticket name exists in the database and the quantity is more than the quantity requested to buy"
+        
+    # Validate user balance
+    if user.balance < (ticket.price * ticket_quantity * 0.35 * 0.05):
+        error_message = "The user has less balance than the ticket price * quantity + service fee (35%) + tax (5%)"
+    
+    # for any errors, redirect back to / and show an error message
+    if error_message != "":
+        return redirect('/', buy_message=error_message)
+    else:
+        user.ticket.append(ticket)
+        ticket = bn.get_all_tickets()
+        return render_template('/', user=user, ticket=ticket)

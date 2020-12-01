@@ -4,8 +4,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 """
 This file defines all backend logic that interacts with database and other services
 """
-
-
 def get_user(email):
     """
     Get a user by a given email
@@ -49,6 +47,57 @@ def register_user(email, name, password, password2):
     db.session.commit()
     return None
 
-# Fixed so that it will return a temporary result until backend is complete - R3.5
+def get_ticket(name):
+    """
+    Get a ticket by a given user name
+    :param name: name of the ticket
+    :return: ticket with user name
+    """
+    
+    ticket = TicketInfo.query.filter_by(name = name).first()
+    return ticket
+
+
 def get_all_tickets():
-    return [{"price": 4, "name":"Ticket 1", "quantity":2, "email":"ticket1@email.com"}, {"price": 3, "name":"Ticket 2", "quantity":21, "email":"ticket2@email.com"}]
+    """
+    Get all ticket available in the database
+    :param: none
+    :return: list of all tickets
+    """
+    
+    available_ticket = []
+    for i in TicketInfo.data:
+        available_ticket.append(i)
+        
+    return available_ticket
+
+
+def sell_ticket(user, name, quantity, price, date):
+    """
+    sell the ticket in the database
+    :param user: user information
+    :param name: the name of the ticket
+    :param quantity: the quantity of the ticket
+    :param price: the price of the ticket
+    :param date: the date for ticket
+    :return: an error message if there is any, or None if register_ticket succeeds
+    """
+
+    ticket = TicketInfo(user=user, name=name, quantity=quantity, price=price, date=date)
+
+    db.session.add(ticket)
+    db.session.commit()
+
+    return None
+
+def get_update(name):
+    """
+    Check if the ticket exists in the database
+    :param name: the name of the ticket
+    :return: the name if ticket exists
+    """
+    # if this doesn't return ticket name, then the name doesn't exist
+    user = get_ticket(name)
+    if not user:
+        return None
+    return user
