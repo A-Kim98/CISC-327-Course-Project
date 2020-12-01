@@ -124,8 +124,8 @@ class IndexPageTest(BaseCase):
         # open home page
         self.open(base_url)
         # test if user  balance is displayed as it should
-        self.assert_element("#user-balance")
-        self.assert_text("Current User Balance:", "#user-balance")
+        self.assert_element("#user_balance")
+        self.assert_text("Current User Balance:", "#user_balance")
         
         # open logout (for cleanup)
         self.open(base_url + '/logout')

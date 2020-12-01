@@ -282,13 +282,13 @@ def profile(user):
     tickets = bn.get_all_tickets()
     return render_template('index.html', user=user, tickets=tickets)
 
- 
 '''
+
 Validate the following:
 1. Check if name of the ticket is alphanumeric-only and space is not allwed as the first or last character
 2. Check if the name of the ticket is not longer than 60 chars.
 3. Check if the name of the ticket contains at least 6 chars
-'''
+
 def validate_ticket_name(ticket_name, error_message):
     #count the number of alphabets in the ticket name
     count = 0
@@ -416,3 +416,4 @@ def buy_ticket(user):
         user.ticket.append(ticket)
         ticket = bn.get_all_tickets()
         return render_template('/', user=user, ticket=ticket)
+'''
