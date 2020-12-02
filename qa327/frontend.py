@@ -26,6 +26,9 @@ Validate email complexity and possible email format errors
 
 '''
 def validate_email(email, error_message, user):
+    email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+    email_check = re.compile(email_regex)
+    
     if len(email) <= 1:
         error_message = "Email and/or password cannot be empty."
 
@@ -38,7 +41,7 @@ def validate_email(email, error_message, user):
 
         elif user:
             error_message = "This email has been ALREADY used."
-
+            
         else:
             error_message = ""
     return error_message
