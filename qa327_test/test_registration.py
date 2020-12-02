@@ -37,6 +37,7 @@ class FrontEndHomePageTest(BaseCase):
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                         R2 - Register
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
