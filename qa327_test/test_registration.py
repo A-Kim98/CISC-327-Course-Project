@@ -633,6 +633,8 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Email and/or password cannot be empty.", "#message")
 
     # R1.7.1 - Email has to follow addr-spec defined in RFC 5322
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     @pytest.mark.timeout(60)
     def test_login_email_format_case1(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -649,6 +651,8 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Email/password format is incorrect.", "#message")
     
     # R1.7.2 - Email has to follow addr-spec defined in RFC 5322
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     @pytest.mark.timeout(60)
     def test_login_email_format_case2(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -665,6 +669,8 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Email/password format is incorrect.", "#message")
         
     # R1.7.3 - Email has to follow addr-spec defined in RFC 5322
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     @pytest.mark.timeout(60)
     def test_login_email_format_case3(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -681,6 +687,8 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Email/password format is incorrect.", "#message")
     
     # R1.7.4 - Email has to follow addr-spec defined in RFC 5322
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     @pytest.mark.timeout(60)
     def test_login_email_format_case4(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -697,6 +705,8 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Email/password format is incorrect.", "#message")
     
     # R1.7.5 - Email has to follow addr-spec defined in RFC 5322
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     @pytest.mark.timeout(60)
     def test_login_email_format_case5(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -714,6 +724,8 @@ class FrontEndHomePageTest(BaseCase):
    
     # minimum length 6
     @pytest.mark.timeout(60)
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_password_failed_case1(self, *_):
         # open login page
         self.open(base_url + '/login')
@@ -728,6 +740,8 @@ class FrontEndHomePageTest(BaseCase):
 
     # minimum length 6
     @pytest.mark.timeout(60)
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_password_failed_case2(self, *_):
         # open login page
         self.open(base_url + '/login')
@@ -742,6 +756,8 @@ class FrontEndHomePageTest(BaseCase):
 
     # at least one lower case
     @pytest.mark.timeout(60)
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_password_failed_case3(self, *_):
         # open login page
         self.open(base_url + '/login')
@@ -757,6 +773,8 @@ class FrontEndHomePageTest(BaseCase):
     
     # at least one special character.
     @pytest.mark.timeout(60)
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_password_failed_case4(self, *_):
         # open login page
         self.open(base_url + '/login')
@@ -771,6 +789,8 @@ class FrontEndHomePageTest(BaseCase):
     
     # R1.9 - For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
     @pytest.mark.timeout(60)
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_format_error(self, *_):
         # open login page
         self.open(base_url + '/login')
@@ -785,6 +805,8 @@ class FrontEndHomePageTest(BaseCase):
         
     # R1.9 - For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
     @pytest.mark.timeout(60)
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_format_error(self, *_):
         # open login page
         self.open(base_url + '/login')
