@@ -302,7 +302,7 @@ def validate_ticket_name(ticket_name, error_message):
         error_message = "The name of the ticket is no longer than 60 characters"
     
     for i in ticket_name:
-        if (i.isalpha()) == True:
+        if (i.isalnum()):
             count +=1
     if count < 6:
         error_message = "The name of the tickets has to contain at least 6 characters"
