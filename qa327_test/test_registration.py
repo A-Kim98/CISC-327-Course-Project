@@ -37,7 +37,6 @@ class FrontEndHomePageTest(BaseCase):
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                         R2 - Register
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    '''
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
@@ -259,10 +258,10 @@ class FrontEndHomePageTest(BaseCase):
         self.assert_text("Email/password format is incorrect.", "#message")
         #open logout page
         self.open(base_url + '/logout')
-    '''
+
     # Password has to meet the required complexity: minimum length 6
     @pytest.mark.timeout(60)
-    @patch('qa327.backend.register_user', return_value=test_user_register)
+    @patch('qa327.backend.register_user', return_value=test_user_login)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_register_password_failed_case1(self, *_):
         #open the register page
@@ -522,12 +521,11 @@ class FrontEndHomePageTest(BaseCase):
         #open logout page
         self.open(base_url + '/logout')
     
-
-
+    
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                         R1 - Login
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    '''
+    
     # R1.1 - If the user hasn't logged in, show the login page
     @pytest.mark.timeout(60)
     def test_login(self, *_):
@@ -556,7 +554,8 @@ class FrontEndHomePageTest(BaseCase):
     # R1.10 - If email/password are correct, redirect to /
     # R2.1 If the user has logged in, redirect back to the user profile page /
     @pytest.mark.timeout(60)
-    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_success(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -580,7 +579,8 @@ class FrontEndHomePageTest(BaseCase):
 
     # R1.6.1 - Email and password both cannot be empty [Email]
     @pytest.mark.timeout(60)
-    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_empty_email(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -597,7 +597,8 @@ class FrontEndHomePageTest(BaseCase):
     
     # R1.6.2 - Email and password both cannot be empty [Password]
     @pytest.mark.timeout(60)
-    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_empty_password(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -614,7 +615,8 @@ class FrontEndHomePageTest(BaseCase):
         
     # R1.6.3 - Email and password both cannot be empty [Email and Password]
     @pytest.mark.timeout(60)
-    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
     def test_login_emtpy_email_password(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -793,4 +795,3 @@ class FrontEndHomePageTest(BaseCase):
         # make sure it shows proper error message
         self.assert_element("#message")
         self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.", "#message")
-    '''
