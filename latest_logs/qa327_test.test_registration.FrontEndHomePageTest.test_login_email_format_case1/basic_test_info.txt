@@ -1,0 +1,22 @@
+qa327_test.test_registration.FrontEndHomePageTest.test_login_email_format_case1
+----------------------------------------------------
+Last Page: http://localhost:8081/login
+  Browser: chrome
+Timestamp: 1606855220  (Unix Timestamp)
+     Date: Tuesday, December 1, 2020
+     Time: 3:40:20 PM  (EDT, UTC-05:00)
+----------------------------------------------------
+Traceback: File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/unittest/case.py", line 605, in run
+    testMethod()
+  File "/Users/alice/Desktop/CISC327/qa327_test/test_registration.py", line 604, in test_login_email_format_case1
+    self.assert_element("#message")
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/seleniumbase/fixtures/base_case.py", line 5038, in assert_element
+    self.wait_for_element_visible(selector, by=by, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/seleniumbase/fixtures/base_case.py", line 3381, in wait_for_element_visible
+    self.driver, selector, by, timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/seleniumbase/fixtures/page_actions.py", line 299, in wait_for_element_visible
+    timeout_exception(NoSuchElementException, message)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/seleniumbase/fixtures/page_actions.py", line 117, in timeout_exception
+    raise exc(message)
+Exception: Message: 
+ Element {#message} was not present after 6 seconds!

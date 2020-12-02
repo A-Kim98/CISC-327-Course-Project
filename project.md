@@ -147,11 +147,18 @@ logout pops the logged_in attribute from session and redirects.
 page_not_found() gives the template for a 404 error
 authenticate will wrap around any function that accepts a user object and will check to if logged in. If not redirects to login.
 returns a profile template and gets ticket info from controller this is where authentication is done
+buy_ticket() checks if the user-provided the correct ticket information that they want to buy. If all the information is provided correctly, the user can buy the tickets. If not, redirects to the profile page with the error messages. 
+update_ticket() checks if the user-provided the correct information they want to update, and if all the information is provided correctly, the user can update the ticket information. If not, redirects to the profile page with the error messages. 
+sell_ticket() checks if the user-provided the correct information they want to sell, and if all the information is provided correctly, the user can successfully sell the tickets. If not, redirects to the profile page with the error messages. 
 
 in the backend:
 get_user queries the database for the user has email param
 login_user checks for user authentifcation and has email and password params
 register_user() registers the user to the database and accepts all params in the register page forms. It creates a user object with a balance of 5000
+get_ticket() queries the database for the ticket that the user has. 
+get_all_tickets() finds all the available tickets in the database. 
+sell_ticket() takes the user and tickets information and sell the tickets based on the ticket information. 
+get_update() takes user name as the input check if the ticket that user wants to update exists in the database. 
 
 Model:
 a class called user exists with id email password and names  as attributes
