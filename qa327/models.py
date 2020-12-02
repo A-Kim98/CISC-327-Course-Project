@@ -22,7 +22,7 @@ class User(db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
     balance = db.Column(db.Integer)
-    tickets = db.Column(db.PickleType, nullable=False)
+    tickets = db.Column(db.String(100))
 
 
 class UserInfo(db.Model):
