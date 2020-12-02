@@ -16,7 +16,8 @@ test_user_register = User(
                  email='registration@gmail.com',
                  password=generate_password_hash('Tester327!'),
                  name='LetsTestR',
-                 balance=5000
+                 balance=5000,
+                 tickets = None
             )
   
 # Mock a smple user (login)
@@ -108,7 +109,7 @@ class FrontEndHomePageTest(BaseCase):
         #open logout page
         self.open(base_url + '/logout')
     
-    
+
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
     @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
@@ -522,11 +523,12 @@ class FrontEndHomePageTest(BaseCase):
         #open logout page
         self.open(base_url + '/logout')
     
-    
+
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                         R1 - Login
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     
+
     # R1.1 - If the user hasn't logged in, show the login page
     @pytest.mark.timeout(60)
     def test_login(self, *_):

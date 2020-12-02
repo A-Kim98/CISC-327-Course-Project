@@ -27,7 +27,6 @@ Validate email complexity and possible email format errors
 '''
 def validate_email(email, error_message, user):
     email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-    email_check = re.compile(email_regex)
     
     if len(email) <= 1:
         error_message = "Email and/or password cannot be empty."
@@ -292,7 +291,7 @@ Validate the following:
 1. Check if name of the ticket is alphanumeric-only and space is not allwed as the first or last character
 2. Check if the name of the ticket is not longer than 60 chars.
 3. Check if the name of the ticket contains at least 6 chars
-
+'''
 def validate_ticket_name(ticket_name, error_message):
     #count the number of alphabets in the ticket name
     count = 0
@@ -420,4 +419,4 @@ def buy_ticket(user):
         user.ticket.append(ticket)
         ticket = bn.get_all_tickets()
         return render_template('/', user=user, ticket=ticket)
-'''
+
