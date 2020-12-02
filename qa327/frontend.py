@@ -295,7 +295,7 @@ Validate the following:
 def validate_ticket_name(ticket_name, error_message):
     #count the number of alphabets in the ticket name
     count = 0
-    if (ticket_name[0] == " " or ticket_name[-1] == " " or ticket_name.isdigit()):
+    if (ticket_name[0] == " " or ticket_name[-1] == " " or ticket_name.isalnum() == False):
         error_message = "The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character."
         
     if len(ticket_name) > 60:
@@ -419,4 +419,3 @@ def buy_ticket(user):
         user.ticket.append(ticket)
         ticket = bn.get_all_tickets()
         return render_template('/', user=user, ticket=ticket)
-
