@@ -87,9 +87,7 @@ def validate_login_email(email, error_message, user):
         elif len(email) > 30:
             error_message = "Email/password format is incorrect."
             
-        elif user:
-            session['logged_in'] = user.email
-            return redirect('/', code=303)
+
             
         else:
             error_message = ""
@@ -200,9 +198,8 @@ def login_get():
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
-    user = bn.login_user(email, password)
     error_message = None
-    
+    user = bn.login_user(email, password)
     # validate email
     check_email = validate_login_email(email, error_message, user)
     
@@ -222,7 +219,11 @@ def login_post():
     if check_pwd != "" and check_pwd != "":
         if check_pwd == check_email:
             return render_template('login.html', message=check_email)
-        
+
+    if check_email == "" and check_pwd == "" and user:
+        session['logged_in'] = user.email
+        return redirect('/', code=303)
+
     # Otherwise, redict to /login and show message 'email/password combination incorrect'
     else:
         return render_template('login.html', message="email/password combination incorrect.")
