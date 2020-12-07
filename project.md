@@ -73,7 +73,6 @@ the backend represents the controller in the model view controller design patter
 ### 2.5 Integration
 By using SQLite, the program will run the front end during the day, backend during the night, and produce new data files the next day. Any conflicts at transaction will be left for customer services to resolve.
 
-![Project Structure](/assets/images/architecture.png "Project Structure")
 
 ### 2.6 Deployment
 Once the project is complete and it is ready to be published, docker files and cloud deployment will be used in order to properly allow the website to be visited by other users.
