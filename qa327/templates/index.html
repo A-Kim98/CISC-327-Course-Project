@@ -21,14 +21,13 @@
             <td>Email</td>
             <td>Price</td>
         </tr>
-{% for ticket in tickets %}
-        <tr>
+        <tr>{% for ticket in tickets %}
             <td>{{ ticket.name }}</td>
             <td>{{ ticket.quantity }}</td>
             <td>{{ ticket.email }}</td>
             <td>{{ ticket.price }}</td>
+            {% endfor %}
         </tr>
-{% endfor %}
 </table>
 </div>
 
@@ -41,14 +40,14 @@
 <form method="post" id="sell" action="/sell">
     <div class="form-group">
         <label for="name_sell">Name</label>
-        <input class="form-control" name="name" id="name_sell" required>
+        <input class="form-control" name="name_sell" id="name_sell" required>
         <label for="quantity_sell">Quantity</label>
-        <input class="form-control" name="quantity" id="quantity_sell" required>
+        <input class="form-control" type="number" name="quantity_sell" id="quantity_sell" required>
         <label for="price_sell">Price</label>
-        <input class="form-control" name="price" id="price_sell" required>
+        <input class="form-control" type="number" name="price_sell" id="price_sell" required>
         <label for="expdate_sell">Expiration Date</label>
-        <input class="form-control" name="expdate" id="expdate_sell" required>
-        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit" value="Sell">
+        <input class="form-control"  name="expdate_sell" id="expdate_sell" required>
+        <input class="btn btn-lg btn-primary" type="submit" name="btn-submit-sell" id="btn-submit-sell" value="Sell">
     </div>
 </form>
 
@@ -60,9 +59,9 @@
     <div class="form-group">
         <label for="name_buy">Name</label>
         <input class="form-control" name="name" id="name_buy" required>
-        <label for="quantity_sell">Quantity</label>
-        <input class="form-control" name="quantity" id="quantity_buy" required>
-        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit" value="Buy">
+        <label for="quantity_buy">Quantity</label>
+        <input class="form-control" type="number" name="quantity" id="quantity_buy" required>
+        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit-buy" value="Buy">
     </div>
 </form>
 
@@ -75,12 +74,12 @@
         <label for="name_update">Name</label>
         <input class="form-control" name="name" id="name_update" required>
         <label for="quantity_update">Quantity</label>
-        <input class="form-control" name="quantity" id="quantity_update" required>
+        <input class="form-control" type="number" name="quantity" id="quantity_update" required>
         <label for="price_update">Price</label>
-        <input class="form-control" name="price" id="price_update" required>
+        <input class="form-control" type="number" name="price" id="price_update" required>
         <label for="expdate_update">Expiration Date</label>
         <input class="form-control" name="expdate" id="expdate_update" required>
-        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit" value="Update">
+        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit-update" value="Update">
     </div>
 </form>
 
