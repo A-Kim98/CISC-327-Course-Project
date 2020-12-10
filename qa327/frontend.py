@@ -4,6 +4,8 @@ import qa327.backend as bn
 import re  # regular expressions
 import string
 from datetime import datetime
+from sqlalchemy import exc
+from flask_sqlalchemy import SQLAlchemy
 
 """
 This file defines the front-end part of the service.
@@ -196,7 +198,6 @@ def sell_ticket():
 
     # For any errors, redirect back to / and show an error message
     tickets = bn.get_all_tickets()
-    print(error_list[0])
     if error_list[0] != "":
         return render_template('index.html', user=user, sell_message=error_list[0], tickets=tickets)
     elif error_list[1] != "":
@@ -207,9 +208,14 @@ def sell_ticket():
         return render_template('index.html', user=user, sell_message=error_list[3], tickets=tickets)
     # The added new ticket information will be posted on the user profile page
     else:
-        bn.sell_ticket(user, ticket_name, ticket_quantity, ticket_price, ticket_date)
-        tickets = bn.get_all_tickets()
-        return render_template('index.html', user=user, tickets=tickets)
+        try:
+            bn.sell_ticket(user, ticket_name, ticket_quantity, ticket_price, ticket_date)
+            tickets = bn.get_all_tickets()
+            return render_template('index.html', user=user, tickets=tickets)
+        except exc.IntegrityError:
+            bn.rollback()  # need to roll the database back before uniquness error
+            return render_template('index.html', user=user, sell_message="This ticket name already exists", tickets=tickets)
+
 
 
 @app.route('/update')
@@ -447,7 +453,10 @@ def validate_ticket_price(ticket_price, error_message):
 
 # Validate ticket date
 def validate_ticket_date(ticket_date, error_message):
-    expired = datetime.strptime(ticket_date, "%Y%m%d")
+    try:
+        expired = datetime.strptime(ticket_date, "%Y%m%d")
+    except ValueError:
+        return "Date must be given in the format YYYYMMDD (e.g. 20200901)"
     present = datetime.now()
 
     if ticket_date != datetime.strptime(ticket_date, "%Y%m%d").strftime('%Y%m%d'):

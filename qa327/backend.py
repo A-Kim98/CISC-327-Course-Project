@@ -4,6 +4,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 """
 This file defines all backend logic that interacts with database and other services
 """
+
+
 def get_user(email):
     """
     Get a user by a given email
@@ -47,17 +49,19 @@ def register_user(email, name, password, password2):
     db.session.commit()
     return None
 
+
 def get_ticket(name):
     """
     Get a ticket by a given name
     :param name: name of the ticket
     :return: ticket with user name
     """
-    
-    ticket = TicketInfo.query.filter_by(name = name).first().ticket
+
+    ticket = TicketInfo.query.filter_by(name=name).first().ticket
     return ticket
 
 
+# TODO add wrapper that deletes all expired tickets
 def get_all_tickets():
     """
     Get all ticket available in the database
@@ -87,6 +91,7 @@ def sell_ticket(user, name, quantity, price, date):
 
     return None
 
+
 def get_update(name):
     """
     Check if the ticket exists in the database
@@ -98,3 +103,7 @@ def get_update(name):
     if not user:
         return None
     return user
+
+
+def rollback():
+    db.session.rollback()
