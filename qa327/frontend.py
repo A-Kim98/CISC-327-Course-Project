@@ -13,10 +13,13 @@ The html templates are stored in the 'templates' folder.
 """
 
 
+# TODO error messages are usually handled using try except blocks not if statments condider changing for clarity
+
 @app.route('/register', methods=['GET'])
 def register_get():
     # templates are stored in the templates folder
     return render_template('register.html', message='')
+
 
 # The registration form can be submitted as a POST request to the current URL (/register)
 @app.route('/register', methods=['POST'])
@@ -178,23 +181,30 @@ def sell_ticket():
     ticket_price = int(request.form.get('price_sell'))
     ticket_date = request.form.get('expdate_sell')
     error_message = ""
-
+    error_list = []
     # validate ticket name
-    check_ticket_name = validate_ticket_name(ticket_name, error_message)
+    error_list.append(validate_ticket_name(ticket_name, error_message))
 
     # validate ticket quantity
-    check_ticket_quantity = validate_ticket_quantity(ticket_quantity, error_message)
+    error_list.append(validate_ticket_quantity(ticket_quantity, error_message))
 
     # validate ticket price
-    check_ticket_price = validate_ticket_price(ticket_price, error_message)
+    error_list.append(validate_ticket_price(ticket_price, error_message))
 
     # validate ticket date
-    check_ticket_date = validate_ticket_date(ticket_date, error_message)
+    error_list.append(validate_ticket_date(ticket_date, error_message))
 
     # For any errors, redirect back to / and show an error message
-    if error_message != "":
-        return render_template('index.html', sell_message=error_message)
-
+    tickets = bn.get_all_tickets()
+    print(error_list[0])
+    if error_list[0] != "":
+        return render_template('index.html', user=user, sell_message=error_list[0], tickets=tickets)
+    elif error_list[1] != "":
+        return render_template('index.html', user=user, sell_message=error_list[1], tickets=tickets)
+    elif error_list[2] != "":
+        return render_template('index.html', user=user, sell_message=error_list[2], tickets=tickets)
+    elif error_list[3] != "":
+        return render_template('index.html', user=user, sell_message=error_list[3], tickets=tickets)
     # The added new ticket information will be posted on the user profile page
     else:
         bn.sell_ticket(user, ticket_name, ticket_quantity, ticket_price, ticket_date)
@@ -260,11 +270,6 @@ def buy_ticket(user):
         user.ticket.append(ticket)
         ticket = bn.get_all_tickets()
         return render_template('/', user=user, ticket=ticket)
-
-
-
-
-
 
 
 '''
@@ -398,7 +403,6 @@ def validate_username(name, error_message):
         else:
             error_message = ""
     return error_message
-
 
 
 '''
