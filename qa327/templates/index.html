@@ -13,7 +13,7 @@
 <h2 >Here are all available tickets</h2>
 
 <!--Added the title, changed to table, and added to display quantity and email of tickets-->
-<div id="tickets">
+<div id="tickets" style="overflow: auto; max-height: 200px">
     <table style="width:100%">
         <tr>
             <td>Name</td>
@@ -21,13 +21,13 @@
             <td>Email</td>
             <td>Price</td>
         </tr>
-        <tr>{% for ticket in tickets %}
+        {% for ticket in tickets %}<tr>
             <td>{{ ticket.name }}</td>
             <td>{{ ticket.quantity }}</td>
             <td>{{ ticket.email }}</td>
             <td>{{ ticket.price }}</td>
-            {% endfor %}
-        </tr>
+            </tr>{% endfor %}
+
 </table>
 </div>
 
