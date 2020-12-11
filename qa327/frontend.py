@@ -15,7 +15,7 @@ The html templates are stored in the 'templates' folder.
 """
 
 
-# TODO error messages are usually handled using try except blocks not if statments condider changing for clarity
+# TODO error messages are usually handled using try except blocks not if statements consider changing for clarity
 
 @app.route('/register', methods=['GET'])
 def register_get():
@@ -214,8 +214,8 @@ def sell_ticket():
             return render_template('index.html', user=user, tickets=tickets)
         except exc.IntegrityError:
             bn.rollback()  # need to roll the database back before uniquness error
-            return render_template('index.html', user=user, sell_message="This ticket name already exists", tickets=tickets)
-
+            return render_template('index.html', user=user, sell_message="This ticket name already exists",
+                                   tickets=tickets)
 
 
 @app.route('/update')
@@ -422,18 +422,14 @@ Validate the following:
 
 def validate_ticket_name(ticket_name, error_message):
     # count the number of alphabets in the ticket name
-    count = 0
     if (ticket_name[0] == " " or ticket_name[-1] == " " or ticket_name.isalnum() == False):
         error_message = "The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character."
 
-    if len(ticket_name) > 60:
-        error_message = "The name of the ticket is no longer than 60 characters"
+    elif len(ticket_name) > 60:
+        error_message = "Ticket name cannot be longer than 60 characters"
 
-    for i in ticket_name:
-        if (i.isalnum()):
-            count += 1
-    if count < 6:
-        error_message = "The name of the tickets has to contain at least 6 characters"
+    elif len(ticket_name) < 1:  # TODO does a ticket length of at least six align with any specifications?
+        error_message = "The name of the tickets has to contain at least once character"
     return error_message
 
 
