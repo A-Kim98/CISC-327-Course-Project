@@ -263,35 +263,65 @@ def update_ticket():
 
 
 
-@app.route('/buy')
-def buy_ticket(user):
+@app.route('/buy', methods=['POST'])
+def buy_ticket():
+    email = session['logged_in']
+    user = bn.get_user(email)
     ticket_name = request.form.get('name_buy')
     ticket_quantity = int(request.form.get('quantity_buy'))
     ticket = bn.check_name_exist(ticket_name)
     error_message = ""
+    error_list = []
 
+    if ticket is None:
+        error_list.append("The ticket of the given name must exist")
+    else:
+        error_list.append("")
     # validate ticket name
-    check_ticket_name = validate_ticket_name(ticket_name, error_message)
+    error_list.append(validate_ticket_name(ticket_name, error_message))
 
     # validate ticket quantity
-    check_ticket_quantity = validate_ticket_quantity(ticket_quantity, error_message)
+    error_list.append(validate_ticket_quantity(ticket_quantity, error_message))
 
     # validate the ticket quantity in the database
-    if ticket.quantity > ticket_quantity:
-        error_message = "The ticket name exists in the database and the quantity is more than the quantity requested to buy"
+    try:
+        if ticket.quantity < ticket_quantity:
+            error_list.append("ticket quantity cannot exceed more than what is listed")
+        else:
+            error_list.append("")
 
-    # Validate user balance
-    if user.balance < (ticket.price * ticket_quantity * 0.35 * 0.05):
-        error_message = "The user has less balance than the ticket price * quantity + service fee (35%) + tax (5%)"
+        # Validate user balance
+        if user.balance < (ticket.price * ticket_quantity + ticket.price * ticket_quantity * 0.35 * 0.05):
+            error_list.append("The user has less balance than the ticket price * quantity + service fee (35%) + tax (5%)")
+        else:
+            error_list.append("")
+    except AttributeError:
+        error_list.append("") # we don't actually need these two lines(just feel like filling in the list all the way is consistent)
+        error_list.append("")
 
-    # for any errors, redirect back to / and show an error message
-    if error_message != "":
-        return redirect('/', buy_message=error_message)
+    tickets = bn.get_all_tickets()
+    if error_list[0] != "":
+        return render_template('index.html', user=user, buy_message=error_list[0], tickets=tickets)
+    elif error_list[1] != "":
+        return render_template('index.html', user=user, buy_message=error_list[1], tickets=tickets)
+    elif error_list[2] != "":
+        return render_template('index.html', user=user, buy_message=error_list[2], tickets=tickets)
+    elif error_list[3] != "":
+        return render_template('index.html', user=user, buy_message=error_list[3], tickets=tickets)
+    elif error_list[4] != "":
+        return render_template('index.html', user=user, buy_message=error_list[4], tickets=tickets)
     else:
-        user.ticket.append(ticket)
-        ticket = bn.get_all_tickets()
-        return render_template('/', user=user, ticket=ticket)
-
+        remaining_tickets = ticket.quantity-ticket_quantity
+        #if all tickets purchased delete ticket object from data base else update ticket to right quantity
+        if remaining_tickets == 0:
+            bn.delete_ticket(ticket_name)
+        else:
+            bn.update_ticket(ticket_name, remaining_tickets, ticket.price, ticket.date)
+        #update user balance
+        new_balance = user.balance - ticket.price * ticket_quantity - ticket.price * ticket_quantity * 0.35 * 0.05
+        bn.update_user_balance(user, new_balance)
+        tickets = bn.get_all_tickets()
+        return render_template('index.html', user=user, tickets=tickets)
 
 '''
 Validate email complexity and possible email format errors

@@ -115,3 +115,15 @@ def update_ticket(name, quantity, price, date):
     ticket.price = price
     ticket.date = date
     db.session.commit()
+    return None
+
+
+def delete_ticket(name):
+    TicketInfo.query.filter_by(name=name).delete()
+    return None
+
+
+def update_user_balance(user, new_balance):
+    user.balance = new_balance
+    db.session.commit()
+    return None
