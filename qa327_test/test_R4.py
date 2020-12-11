@@ -60,7 +60,7 @@ class TestR4(BaseCase):
         # click sell button
         self.click('input[value="Sell"]')
         # assert no error text appears
-        self.assert_text_not_visible("Ticket name must be alphanumeric-only", "#message")
+        self.assert_text_not_visible("Ticket name must be alphanumeric-only", "#message") #TODO these asserts have to be updated
         self.assert_text_not_visible("Ticket name cannot begin with a space", "#message")
         self.assert_text_not_visible("Ticket name cannot end with a space", "#message")
         self.assert_text_not_visible("Ticket name cannot be longer than 60 characters", "#message")

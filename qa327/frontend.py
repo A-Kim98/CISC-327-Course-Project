@@ -218,41 +218,56 @@ def sell_ticket():
                                    tickets=tickets)
 
 
-@app.route('/update')
-def update_ticket(user):
+@app.route('/update', methods=['POST'])
+def update_ticket():
+    email = session['logged_in']
+    user = bn.get_user(email)
     ticket_name = request.form.get('name_update')
-    ticket_quantity = request.form.get('quantity_update')
-    ticket_price = request.form.get('price_update')
+    ticket_quantity = int(request.form.get('quantity_update'))
+    ticket_price = int(request.form.get('price_update'))
     ticket_date = request.form.get('expdate_update')
-    ticket = bn.get_ticket(ticket_name)
+    ticket = bn.check_name_exist(ticket_name) # TODO a user should only be able to update their own tickets not everybodies
     error_message = ""
+    error_list = []
 
-    # validate ticket name
-    check_ticket_name = validate_ticket_name(ticket_name, error_message)
+    if ticket is None:
+        error_list.append("The ticket of the given name must exist")
+    else:
+        error_list.append("")
 
     # validate ticket quantity
-    check_ticket_quantity = validate_ticket_quantity(ticket_quantity, error_message)
+    error_list.append(validate_ticket_quantity(ticket_quantity, error_message))
 
     # validate ticket price
-    check_ticket_price = validate_ticket_price(ticket_price, error_message)
+    error_list.append(validate_ticket_price(ticket_price, error_message))
 
     # validate ticket date
-    check_ticket_date = validate_ticket_date(ticket_date, error_message)
+    error_list.append(validate_ticket_date(ticket_date, error_message))
 
-    # vadliate ticket existence
-    if ticket is None:
-        error_message = "The ticket of the given name must exist"
+    # For any errors, redirect back to / and show an error message
+    tickets = bn.get_all_tickets()
+    if error_list[0] != "":
+        return render_template('index.html', user=user, update_message=error_list[0], tickets=tickets)
+    elif error_list[1] != "":
+        return render_template('index.html', user=user, update_message=error_list[1], tickets=tickets)
+    elif error_list[2] != "":
+        return render_template('index.html', user=user, update_message=error_list[2], tickets=tickets)
+    elif error_list[3] != "":
+        return render_template('index.html', user=user, update_message=error_list[3], tickets=tickets)
+    # The added new ticket information will be posted on the user profile page
+    else:
+        bn.update_ticket(ticket_name, ticket_quantity, ticket_price, ticket_date)
+        tickets = bn.get_all_tickets()
+        return render_template('index.html', user=user, tickets=tickets)
 
-    # for any errors, redirect back to / and show an error message
-    if error_message != "":
-        return redirect('/', update_message=error_message)
+
 
 
 @app.route('/buy')
 def buy_ticket(user):
     ticket_name = request.form.get('name_buy')
-    ticket_quantity = request.form.get('quantity_buy')
-    ticket = bn.get_ticket(ticket_name)
+    ticket_quantity = int(request.form.get('quantity_buy'))
+    ticket = bn.check_name_exist(ticket_name)
     error_message = ""
 
     # validate ticket name

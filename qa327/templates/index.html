@@ -20,12 +20,14 @@
             <td>Quantity</td>
             <td>Email</td>
             <td>Price</td>
+            <td>Date</td>
         </tr>
         {% for ticket in tickets %}<tr>
             <td>{{ ticket.name }}</td>
             <td>{{ ticket.quantity }}</td>
             <td>{{ ticket.email }}</td>
             <td>{{ ticket.price }}</td>
+            <td>{{ ticket.date }}</td>
             </tr>{% endfor %}
 
 </table>

@@ -57,7 +57,7 @@ def get_ticket(name):
     :return: ticket with user name
     """
 
-    ticket = TicketInfo.query.filter_by(name=name).first().ticket
+    ticket = TicketInfo.query.filter_by(name=name).first()
     return ticket
 
 
@@ -92,7 +92,7 @@ def sell_ticket(user, name, quantity, price, date):
     return None
 
 
-def get_update(name):
+def check_name_exist(name):
     """
     Check if the ticket exists in the database
     :param name: the name of the ticket
@@ -107,3 +107,11 @@ def get_update(name):
 
 def rollback():
     db.session.rollback()
+
+
+def update_ticket(name, quantity, price, date):
+    ticket = get_ticket(name)
+    ticket.quantity = quantity
+    ticket.price = price
+    ticket.date = date
+    db.session.commit()
