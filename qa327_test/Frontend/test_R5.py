@@ -3,7 +3,7 @@ from seleniumbase import BaseCase
 
 from qa327_test.conftest import base_url
 from unittest.mock import patch
-from qa327.models import db, User
+from qa327.models import db, User, TicketInfo
 from werkzeug.security import generate_password_hash, check_password_hash
 
 """
@@ -26,9 +26,13 @@ test_user_login = User(
 )
 
 # Moch some sample tickets
-test_tickets = [
-    {'name': 't1', 'price': '100', 'email': 'testemail@gmail.com', 'quantity': '1'}
-]
+test_tickets = TicketInfo(
+    email='login@gmail.com',
+    name='t1',
+    quantity='1',
+    price='100',
+    date='20210408'
+)
 
 
 class TestR5(BaseCase):
@@ -60,7 +64,7 @@ class TestR5(BaseCase):
         # click update button
         self.click('input[value="Update"]')
         # assert no error text appears
-        self.assert_text_not_visible("Ticket name must be alphanumeric-only", "#message") #TODO update these asserts
+        self.assert_text_not_visible("Ticket name must be alphanumeric-only", "#message")  # TODO update these asserts
         self.assert_text_not_visible("Ticket name cannot begin with a space", "#message")
         self.assert_text_not_visible("Ticket name cannot end with a space", "#message")
         self.assert_text_not_visible("Ticket name cannot be longer than 60 characters", "#message")
@@ -103,7 +107,8 @@ class TestR5(BaseCase):
         self.assert_text_not_visible("Ticket name must be alphanumeric-only", "#message")
         self.assert_text_not_visible("Ticket name cannot begin with a space", "#message")
         self.assert_text_not_visible("Ticket name cannot end with a space", "#message")
-        self.assert_text_not_visible("Ticket name cannot be longer than 60 characters", "#message") #TODO update these asserts
+        self.assert_text_not_visible("Ticket name cannot be longer than 60 characters",
+                                     "#message")  # TODO update these asserts
         self.assert_text_not_visible("At most 100 tickets can be sold", "#message")
         self.assert_text_not_visible("Price of the ticket cannot be below 10", "#message")
         self.assert_text_not_visible("Price of the ticket cannot be above 100", "#message")
@@ -111,9 +116,10 @@ class TestR5(BaseCase):
         # open logout (for cleanup)
         self.open(base_url + '/logout')
 
-# Test Case R5.1.1
+    # Test Case R5.1.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_alphanumeric_only(self, *_):
         """
         Check if name of the ticket is alphanumeric-only
@@ -143,10 +149,10 @@ class TestR5(BaseCase):
         # open logout (for cleanup)
         self.open(base_url + '/logout')
 
-
     # Test Case R5.1.2
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_spaces_only(self, *_):
         """
         Check space is not allowed as first character
@@ -168,7 +174,7 @@ class TestR5(BaseCase):
         self.type("#price_update", 15)
         self.type("#expdate_update", 20210901)
         # click update button
-        self.click('input[value="update"]')
+        self.click('input[value="Update"]')
         # assert proper error message
         self.assert_text("The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the "
                          "first or the last character.", "#update_message")
@@ -179,6 +185,7 @@ class TestR5(BaseCase):
     # Test Case R5.1.3
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_spaces_only2(self, *_):
         """
         Check space is not allowed as last character
@@ -200,7 +207,7 @@ class TestR5(BaseCase):
         self.type("#price_update", 15)
         self.type("#expdate_update", 20210901)
         # click update button
-        self.click('input[value="update"]')
+        self.click('input[value="Update"]')
         # assert proper error message
         self.assert_text("The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the "
                          "first or the last character.", "#update_message")
@@ -211,6 +218,7 @@ class TestR5(BaseCase):
     # Test Case R5.2.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_name_length(self, *_):
         """
          The name of the ticket is no longer than 60 characters
@@ -232,7 +240,7 @@ class TestR5(BaseCase):
         self.type("#price_update", 15)
         self.type("#expdate_update", 20210901)
         # click update button
-        self.click('input[value="update"]')
+        self.click('input[value="Update"]')
         # assert proper error message
         self.assert_text("Ticket name cannot be longer than 60 characters", "#update_message")
 
@@ -242,6 +250,7 @@ class TestR5(BaseCase):
     # Test Case R5.3.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_quantity_bound(self, *_):
         """
          The quantity of the tickets has to be more than 0
@@ -263,7 +272,7 @@ class TestR5(BaseCase):
         self.type("#price_update", 15)
         self.type("#expdate_update", 20210901)
         # click update button
-        self.click('input[value="update"]')
+        self.click('input[value="Update"]')
         # assert proper error message
         self.assert_text("The quantity of the tickets has to be more than 0, and less than or equal to 100.",
                          "#update_message")
@@ -274,6 +283,7 @@ class TestR5(BaseCase):
     # Test Case R5.3.2
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_quantity_bound2(self, *_):
         """
           The quantity of the tickets has to be less than or equal to 100
@@ -295,7 +305,7 @@ class TestR5(BaseCase):
         self.type("#price_update", 15)
         self.type("#expdate_update", 20210901)
         # click update button
-        self.click('input[value="update"]')
+        self.click('input[value="Update"]')
         # assert proper error message
         self.assert_text("The quantity of the tickets has to be more than 0, and less than or equal to 100.",
                          "#update_message")
@@ -306,6 +316,7 @@ class TestR5(BaseCase):
     # Test Case R5.4.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_price_bound(self, *_):
         """
          Price cannot be lower than 10
@@ -327,7 +338,7 @@ class TestR5(BaseCase):
         self.type("#price_update", 9)
         self.type("#expdate_update", 20210901)
         # click update button
-        self.click('input[value="update"]')
+        self.click('input[value="Update"]')
         # assert proper error message
         self.assert_text("Price has to be of range [10, 100]",
                          "#update_message")
@@ -338,6 +349,7 @@ class TestR5(BaseCase):
     # Test Case R5.4.2
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_price_bound2(self, *_):
         """
          Price cannot be higher than 100
@@ -359,7 +371,7 @@ class TestR5(BaseCase):
         self.type("#price_update", 101)
         self.type("#expdate_update", 20210901)
         # click update button
-        self.click('input[value="update"]')
+        self.click('input[value="Update"]')
         # assert proper error message
         self.assert_text("Price has to be of range [10, 100]", "#update_message")
 
@@ -369,6 +381,7 @@ class TestR5(BaseCase):
     # Test Case R5.5.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_date_format(self, *_):
         """
          Date must be given in the format YYYYMMDD (e.g. 20200901)
@@ -390,7 +403,7 @@ class TestR5(BaseCase):
         self.type("#price_update", 15)
         self.type("#expdate_update", "Sept. 9 2021")
         # click update button
-        self.click('input[value="update"]')
+        self.click('input[value="Update"]')
         # assert proper error message
         self.assert_text("Date must be given in the format YYYYMMDD (e.g. 20200901)", "#update_message")
 
@@ -400,8 +413,7 @@ class TestR5(BaseCase):
     # Test Case R5.6.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_ticket', return_value=test_tickets)
-    def test_date_format(self, *_):
+    def test_ticket_exist(self, *_):
         """
          The ticket of the given name must exist
         """
@@ -417,21 +429,22 @@ class TestR5(BaseCase):
         # click enter button
         self.click('input[type="submit"]')
         # enter update ticket form with low values
-        self.type("#name_update", "this ticket does not exist")
+        self.type("#name_update", "thisTicketNoExist")
         self.type("#quantity_update", 1)
         self.type("#price_update", 15)
         self.type("#expdate_update", 20210901)
         # click update button
-        self.click('input[value="update"]')
+        self.click('input[value="Update"]')
         # assert proper error message
         self.assert_text("The ticket of the given name must exist", "#update_message")
 
         # open logout (for cleanup)
         self.open(base_url + '/logout')
-        
-# Test Case R5.7.1
+
+    # Test Case R5.7.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_redirect_update(self, *_):
         """
          For any errors, redirect back to / and show an error message
@@ -453,7 +466,7 @@ class TestR5(BaseCase):
         self.type("#price_update", 15)
         self.type("#expdate_update", "Sept. 9 2021")
         # click update button
-        self.click('input[value="update"]')
+        self.click('input[value="Update"]')
         # assert proper header
         self.assert_element("#welcome-header")
 

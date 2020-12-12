@@ -230,11 +230,8 @@ def update_ticket():
     error_message = ""
     error_list = []
 
-    if ticket is None:
-        error_list.append("The ticket of the given name must exist")
-    else:
-        error_list.append("")
-
+    # validate ticket quantity
+    error_list.append(validate_ticket_name(ticket_name, error_message))
     # validate ticket quantity
     error_list.append(validate_ticket_quantity(ticket_quantity, error_message))
 
@@ -243,6 +240,11 @@ def update_ticket():
 
     # validate ticket date
     error_list.append(validate_ticket_date(ticket_date, error_message))
+
+    if ticket is None:
+        error_list.append("The ticket of the given name must exist")
+    else:
+        error_list.append("")
 
     # For any errors, redirect back to / and show an error message
     tickets = bn.get_all_tickets()
@@ -254,6 +256,8 @@ def update_ticket():
         return render_template('index.html', user=user, update_message=error_list[2], tickets=tickets)
     elif error_list[3] != "":
         return render_template('index.html', user=user, update_message=error_list[3], tickets=tickets)
+    elif error_list[4] != "":
+        return render_template('index.html', user=user, update_message=error_list[4], tickets=tickets)
     # The added new ticket information will be posted on the user profile page
     else:
         bn.update_ticket(ticket_name, ticket_quantity, ticket_price, ticket_date)
@@ -273,15 +277,17 @@ def buy_ticket():
     error_message = ""
     error_list = []
 
-    if ticket is None:
-        error_list.append("The ticket of the given name must exist")
-    else:
-        error_list.append("")
+
     # validate ticket name
     error_list.append(validate_ticket_name(ticket_name, error_message))
 
     # validate ticket quantity
     error_list.append(validate_ticket_quantity(ticket_quantity, error_message))
+
+    if ticket is None:
+        error_list.append("The ticket of the given name must exist")
+    else:
+        error_list.append("")
 
     # validate the ticket quantity in the database
     try:

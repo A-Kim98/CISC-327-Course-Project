@@ -3,7 +3,7 @@ from seleniumbase import BaseCase
 
 from qa327_test.conftest import base_url
 from unittest.mock import patch
-from qa327.models import db, User
+from qa327.models import db, User, TicketInfo
 from werkzeug.security import generate_password_hash, check_password_hash
 
 """
@@ -26,9 +26,13 @@ test_user_login = User(
 )
 
 # Moch some sample tickets
-test_tickets = [
-    {'name': 't1', 'price': '100', 'email': 'testemail@gmail.com', 'quantity': '1'}
-]
+test_tickets = TicketInfo(
+    email='login@gmail.com',
+    name='t1',
+    quantity=1,
+    price='100',
+    date='20210408'
+)
 
 
 class TestR6(BaseCase):
@@ -115,6 +119,7 @@ class TestR6(BaseCase):
     # Test Case R6.1.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_alphanumeric_only(self, *_):
         """
         Check if name of the ticket is alphanumeric-only
@@ -147,6 +152,7 @@ class TestR6(BaseCase):
     # Test Case R6.1.2
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_spaces_only(self, *_):
         """
         Check space is not allowed as first character
@@ -179,6 +185,7 @@ class TestR6(BaseCase):
     # Test Case R6.1.3
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_spaces_only2(self, *_):
         """
         Check space is not allowed as last character
@@ -211,6 +218,7 @@ class TestR6(BaseCase):
     # Test Case R6.2.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_name_length(self, *_):
         """
          The name of the ticket is no longer than 60 characters
@@ -242,6 +250,7 @@ class TestR6(BaseCase):
     # Test Case R6.3.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_quantity_bound(self, *_):
         """
          The quantity of the tickets has to be more than 0
@@ -274,6 +283,7 @@ class TestR6(BaseCase):
     # Test Case R6.3.2
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_quantity_bound2(self, *_):
         """
           The quantity of the tickets has to be less than or equal to 100
@@ -307,8 +317,7 @@ class TestR6(BaseCase):
     # Test Case R6.4.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_ticket', return_value=test_tickets)
-    def test_date_format(self, *_):
+    def test_ticket_exist(self, *_):
         """
          The ticket of the given name must exist
         """
@@ -324,7 +333,7 @@ class TestR6(BaseCase):
         # click enter button
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
-        self.type("#name_buy", "this ticket does not exist")
+        self.type("#name_buy", "thisDoesNotExist")
         self.type("#quantity_buy", 1)
         
         
@@ -340,7 +349,7 @@ class TestR6(BaseCase):
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
     @patch('qa327.backend.get_ticket', return_value=test_tickets)
-    def test_date_format(self, *_):
+    def test_quanity_more_bought(self, *_):
         """
          The ticket quantity is more than the quantity bought - negative
         """
@@ -370,6 +379,7 @@ class TestR6(BaseCase):
     # Test Case R6.6.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_redirect_buy(self, *_):
         """
          For any errors, redirect back to / and show an error message
@@ -406,9 +416,13 @@ class TestR6(BaseCase):
     )
 
     # Moch some sample tickets
-    test_tickets = [
-        {'name': 't1', 'price': '100', 'email': 'testemail@gmail.com', 'quantity': '10'}
-    ]
+    test_tickets = TicketInfo(
+        email='login@gmail.com',
+        name='t1',
+        quantity='15',
+        price='100',
+        date='20210408'
+    )
 
     # Test Case R6.5.1
     @pytest.mark.timeout(60)
@@ -430,7 +444,7 @@ class TestR6(BaseCase):
         # click enter button
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
-        self.type("#name_buy", "this ticket does not exist")
+        self.type("#name_buy", "thisticketdoesnotexist")
         self.type("#quantity_buy", 1)
         
         
