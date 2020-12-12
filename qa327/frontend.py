@@ -268,7 +268,7 @@ def buy_ticket():
     email = session['logged_in']
     user = bn.get_user(email)
     ticket_name = request.form.get('name_buy')
-    ticket_quantity = int(request.form.get('quantity_buy'))
+    ticket_quantity = int(request.form.get('quantity_buy'))  # TODO a user should not have the option to buy their own tickets
     ticket = bn.check_name_exist(ticket_name)
     error_message = ""
     error_list = []
