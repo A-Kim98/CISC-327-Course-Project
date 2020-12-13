@@ -3,7 +3,7 @@ from seleniumbase import BaseCase
 
 from qa327_test.conftest import base_url
 from unittest.mock import patch
-from qa327.models import db, User
+from qa327.models import db, User, TicketInfo
 from werkzeug.security import generate_password_hash, check_password_hash
 
 """
@@ -21,18 +21,23 @@ Annotate @patch before unit tests can mock backend methods (for that testing fun
 test_user = User(
                  email='tester@gmail.com',
                  name='tester',
-                 password=generate_password_hash('Tester327!')
+                 password=generate_password_hash('Tester327!'),
+                 balance=10000
             )
 test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
-    password=generate_password_hash('Test_frontend123!')
+    password=generate_password_hash('Test_frontend123!'),
+    balance=10000
 )
 
-# Moch some sample tickets
-test_tickets = [
-    {'name': 't1', 'price': '100', 'email' : 'testemail@gmail.com', 'quantity': '1'}
-]
+test_tickets = TicketInfo(
+    email='login@gmail.com',
+    name='t1',
+    quantity=1,
+    price=100,
+    date='20210408'
+)
 
 
 class IndexPageTest(BaseCase):

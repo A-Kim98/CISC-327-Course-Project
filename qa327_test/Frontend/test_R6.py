@@ -345,6 +345,14 @@ class TestR6(BaseCase):
         # open logout (for cleanup)
         self.open(base_url + '/logout')
 
+    # Moch some sample tickets
+    test_tickets = TicketInfo(
+        email='login@gmail.com',
+        name='t1',
+        quantity=10,
+        price=10,
+        date='20210408'
+    )
     # Test Case R6.4.2
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
