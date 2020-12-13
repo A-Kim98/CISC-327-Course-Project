@@ -17,7 +17,6 @@ test_user_register = User(
                  password=generate_password_hash('Tester327!'),
                  name='LetsTestR',
                  balance=5000,
-                 tickets = None
             )
   
 # Mock a smple user (login)
@@ -41,7 +40,7 @@ class FrontEndHomePageTest(BaseCase):
 
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     # R2.2- Show the user registration page if user is not logged in
     def test_register(self, *_):
         # open the logout page to invalidate any logged-in session
@@ -90,7 +89,7 @@ class FrontEndHomePageTest(BaseCase):
     #R2.5 - Email, password, password2 all have to satisfy the same required as defined in R1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_empty_email_case1(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -112,7 +111,7 @@ class FrontEndHomePageTest(BaseCase):
 
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_empty_password_case1(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -133,7 +132,7 @@ class FrontEndHomePageTest(BaseCase):
     
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_emtpy_email_password_case2(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -154,7 +153,7 @@ class FrontEndHomePageTest(BaseCase):
     
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_email_format_case1(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -176,7 +175,7 @@ class FrontEndHomePageTest(BaseCase):
     # Email has to follow addr-spec defined in RFC 5322
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_email_format_case2(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -198,7 +197,7 @@ class FrontEndHomePageTest(BaseCase):
     # Email has to follow addr-spec defined in RFC 5322
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_email_format_case3(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -220,7 +219,7 @@ class FrontEndHomePageTest(BaseCase):
     # Email has to follow addr-spec defined in RFC 5322
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_email_format_case4(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -242,7 +241,7 @@ class FrontEndHomePageTest(BaseCase):
     # Email has to follow addr-spec defined in RFC 5322
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_email_format_case5(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -264,7 +263,7 @@ class FrontEndHomePageTest(BaseCase):
     # Password has to meet the required complexity: minimum length 6
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_password_failed_case1(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -284,7 +283,7 @@ class FrontEndHomePageTest(BaseCase):
     # Password needs at least one upper case.
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_password_failed_case2(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -304,7 +303,7 @@ class FrontEndHomePageTest(BaseCase):
     # Password needs at least one lower case.
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_password_failed_case3(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -324,7 +323,7 @@ class FrontEndHomePageTest(BaseCase):
     # Password needs at least one special character.
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_password_failed_case4(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -344,7 +343,7 @@ class FrontEndHomePageTest(BaseCase):
     # R2.6 - Password and password2 have to be exactly the same
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_password_failed_case5(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -365,7 +364,7 @@ class FrontEndHomePageTest(BaseCase):
     #R2.7 - User name has to be non-empty, alphanumeric-only, and space allowed only if it is not the first or the last character
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_username_failed_case1(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -384,7 +383,7 @@ class FrontEndHomePageTest(BaseCase):
 
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_username_failed_case2(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -403,7 +402,7 @@ class FrontEndHomePageTest(BaseCase):
             
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_username_failed_case3(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -422,7 +421,7 @@ class FrontEndHomePageTest(BaseCase):
             
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_username_failed_case4(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -444,7 +443,7 @@ class FrontEndHomePageTest(BaseCase):
     #password error
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_format_error_case1(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -464,7 +463,7 @@ class FrontEndHomePageTest(BaseCase):
     #password2 error
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_format_error_case2(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -484,7 +483,7 @@ class FrontEndHomePageTest(BaseCase):
     #name error
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_register_format_error_case3(self, *_):
         #open the register page
         self.open(base_url + '/register')
@@ -505,7 +504,7 @@ class FrontEndHomePageTest(BaseCase):
     # R2.10 - If the email already exists, show message 'this email has been ALREADY used'
     @pytest.mark.timeout(60)
     @patch('qa327.backend.register_user', return_value=test_user_register)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     @patch('qa327.backend.get_user', return_value=test_user_register)
     def test_register_check_email(self, *_):
         #open the register page
@@ -558,7 +557,7 @@ class FrontEndHomePageTest(BaseCase):
     # R2.1 If the user has logged in, redirect back to the user profile page /
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_success(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -583,7 +582,7 @@ class FrontEndHomePageTest(BaseCase):
     # R1.6.1 - Email and password both cannot be empty [Email]
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_empty_email(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -601,7 +600,7 @@ class FrontEndHomePageTest(BaseCase):
     # R1.6.2 - Email and password both cannot be empty [Password]
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_empty_password(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -619,7 +618,7 @@ class FrontEndHomePageTest(BaseCase):
     # R1.6.3 - Email and password both cannot be empty [Email and Password]
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_emtpy_email_password(self, *_):
         #open logout page to invalidate any logged in sessions may exist
         self.open(base_url + '/logout')
@@ -636,7 +635,7 @@ class FrontEndHomePageTest(BaseCase):
 
     # R1.7.1 - Email has to follow addr-spec defined in RFC 5322
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     @pytest.mark.timeout(60)
     def test_login_email_format_case1(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -654,7 +653,7 @@ class FrontEndHomePageTest(BaseCase):
     
     # R1.7.2 - Email has to follow addr-spec defined in RFC 5322
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     @pytest.mark.timeout(60)
     def test_login_email_format_case2(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -672,7 +671,7 @@ class FrontEndHomePageTest(BaseCase):
         
     # R1.7.3 - Email has to follow addr-spec defined in RFC 5322
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     @pytest.mark.timeout(60)
     def test_login_email_format_case3(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -690,7 +689,7 @@ class FrontEndHomePageTest(BaseCase):
     
     # R1.7.4 - Email has to follow addr-spec defined in RFC 5322
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     @pytest.mark.timeout(60)
     def test_login_email_format_case4(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -708,7 +707,7 @@ class FrontEndHomePageTest(BaseCase):
     
     # R1.7.5 - Email has to follow addr-spec defined in RFC 5322
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     @pytest.mark.timeout(60)
     def test_login_email_format_case5(self, *_):
         #open logout page to invalidate any logged in sessions may exist
@@ -727,7 +726,7 @@ class FrontEndHomePageTest(BaseCase):
     # minimum length 6
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_password_failed_case1(self, *_):
         # open login page
         self.open(base_url + '/login')
@@ -743,7 +742,7 @@ class FrontEndHomePageTest(BaseCase):
     # minimum length 6
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_password_failed_case2(self, *_):
         # open login page
         self.open(base_url + '/login')
@@ -759,7 +758,7 @@ class FrontEndHomePageTest(BaseCase):
     # at least one lower case
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_password_failed_case3(self, *_):
         # open login page
         self.open(base_url + '/login')
@@ -776,7 +775,7 @@ class FrontEndHomePageTest(BaseCase):
     # at least one special character.
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_password_failed_case4(self, *_):
         # open login page
         self.open(base_url + '/login')
@@ -792,7 +791,7 @@ class FrontEndHomePageTest(BaseCase):
     # R1.9 - For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_format_error(self, *_):
         # open login page
         self.open(base_url + '/login')
@@ -808,7 +807,7 @@ class FrontEndHomePageTest(BaseCase):
     # R1.9 - For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user_login)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_format_error(self, *_):
         # open login page
         self.open(base_url + '/login')
