@@ -369,9 +369,9 @@ Validate password complexity and possible password/password2 format error
 
 
 def validate_password(password, password2, error_message):
-    hasUpper = re.search(r'/[A-Z]/', password)
-    hasLower = re.search(r'/[a-z]/', password)
-    hasNonAlphNum = re.search(r'/\W/', password)  # test for special char
+    hasUpper = re.search(r'[A-Z]', password)
+    hasLower = re.search(r'[a-z]', password)
+    hasNonAlphNum = re.search(r'\W', password)  # test for special char
 
     if len(password) <= 1 or len(password2) <= 1:
         error_message = "Email and/or password cannot be empty."
@@ -421,9 +421,9 @@ Validate user's password (login)
 
 
 def validate_login_password(password, error_message):
-    hasUpper = re.search(r'/[A-Z]/', password)
-    hasLower = re.search(r'/[a-z]/', password)
-    hasNonAlphNum = re.search(r'/\W/', password)  # test for special char
+    hasUpper = re.search(r'[A-Z]', password)
+    hasLower = re.search(r'[a-z]', password)
+    hasNonAlphNum = re.search(r'\W', password)  # test for special char
 
     if len(password) <= 1:
         error_message = "Email and/or password cannot be empty."

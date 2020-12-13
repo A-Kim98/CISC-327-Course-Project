@@ -18,12 +18,7 @@ Annotate @patch before unit tests can mock backend methods (for that testing fun
 """
 
 # Moch a sample user
-test_user = User(
-                 email='tester@gmail.com',
-                 name='tester',
-                 password=generate_password_hash('Tester327!'),
-                 balance=10000
-            )
+
 test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
@@ -44,7 +39,7 @@ class IndexPageTest(BaseCase):
 
     #Test Case R3.1
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_user_redirect(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -65,7 +60,7 @@ class IndexPageTest(BaseCase):
 
     # Test Case R3.2
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_success(self, *_):
         """
         """
@@ -88,9 +83,7 @@ class IndexPageTest(BaseCase):
         # front-end, without running the backend logics. 
         # so we patch the backend to return a specific user instance, 
         # rather than running that program. (see @ annotations above)
-        
-        # open home page
-        self.open(base_url)
+
         # test if the page loads correctly
         self.assert_element("#welcome-header")
         self.assert_text("Hi test_frontend", "#welcome-header")
@@ -100,7 +93,7 @@ class IndexPageTest(BaseCase):
 
     # Test Case R3.3
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_show_balance(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -137,7 +130,7 @@ class IndexPageTest(BaseCase):
 
     # Test Case R3.4
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_confirm_logout(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -173,7 +166,7 @@ class IndexPageTest(BaseCase):
 
     # Test Case R3.5
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_ticket_table(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -213,7 +206,7 @@ class IndexPageTest(BaseCase):
 
     # Test Case R3.6
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_selling_form(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -253,7 +246,7 @@ class IndexPageTest(BaseCase):
 
     # Test Case R3.7
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_buying_form(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -291,7 +284,7 @@ class IndexPageTest(BaseCase):
 
     # Test Case R3.8
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_selling_validate(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -327,7 +320,7 @@ class IndexPageTest(BaseCase):
 
     # Test Case R3.9
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_buying_validate(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -363,7 +356,7 @@ class IndexPageTest(BaseCase):
 
     # Test Case R3.10
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_updating_validate(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
