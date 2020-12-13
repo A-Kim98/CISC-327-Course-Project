@@ -3,7 +3,7 @@ from seleniumbase import BaseCase
 
 from qa327_test.conftest import base_url
 from unittest.mock import patch
-from qa327.models import db, User
+from qa327.models import db, User, TicketInfo
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -27,11 +27,14 @@ test_user_login = User(
                  balance=10000
             )
 
-# Mock some sample tickets
-test_tickets = [
-    {'name': 't1', 'price': '100', 'email' : 'testemail@gmail.com', 'quantity': '1'}
-]
-
+# Moch some sample tickets
+test_tickets = TicketInfo(
+    email='login@gmail.com',
+    name='t1',
+    quantity=1,
+    price=100,
+    date='20210408'
+)
 
 class FrontEndHomePageTest(BaseCase):
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
