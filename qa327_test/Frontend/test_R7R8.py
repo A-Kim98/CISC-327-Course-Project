@@ -7,17 +7,18 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # Mock a sample user
 test_user = User(
-                 email='tester@gmail.com',
-                 name='tester',
-                 password=generate_password_hash('Tester327!')
-            )
+    email='login@gmail.com',
+    name='LetsTestL',
+    password=generate_password_hash('Tester327!'),
+    balance=10000
+)
 
 # Moch some sample tickets
 test_tickets = TicketInfo(
     email='login@gmail.com',
     name='t1',
-    quantity='1',
-    price='100',
+    quantity=1,
+    price=100,
     date='20210408'
 )
 
@@ -32,8 +33,8 @@ class TestR7R8(BaseCase):
         # open login page
         self.open(base_url + '/login')
         # fill email and password
-        self.type("#email", "test_frontend@test.com")
-        self.type("#password", "test_frontend")
+        self.type("#email", "login@gmail.com")
+        self.type("#password", "Tester327!")
         # click enter button
         self.click('input[type="submit"]')
         # open home page
