@@ -169,8 +169,7 @@ class IndexPageTest(BaseCase):
     @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_ticket_table(self, *_):
         """
-        This is a sample front end unit test to vertify users that are not logged in
-        are redirected to the login page
+        This is a sample front end unit test to vertify the ticket table displays proper info
         """
         # open logout page to invalid any logged-in sessions that may exist, then open login page
         self.open(base_url + '/logout')
@@ -195,12 +194,18 @@ class IndexPageTest(BaseCase):
         # open home page
         self.open(base_url)
         # test if the ticket information is displayed as it should
-        self.assert_element(    "#tickets")
-        self.assert_text("t1",  "#tickets")
-        self.assert_text("100", "#tickets")
-        self.assert_text("1",   "#tickets")
-        self.assert_text("testemail@gmail.com","#tickets")
-        
+        self.type("#name_sell", "HelloWorld123")
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "10")
+        self.type("#expdate_sell", "20210901")
+        self.click('input[value="Sell"]')
+
+        self.assert_text("HelloWorld123", "#tickets")
+        self.assert_text("1", "#tickets")
+        self.assert_text("10",   "#tickets")
+        self.assert_text("20210901", "#tickets")
+        self.assert_text("test_frontend@test.com", "#tickets")
+
         # open logout (for cleanup)
         self.open(base_url + '/logout')
 
