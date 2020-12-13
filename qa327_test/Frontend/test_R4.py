@@ -58,9 +58,9 @@ class TestR4(BaseCase):
 
         # enter Sell ticket form with low values
         self.type("#name_sell", "Hello World 123")
-        self.type("#quantity_sell", 1)
-        self.type("#price_sell", 10)
-        self.type("#expdate_sell", 20210901)
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "10")
+        self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')
         # assert no error text appears
@@ -96,9 +96,9 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "Hello World 123")
-        self.type("#quantity_sell", 100)
-        self.type("#price_sell", 100)
-        self.type("#expdate_sell", 20210901)
+        self.type("#quantity_sell", "100")
+        self.type("#price_sell", "100")
+        self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')
         # asser no error text appears
@@ -134,9 +134,9 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "Ht1&t2@!*\")(/.,<>[]-+")
-        self.type("#quantity_sell", 1)
-        self.type("#price_sell", 15)
-        self.type("#expdate_sell", 20210901)
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "15")
+        self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')
         # assert proper error message
@@ -166,9 +166,9 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", " t1")
-        self.type("#quantity_sell", 1)
-        self.type("#price_sell", 15)
-        self.type("#expdate_sell", 20210901)
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "15")
+        self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')
         # assert proper error message
@@ -198,9 +198,9 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "t1 ")
-        self.type("#quantity_sell", 1)
-        self.type("#price_sell", 15)
-        self.type("#expdate_sell", 20210901)
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "15")
+        self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')
         # assert proper error message
@@ -230,9 +230,9 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi")
-        self.type("#quantity_sell", 1)
-        self.type("#price_sell", 15)
-        self.type("#expdate_sell", 20210901)
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "15")
+        self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')
         # assert proper error message
@@ -261,9 +261,9 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "t1")
-        self.type("#quantity_sell", 0)
-        self.type("#price_sell", 15)
-        self.type("#expdate_sell", 20210901)
+        self.type("#quantity_sell", "0")
+        self.type("#price_sell", "15")
+        self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')
         # assert proper error message
@@ -293,9 +293,9 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "t1")
-        self.type("#quantity_sell", 101)
-        self.type("#price_sell", 15)
-        self.type("#expdate_sell", 20210901)
+        self.type("#quantity_sell", "101")
+        self.type("#price_sell", "15")
+        self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')
         # assert proper error message
@@ -325,9 +325,9 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "t1")
-        self.type("#quantity_sell", 1)
-        self.type("#price_sell", 9)
-        self.type("#expdate_sell", 20210901)
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "9")
+        self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')
         # assert proper error message
@@ -357,9 +357,9 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "t1")
-        self.type("#quantity_sell", 1)
-        self.type("#price_sell", 101)
-        self.type("#expdate_sell", 20210901)
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "101")
+        self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')
         # assert proper error message
@@ -388,8 +388,8 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "t1")
-        self.type("#quantity_sell", 1)
-        self.type("#price_sell", 15)
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "15")
         self.type("#expdate_sell", "Sept. 9 2021")
         # click sell button
         self.click('input[value="Sell"]')
@@ -419,8 +419,8 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "t1")
-        self.type("#quantity_sell", 1)
-        self.type("#price_sell", 15)
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "15")
         self.type("#expdate_sell", "Sept. 9 2021")
         # click sell button
         self.click('input[value="Sell"]')
@@ -450,8 +450,8 @@ class TestR4(BaseCase):
         self.click('input[type="submit"]')
         # enter Sell ticket form with low values
         self.type("#name_sell", "t1")
-        self.type("#quantity_sell", 1)
-        self.type("#price_sell", 15)
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "15")
         self.type("#expdate_sell", "20210901")
         # click sell button
         self.click('input[value="Sell"]')

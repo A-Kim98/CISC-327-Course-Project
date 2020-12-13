@@ -29,8 +29,8 @@ test_user_login = User(
 test_tickets = TicketInfo(
     email='login@gmail.com',
     name='t1',
-    quantity=1,
-    price='100',
+    quantity=100,
+    price=10,
     date='20210408'
 )
 
@@ -58,8 +58,8 @@ class TestR6(BaseCase):
 
         # enter buy ticket form with low values
         self.type("#name_buy", "t1")
-        self.type("#quantity_buy", 1)
-        self.type("#price_buy", 10)
+        self.type("#quantity_buy", "1")
+
         
         # click buy button
         self.click('input[value="Buy"]')
@@ -98,8 +98,8 @@ class TestR6(BaseCase):
 
         # enter buy ticket form with high values
         self.type("#name_buy", "t1")
-        self.type("#quantity_buy", 100)
-        self.type("#price_buy", 100)
+        self.type("#quantity_buy", "100")   #TODO price exceeds user balance adjust ticket price
+
         
         # click buy button
         self.click('input[value="Buy"]')
@@ -137,7 +137,7 @@ class TestR6(BaseCase):
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
         self.type("#name_buy", "Ht1&t2@!*\")(/.,<>[]-+")
-        self.type("#quantity_buy", 1)
+        self.type("#quantity_buy", "1")
         
         
         # click buy button
@@ -170,7 +170,7 @@ class TestR6(BaseCase):
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
         self.type("#name_buy", " t1")
-        self.type("#quantity_buy", 1)
+        self.type("#quantity_buy", "1")
         
         
         # click buy button
@@ -203,7 +203,7 @@ class TestR6(BaseCase):
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
         self.type("#name_buy", "t1 ")
-        self.type("#quantity_buy", 1)
+        self.type("#quantity_buy", "1")
         
         
         # click buy button
@@ -236,7 +236,7 @@ class TestR6(BaseCase):
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
         self.type("#name_buy", "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi")
-        self.type("#quantity_buy", 1)
+        self.type("#quantity_buy", "1")
         
         
         # click buy button
@@ -268,7 +268,7 @@ class TestR6(BaseCase):
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
         self.type("#name_buy", "t1")
-        self.type("#quantity_buy", 0)
+        self.type("#quantity_buy", "0")
         
         
         # click buy button
@@ -301,7 +301,7 @@ class TestR6(BaseCase):
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
         self.type("#name_buy", "t1")
-        self.type("#quantity_buy", 101)
+        self.type("#quantity_buy", "101")
         
         
         # click buy button
@@ -334,7 +334,7 @@ class TestR6(BaseCase):
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
         self.type("#name_buy", "thisDoesNotExist")
-        self.type("#quantity_buy", 1)
+        self.type("#quantity_buy", "1")
         
         
         # click buy button
@@ -366,7 +366,7 @@ class TestR6(BaseCase):
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
         self.type("#name_buy", "t1")
-        self.type("#quantity_buy", 11)
+        self.type("#quantity_buy", "11")
 
         # click buy button
         self.click('input[value="Buy"]')
@@ -397,7 +397,7 @@ class TestR6(BaseCase):
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
         self.type("#name_buy", "%@#$%@^^#$%&^%$&")
-        self.type("#quantity_buy", 1)
+        self.type("#quantity_buy", "1")
 
         # click buy button
         self.click('input[value="Buy"]')
@@ -419,8 +419,8 @@ class TestR6(BaseCase):
     test_tickets = TicketInfo(
         email='login@gmail.com',
         name='t1',
-        quantity='15',
-        price='100',
+        quantity=15,
+        price=100,
         date='20210408'
     )
 
@@ -444,14 +444,14 @@ class TestR6(BaseCase):
         # click enter button
         self.click('input[type="submit"]')
         # enter buy ticket form with low values
-        self.type("#name_buy", "thisticketdoesnotexist")
-        self.type("#quantity_buy", 1)
+        self.type("#name_buy", "t1")
+        self.type("#quantity_buy", "12")
         
         
         # click buy button
         self.click('input[value="Buy"]')
         # assert proper error message
-        self.assert_text("The ticket of the given name must exist", "#buy_message")
+        self.assert_text("The user has less balance than the ticket price * quantity + service fee (35%) + tax (5%)", "#buy_message")
 
         # open logout (for cleanup)
         self.open(base_url + '/logout')

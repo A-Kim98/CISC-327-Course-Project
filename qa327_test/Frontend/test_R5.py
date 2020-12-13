@@ -29,8 +29,8 @@ test_user_login = User(
 test_tickets = TicketInfo(
     email='login@gmail.com',
     name='t1',
-    quantity='1',
-    price='100',
+    quantity=1,
+    price=100,
     date='20210408'
 )
 
@@ -58,9 +58,9 @@ class TestR5(BaseCase):
 
         # enter update ticket form with low values
         self.type("#name_update", "t1")
-        self.type("#quantity_update", 1)
-        self.type("#price_update", 10)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "1")
+        self.type("#price_update", "10")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert no error text appears
@@ -98,9 +98,9 @@ class TestR5(BaseCase):
 
         # enter update ticket form with high values
         self.type("#name_update", "t1")
-        self.type("#quantity_update", 100)
-        self.type("#price_update", 100)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "100")
+        self.type("#price_update", "100")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert no error text appears
@@ -137,9 +137,9 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", "Ht1&t2@!*\")(/.,<>[]-+")
-        self.type("#quantity_update", 1)
-        self.type("#price_update", 15)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "1")
+        self.type("#price_update", "15")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert proper error message
@@ -170,9 +170,9 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", " t1")
-        self.type("#quantity_update", 1)
-        self.type("#price_update", 15)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "1")
+        self.type("#price_update", "15")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert proper error message
@@ -203,9 +203,9 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", "t1 ")
-        self.type("#quantity_update", 1)
-        self.type("#price_update", 15)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "1")
+        self.type("#price_update", "15")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert proper error message
@@ -236,9 +236,9 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi")
-        self.type("#quantity_update", 1)
-        self.type("#price_update", 15)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "1")
+        self.type("#price_update", "15")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert proper error message
@@ -268,9 +268,9 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", "t1")
-        self.type("#quantity_update", 0)
-        self.type("#price_update", 15)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "0")
+        self.type("#price_update", "15")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert proper error message
@@ -301,9 +301,9 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", "t1")
-        self.type("#quantity_update", 101)
-        self.type("#price_update", 15)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "101")
+        self.type("#price_update", "15")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert proper error message
@@ -334,9 +334,9 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", "t1")
-        self.type("#quantity_update", 1)
-        self.type("#price_update", 9)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "1")
+        self.type("#price_update", "9")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert proper error message
@@ -367,9 +367,9 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", "t1")
-        self.type("#quantity_update", 1)
-        self.type("#price_update", 101)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "1")
+        self.type("#price_update", "101")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert proper error message
@@ -399,8 +399,8 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", "t1")
-        self.type("#quantity_update", 1)
-        self.type("#price_update", 15)
+        self.type("#quantity_update", "1")
+        self.type("#price_update", "15")
         self.type("#expdate_update", "Sept. 9 2021")
         # click update button
         self.click('input[value="Update"]')
@@ -430,9 +430,9 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", "thisTicketNoExist")
-        self.type("#quantity_update", 1)
-        self.type("#price_update", 15)
-        self.type("#expdate_update", 20210901)
+        self.type("#quantity_update", "1")
+        self.type("#price_update", "15")
+        self.type("#expdate_update", "20210901")
         # click update button
         self.click('input[value="Update"]')
         # assert proper error message
@@ -462,8 +462,8 @@ class TestR5(BaseCase):
         self.click('input[type="submit"]')
         # enter update ticket form with low values
         self.type("#name_update", "t1")
-        self.type("#quantity_update", 1)
-        self.type("#price_update", 15)
+        self.type("#quantity_update", "1")
+        self.type("#price_update", "15")
         self.type("#expdate_update", "Sept. 9 2021")
         # click update button
         self.click('input[value="Update"]')
