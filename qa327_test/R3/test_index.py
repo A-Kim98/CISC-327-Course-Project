@@ -32,7 +32,7 @@ test_user = User(
 )
 
 test_tickets = TicketInfo(
-    email='login@gmail.com',
+    email='test_frontend@test.com',
     name='t1',
     quantity=1,
     price=100,

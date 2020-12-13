@@ -226,7 +226,8 @@ def update_ticket():
     ticket_quantity = int(request.form.get('quantity_update'))
     ticket_price = int(request.form.get('price_update'))
     ticket_date = request.form.get('expdate_update')
-    ticket = bn.check_name_exist(ticket_name) # TODO a user should only be able to update their own tickets not everybodies
+    ticket = bn.check_name_exist(
+        ticket_name)  # TODO a user should only be able to update their own tickets not everybodies
     error_message = ""
     error_list = []
 
@@ -265,18 +266,16 @@ def update_ticket():
         return render_template('index.html', user=user, tickets=tickets)
 
 
-
-
 @app.route('/buy', methods=['POST'])
 def buy_ticket():
     email = session['logged_in']
     user = bn.get_user(email)
     ticket_name = request.form.get('name_buy')
-    ticket_quantity = int(request.form.get('quantity_buy'))  # TODO a user should not have the option to buy their own tickets
+    ticket_quantity = int(
+        request.form.get('quantity_buy'))  # TODO a user should not have the option to buy their own tickets
     ticket = bn.check_name_exist(ticket_name)
     error_message = ""
     error_list = []
-
 
     # validate ticket name
     error_list.append(validate_ticket_name(ticket_name, error_message))
@@ -298,11 +297,13 @@ def buy_ticket():
 
         # Validate user balance
         if user.balance < (ticket.price * ticket_quantity + ticket.price * ticket_quantity * 0.35 * 0.05):
-            error_list.append("The user has less balance than the ticket price * quantity + service fee (35%) + tax (5%)")
+            error_list.append(
+                "The user has less balance than the ticket price * quantity + service fee (35%) + tax (5%)")
         else:
             error_list.append("")
     except AttributeError:
-        error_list.append("") # we don't actually need these two lines(just feel like filling in the list all the way is consistent)
+        error_list.append(
+            "")  # we don't actually need these two lines(just feel like filling in the list all the way is consistent)
         error_list.append("")
 
     tickets = bn.get_all_tickets()
@@ -317,17 +318,18 @@ def buy_ticket():
     elif error_list[4] != "":
         return render_template('index.html', user=user, buy_message=error_list[4], tickets=tickets)
     else:
-        remaining_tickets = ticket.quantity-ticket_quantity
-        #if all tickets purchased delete ticket object from data base else update ticket to right quantity
+        remaining_tickets = ticket.quantity - ticket_quantity
+        # if all tickets purchased delete ticket object from data base else update ticket to right quantity
         if remaining_tickets == 0:
             bn.delete_ticket(ticket_name)
         else:
             bn.update_ticket(ticket_name, remaining_tickets, ticket.price, ticket.date)
-        #update user balance
+        # update user balance
         new_balance = user.balance - ticket.price * ticket_quantity - ticket.price * ticket_quantity * 0.35 * 0.05
         bn.update_user_balance(user, new_balance)
         tickets = bn.get_all_tickets()
         return render_template('index.html', user=user, tickets=tickets)
+
 
 '''
 Validate email complexity and possible email format errors
@@ -367,8 +369,9 @@ Validate password complexity and possible password/password2 format error
 
 
 def validate_password(password, password2, error_message):
-    password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$'
-    password_check = re.compile(password_regex)
+    hasUpper = re.search(r'/[A-Z]/', password)
+    hasLower = re.search(r'/[a-z]/', password)
+    hasNonAlphNum = re.search(r'/\W/', password)  # test for special char
 
     if len(password) <= 1 or len(password2) <= 1:
         error_message = "Email and/or password cannot be empty."
@@ -377,12 +380,10 @@ def validate_password(password, password2, error_message):
         error_message = "Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character."
 
     else:
-        if (not re.search(password_check, password)) and password == password2:
+        if (hasUpper is None or hasLower is None or hasNonAlphNum is None):
             error_message = "Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character."
-
-        elif (not re.search(password_check, password)) or (not re.search(password_check, password2)):
-            error_message = "Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, at least one special character and password and password2 have to be exactly the same."
-
+        elif password!=password2:
+            error_message = "Passwords do not match"
         else:
             error_message = ""
     return error_message
@@ -420,8 +421,9 @@ Validate user's password (login)
 
 
 def validate_login_password(password, error_message):
-    password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$'
-    password_check = re.compile(password_regex)
+    hasUpper = re.search(r'/[A-Z]/', password)
+    hasLower = re.search(r'/[a-z]/', password)
+    hasNonAlphNum = re.search(r'/\W/', password)  # test for special char
 
     if len(password) <= 1:
         error_message = "Email and/or password cannot be empty."
@@ -429,7 +431,7 @@ def validate_login_password(password, error_message):
     elif len(password) < 6:
         error_message = "Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character."
     else:
-        if not re.search(password_check, password):
+        if hasUpper is None or hasLower is None or hasNonAlphNum is None:
             error_message = "Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character."
         else:
             error_message = ""

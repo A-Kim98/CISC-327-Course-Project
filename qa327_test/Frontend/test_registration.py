@@ -357,7 +357,7 @@ class FrontEndHomePageTest(BaseCase):
         self.click('input[type="submit"]')
         # make sure it shows proper error message
         self.assert_element("#message")
-        self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, at least one special character and password and password2 have to be exactly the same.", "#message")
+        self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.", "#message")
         #open logout page
         self.open(base_url + '/logout')
 
@@ -457,7 +457,7 @@ class FrontEndHomePageTest(BaseCase):
         self.click('input[type="submit"]')
         # make sure it shows proper error message
         self.assert_element("#message")
-        self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, at least one special character and password and password2 have to be exactly the same.", "#message")
+        self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.", "#message")
         #open logout page
         self.open(base_url + '/logout')
     
@@ -477,7 +477,7 @@ class FrontEndHomePageTest(BaseCase):
         self.click('input[type="submit"]')
         # make sure it shows proper error message
         self.assert_element("#message")
-        self.assert_text("Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, at least one special character and password and password2 have to be exactly the same.", "#message")
+        self.assert_text("Passwords do not match", "#message")
         #open logout page
         self.open(base_url + '/logout')
  
