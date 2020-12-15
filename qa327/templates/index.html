@@ -8,28 +8,28 @@
 
 <!--For R3.2 and 3.3, user balance is temporary until backend iis done-->
 <h2 id="welcome-header">Hi {{ user.name }} !</h2>
-<h2 id="user-balance">Current User Balance: $ 4.22</h2>
-
+<h2 id="user_balance">Current User Balance: {{ user.balance }}</h2>
 
 <h2 >Here are all available tickets</h2>
 
 <!--Added the title, changed to table, and added to display quantity and email of tickets-->
-<div id="tickets">
+<div id="tickets" style="overflow: auto; max-height: 200px">
     <table style="width:100%">
         <tr>
             <td>Name</td>
             <td>Quantity</td>
             <td>Email</td>
             <td>Price</td>
-        </tr>   
-{% for ticket in tickets %}
-        <tr>
+            <td>Date</td>
+        </tr>
+        {% for ticket in tickets %}<tr>
             <td>{{ ticket.name }}</td>
             <td>{{ ticket.quantity }}</td>
             <td>{{ ticket.email }}</td>
             <td>{{ ticket.price }}</td>
-        </tr>        
-{% endfor %}
+            <td>{{ ticket.date }}</td>  <!--TODO add a dash or / between day month and year for easy readability-->
+            </tr>{% endfor %}
+
 </table>
 </div>
 
@@ -38,47 +38,50 @@
 <!--Added sell form for selling tickets for R3-->
 <br>
 <h1>Sell</h1>
+<h4 id='sell_message'>{{sell_message}}</h4>
 <form method="post" id="sell" action="/sell">
     <div class="form-group">
         <label for="name_sell">Name</label>
-        <input class="form-control" name="name" id="name_sell" required>
+        <input class="form-control" name="name_sell" id="name_sell" required>
         <label for="quantity_sell">Quantity</label>
-        <input class="form-control" name="quantity" id="quantity_sell" required>
+        <input class="form-control" type="number" name="quantity_sell" id="quantity_sell" required>
         <label for="price_sell">Price</label>
-        <input class="form-control" name="price" id="price_sell" required>
+        <input class="form-control" type="number" name="price_sell" id="price_sell" required>
         <label for="expdate_sell">Expiration Date</label>
-        <input class="form-control" name="expdate" id="expdate_sell" required>
-        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit" value="Sell">
+        <input class="form-control"  name="expdate_sell" id="expdate_sell" required>
+        <input class="btn btn-lg btn-primary" type="submit" name="btn-submit-sell" id="btn-submit-sell" value="Sell">
     </div>
 </form>
 
 <!--Added buy form for buying tickets for R3-->
 <br>
 <h1>Buy</h1>
+<h4 id='buy_message'>{{buy_message}}</h4>
 <form method="post" id="buy"  action="/buy">
     <div class="form-group">
         <label for="name_buy">Name</label>
-        <input class="form-control" name="name" id="name_buy" required>
-        <label for="quantity_sell">Quantity</label>
-        <input class="form-control" name="quantity" id="quantity_buy" required>
-        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit" value="Buy">
+        <input class="form-control" name="name_buy" id="name_buy" required>
+        <label for="quantity_buy">Quantity</label>
+        <input class="form-control" type="number" name="quantity_buy" id="quantity_buy" required>
+        <input class="btn btn-lg btn-primary" type="submit" name="btn-submit-buy" id="btn-submit-buy" value="Buy">
     </div>
 </form>
 
 <!--Added update form for updating tickets for R3-->
 <br>
 <h1>update</h1>
+<h4 id='update_message'>{{update_message}}</h4>
 <form method="post" id="update" action="/update">
     <div class="form-group">
         <label for="name_update">Name</label>
-        <input class="form-control" name="name" id="name_update" required>
+        <input class="form-control" name="name_update" id="name_update" required>
         <label for="quantity_update">Quantity</label>
-        <input class="form-control" name="quantity" id="quantity_update" required>
+        <input class="form-control" type="number" name="quantity_update" id="quantity_update" required>
         <label for="price_update">Price</label>
-        <input class="form-control" name="price" id="price_update" required>
+        <input class="form-control" type="number" name="price_update" id="price_update" required>
         <label for="expdate_update">Expiration Date</label>
-        <input class="form-control" name="expdate" id="expdate_update" required>
-        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit" value="Update">
+        <input class="form-control" name="expdate_update" id="expdate_update" required>
+        <input class="btn btn-lg btn-primary" type="submit" id="btn-submit-update" value="Update">
     </div>
 </form>
 

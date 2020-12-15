@@ -3,7 +3,7 @@ from seleniumbase import BaseCase
 
 from qa327_test.conftest import base_url
 from unittest.mock import patch
-from qa327.models import db, User
+from qa327.models import db, User, TicketInfo
 from werkzeug.security import generate_password_hash, check_password_hash
 
 """
@@ -18,21 +18,21 @@ Annotate @patch before unit tests can mock backend methods (for that testing fun
 """
 
 # Moch a sample user
-test_user = User(
-                 email='tester@gmail.com',
-                 name='tester',
-                 password=generate_password_hash('Tester327!')
-            )
+
 test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
-    password=generate_password_hash('Test_frontend123!')
+    password=generate_password_hash('Test_frontend123!'),
+    balance=10000
 )
 
-# Moch some sample tickets
-test_tickets = [
-    {'name': 't1', 'price': '100', 'email' : 'testemail@gmail.com', 'quantity': '1'}
-]
+test_tickets = TicketInfo(
+    email='test_frontend@test.com',
+    name='t1',
+    quantity=1,
+    price=100,
+    date='20210408'
+)
 
 
 class IndexPageTest(BaseCase):
@@ -40,7 +40,7 @@ class IndexPageTest(BaseCase):
     #Test Case R3.1
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_user_redirect(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -62,7 +62,7 @@ class IndexPageTest(BaseCase):
     # Test Case R3.2
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_login_success(self, *_):
         """
         """
@@ -85,9 +85,7 @@ class IndexPageTest(BaseCase):
         # front-end, without running the backend logics. 
         # so we patch the backend to return a specific user instance, 
         # rather than running that program. (see @ annotations above)
-        
-        # open home page
-        self.open(base_url)
+
         # test if the page loads correctly
         self.assert_element("#welcome-header")
         self.assert_text("Hi test_frontend", "#welcome-header")
@@ -98,7 +96,7 @@ class IndexPageTest(BaseCase):
     # Test Case R3.3
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_show_balance(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -127,8 +125,8 @@ class IndexPageTest(BaseCase):
         # open home page
         self.open(base_url)
         # test if user  balance is displayed as it should
-        self.assert_element("#user-balance")
-        self.assert_text("Current User Balance:", "#user-balance")
+        self.assert_element("#user_balance")
+        self.assert_text("Current User Balance:", "#user_balance")
         
         # open logout (for cleanup)
         self.open(base_url + '/logout')
@@ -136,7 +134,7 @@ class IndexPageTest(BaseCase):
     # Test Case R3.4
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_confirm_logout(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -173,11 +171,10 @@ class IndexPageTest(BaseCase):
     # Test Case R3.5
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_ticket_table(self, *_):
         """
-        This is a sample front end unit test to vertify users that are not logged in
-        are redirected to the login page
+        This is a sample front end unit test to vertify the ticket table displays proper info
         """
         # open logout page to invalid any logged-in sessions that may exist, then open login page
         self.open(base_url + '/logout')
@@ -202,19 +199,25 @@ class IndexPageTest(BaseCase):
         # open home page
         self.open(base_url)
         # test if the ticket information is displayed as it should
-        self.assert_element(    "#tickets")
-        self.assert_text("t1",  "#tickets")
-        self.assert_text("100", "#tickets")
-        self.assert_text("1",   "#tickets")
-        self.assert_text("testemail@gmail.com","#tickets")
-        
+        self.type("#name_sell", "HelloWorld123")
+        self.type("#quantity_sell", "1")
+        self.type("#price_sell", "10")
+        self.type("#expdate_sell", "20210901")
+        self.click('input[value="Sell"]')
+
+        self.assert_text("HelloWorld123", "#tickets")
+        self.assert_text("1", "#tickets")
+        self.assert_text("10",   "#tickets")
+        self.assert_text("20210901", "#tickets")
+        self.assert_text("test_frontend@test.com", "#tickets")
+
         # open logout (for cleanup)
         self.open(base_url + '/logout')
 
     # Test Case R3.6
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_selling_form(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -255,7 +258,7 @@ class IndexPageTest(BaseCase):
     # Test Case R3.7
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_buying_form(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -294,7 +297,7 @@ class IndexPageTest(BaseCase):
     # Test Case R3.8
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_selling_validate(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -331,7 +334,7 @@ class IndexPageTest(BaseCase):
     # Test Case R3.9
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_buying_validate(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in
@@ -368,7 +371,7 @@ class IndexPageTest(BaseCase):
     # Test Case R3.10
     @pytest.mark.timeout(60)
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_all_tickets', return_value=test_tickets)
+    @patch('qa327.backend.get_ticket', return_value=test_tickets)
     def test_updating_validate(self, *_):
         """
         This is a sample front end unit test to vertify users that are not logged in

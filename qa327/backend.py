@@ -1,4 +1,4 @@
-from qa327.models import db, User
+from qa327.models import db, User, TicketInfo
 from werkzeug.security import generate_password_hash, check_password_hash
 
 """
@@ -43,12 +43,87 @@ def register_user(email, name, password, password2):
     hashed_pw = generate_password_hash(password, method='sha256')
     # store the encrypted password rather than the plain password
     # create a new user, set the balance to 5000
-    new_user = User(email=email, name=name, password=hashed_pw, balance=5000)
+    new_user = User(email=email, name=name, password=hashed_pw, balance=5000, tickets=None)
 
     db.session.add(new_user)
     db.session.commit()
     return None
 
-# Fixed so that it will return a temporary result until backend is complete - R3.5
+
+def get_ticket(name):
+    """
+    Get a ticket by a given name
+    :param name: name of the ticket
+    :return: ticket with user name
+    """
+
+    ticket = TicketInfo.query.filter_by(name=name).first()
+    return ticket
+
+
+# TODO add wrapper that deletes all expired tickets
 def get_all_tickets():
-    return [{"price": 4, "name":"Ticket 1", "quantity":2, "email":"ticket1@email.com"}, {"price": 3, "name":"Ticket 2", "quantity":21, "email":"ticket2@email.com"}]
+    """
+    Get all ticket available in the database
+    :param: none
+    :return: list of all tickets
+    """
+
+    all_tickets = TicketInfo.query.all()
+    return all_tickets
+
+
+def sell_ticket(user, name, quantity, price, date):
+    """
+    sell the ticket in the database
+    :param user: user information
+    :param name: the name of the ticket
+    :param quantity: the quantity of the ticket
+    :param price: the price of the ticket
+    :param date: the date for ticket
+    :return: an error message if there is any, or None if register_ticket succeeds
+    """
+
+    ticket = TicketInfo(email=user.email, name=name, quantity=quantity, price=price, date=date)
+
+    db.session.add(ticket)
+    db.session.commit()
+
+    return None
+
+
+def check_name_exist(name):
+    """
+    Check if the ticket exists in the database
+    :param name: the name of the ticket
+    :return: the name if ticket exists
+    """
+    # if this doesn't return ticket name, then the name doesn't exist
+    user = get_ticket(name)
+    if not user:
+        return None
+    return user
+
+
+def rollback():
+    db.session.rollback()
+
+
+def update_ticket(name, quantity, price, date):
+    ticket = get_ticket(name)
+    ticket.quantity = quantity
+    ticket.price = price
+    ticket.date = date
+    db.session.commit()
+    return None
+
+
+def delete_ticket(name):
+    TicketInfo.query.filter_by(name=name).delete()
+    return None
+
+
+def update_user_balance(user, new_balance):
+    user.balance = new_balance
+    db.session.commit()
+    return None
