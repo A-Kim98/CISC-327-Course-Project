@@ -1,1 +1,10 @@
 /qa327/db.sqlite
+<<<<<<< Updated upstream
+=======
+.idea/vcs.xml
+.idea
+/qa327_test/db.sqlite
+/qa327_test/Frontend/db.sqlite
+
+mysql_data
+>>>>>>> Stashed changes
