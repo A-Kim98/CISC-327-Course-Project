@@ -8,7 +8,6 @@ to the underlying database, so we don't need to
 write SQL queries such as 'select', 'update' etc.
 """
 
-
 db = SQLAlchemy()
 db.init_app(app)
 
@@ -20,26 +19,9 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
-    name = db.Column(db.String(1000))
+    name = db.Column(db.String(1000))  # TODO if this is supposed to be a username it should also be labeled as unique
     balance = db.Column(db.Integer)
     tickets = db.Column(db.String(100))
-
-
-class UserInfo(db.Model):
-    """
-    A UserInfo model which hold user informations
-    """
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True)
-    name = db.Column(db.String(1000))
-    quantity = db.Column(db.Integer)
-    price = db.Column(db.Integer)
-    date = db.Column(db.String(50))
-
-    data = []
-
-    def __init__self(self):
-        self.data.append(self)
 
 
 class TicketInfo(db.Model):
@@ -47,19 +29,24 @@ class TicketInfo(db.Model):
     A TicketInfo model which holds ticket informations
     """
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True)
-    name = db.Column(db.String(1000))
+    email = db.Column(db.String(100))
+    name = db.Column(db.String(1000), unique=True)  # based on our ticket buy the ticket must have a unique name
     quantity = db.Column(db.Integer)
     price = db.Column(db.Integer)
     date = db.Column(db.String(50))
 
-    data = []
+    # this is if we only want the group of name and email to be unique
+    '''
+    __table_args__ = (db.UniqueConstraint('email', 'name', name='user_noSameName'),
+                      )  # composite constraint can't have
+    # both email and name be the same (ie a user has to name their sold tickets differently)
+'''
 
-    def __init__self(self):
-        self.data.append(self)
-  
-  
+
 # it creates all the SQL tables if they do not exist
 with app.app_context():
     db.create_all()
     db.session.commit()
+
+
+

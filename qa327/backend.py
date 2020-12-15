@@ -1,9 +1,11 @@
-from qa327.models import db, User, UserInfo, TicketInfo
+from qa327.models import db, User, TicketInfo
 from werkzeug.security import generate_password_hash, check_password_hash
 
 """
 This file defines all backend logic that interacts with database and other services
 """
+
+
 def get_user(email):
     """
     Get a user by a given email
@@ -47,29 +49,28 @@ def register_user(email, name, password, password2):
     db.session.commit()
     return None
 
+
 def get_ticket(name):
     """
-    Get a ticket by a given user name
+    Get a ticket by a given name
     :param name: name of the ticket
     :return: ticket with user name
     """
-    
-    ticket = TicketInfo.query.filter_by(name = name).first().ticket
+
+    ticket = TicketInfo.query.filter_by(name=name).first()
     return ticket
 
 
+# TODO add wrapper that deletes all expired tickets
 def get_all_tickets():
     """
     Get all ticket available in the database
     :param: none
     :return: list of all tickets
     """
-    
-    available_ticket = []
-    for i in TicketInfo.data:
-        available_ticket.append(i)
-        
-    return available_ticket
+
+    all_tickets = TicketInfo.query.all()
+    return all_tickets
 
 
 def sell_ticket(user, name, quantity, price, date):
@@ -83,14 +84,15 @@ def sell_ticket(user, name, quantity, price, date):
     :return: an error message if there is any, or None if register_ticket succeeds
     """
 
-    ticket = TicketInfo(user=user, name=name, quantity=quantity, price=price, date=date)
+    ticket = TicketInfo(email=user.email, name=name, quantity=quantity, price=price, date=date)
 
     db.session.add(ticket)
     db.session.commit()
 
     return None
 
-def get_update(name):
+
+def check_name_exist(name):
     """
     Check if the ticket exists in the database
     :param name: the name of the ticket
@@ -101,3 +103,27 @@ def get_update(name):
     if not user:
         return None
     return user
+
+
+def rollback():
+    db.session.rollback()
+
+
+def update_ticket(name, quantity, price, date):
+    ticket = get_ticket(name)
+    ticket.quantity = quantity
+    ticket.price = price
+    ticket.date = date
+    db.session.commit()
+    return None
+
+
+def delete_ticket(name):
+    TicketInfo.query.filter_by(name=name).delete()
+    return None
+
+
+def update_user_balance(user, new_balance):
+    user.balance = new_balance
+    db.session.commit()
+    return None
