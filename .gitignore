@@ -3,3 +3,5 @@
 .idea
 /qa327_test/db.sqlite
 /qa327_test/Frontend/db.sqlite
+
+mysql_data
